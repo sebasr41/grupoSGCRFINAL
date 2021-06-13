@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="PRODUCTLINES")
-public class Productlines {
+public class ProductLines {
 	
 
 	@Id
@@ -36,7 +36,7 @@ public class Productlines {
 	/**
 	 * 
 	 */
-	public Productlines() {
+	public ProductLines() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,7 +47,7 @@ public class Productlines {
 	 * @param htmlDescription
 	 * @param image
 	 */
-	public Productlines(Long productLines, String productLinesName, String textDescription, String htmlDescription,
+	public ProductLines(Long productLines, String productLinesName, String textDescription, String htmlDescription,
 			Blob image) {
 		super();
 		this.productLines = productLines;
