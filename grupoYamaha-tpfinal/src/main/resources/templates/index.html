@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.15.3/css/all.css}" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{css/styles.css}">
+    <link rel="shortcut icon" href="img/favicon.png"/>
+    <title>tpfinal-Programación Visual</title>
+</head>
+<body class="body-gam">
+  	<!--   HEADER    -->
+  	<div th:replace="layouts/header :: header" ></div>
+  	
+  	<!-- CAROUSEL SLIDE -->
+	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+	    <ol class="carousel-indicators gam-gradiente">
+	      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+	      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+	      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+	    </ol>
+	    <div class="carousel-inner">
+	      <div class="carousel-item active">
+	        <div class="gam-img gam-img-carousel-1"></div>
+	        <div class="carousel-caption d-none d-md-block">
+	          <h5>Frontend</h5>
+	          <p>Aprendemos el framwork: Bootstrap.</p>
+	        </div>
+	      </div>
+	      <div class="carousel-item">
+	        <div class="gam-img gam-img-carousel-2"></div>
+	        <div class="carousel-caption d-none d-md-block">
+	          <h5>Backend</h5>
+	          <p>Aprendemos el framework: Spring.</p>
+	        </div>
+	      </div>
+	      <div class="carousel-item">
+	        <div class="gam-img gam-img-carousel-3"></div>
+	        <div class="carousel-caption d-none d-md-block">
+	          <h5>Programación Visual</h5>
+	          <p>Aprendemos tecnologías de Backend y Frontend.</p>
+	        </div>
+	      </div>
+	    </div>
+	    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+	      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+	      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
+	</div>
+  <!--MAIN-->
+  <div class="container text-light">
+      <h1 class="h1 mt-4 text-center">Elegí un auto para tu estilo de vida</h1>    
+      <div class="row my-5 text-center rounded gam-border--cyan">
+        <div class="col-2 mt-3">
+          <p class="text-gam--cyan">Pick-ups y SUVs</p>
+        </div>
+        <div class="col-2 mt-3">
+          <p class="text-gam--cyan">Autos</p>
+        </div>
+        <div class="col-2 mt-3">
+          <p class="text-gam--cyan">Utilitarios</p>
+        </div>
+        <div class="col-2 mt-3">
+          <p class="text-gam--cyan">Ventas especiales</p>
+        </div>
+        <div class="col-2 mt-3">
+          <p class="text-gam--cyan">Futuros vehículos</p>
+        </div>
+        <div class="col-2 mt-3">
+          <p class="text-gam--cyan">Vehículos eléctricos</p>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-2">
+          <img th:src="@{/img/thumble1.png}" width="150" alt="auto">
+        </div>
+        <div class="col-2">
+          <img th:src="@{/img/thumble2.png}" width="150" alt="auto">
+        </div>
+        <div class="col-2">
+          <img th:src="@{/img/thumble3.png}" width="150" alt="auto">
+        </div>
+        <div class="col-2">         
+          <img th:src="@{/img/thumble4.png}" width="150" alt="auto">
+        </div>
+        <div class="col-2">
+          <img th:src="@{/img/thumble5.png}" width="150" alt="auto">
+        </div>
+        <div class="col-2">         
+          <img th:src="@{/img/thumble6.png}" width="150" alt="auto">
+        </div>
+      </div>
+
+      <h3 class="h3 text-center mb-5">Conocé todos los vehículos y encontrá el que mejor se adapta a tu estilo de vida</h3>
+      <button type="button" class="btn btn-gam--cyan  gam-border--cyan text-center d-block m-auto my-5">Todos los Vehículos</button>  
+      
+  </div>
+
+  
+  <div class="show-case my-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8 text-center mt-5">
+            <h4 class="text-uppercase font-weight-bold h1 mb-2">Un beneficio que llegó para estacionarse en tu casa</h4>            
+            <a href="#" class="btn btn-outline-light" data-toggle="modal">Ver modelos</a>
+            <button type="button" class="btn btn-gam--blue text-light " data-toggle="modal" data-target="#modalCompra">Quiero el beneficio</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col text-center text-light">
+        <h2>Conocé el mundo PV </h2>
+        <p>Descubrí novedades y beneficios.</p>
+      </div>
+    </div>
+    <div class="row text-light">
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card rounded-top rounded-lg">
+          <img class="card-img-top" th:src="@{img/imgcard1.jpg}" alt="Foto de auto">
+          <div class="card-body card-gam-bg rounded-bottom rounded-lg">            
+            <h5 class="card-title">Solicita una cotización</h5>
+            <p class="card-text">Para que conozcas todo lo que tiene Pv para vos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card rounded-top rounded-lg">
+          <img class="card-img-top" th:src="@{img/imgcard2.jpg}" alt="Foto de auto">
+          <div class="card-body card-gam-bg rounded-bottom rounded-lg">            
+            <h5 class="card-title">Tecnología OnStar</h5>
+            <p class="card-text">Con estos servicios exclusivos, vas a poder aprovechar más la seguridad y la practicidad, dentro y fuera de tu automovil.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card rounded-top rounded-lg">
+          <img class="card-img-top" th:src="@{img/imgcard3.jpg}" alt="Foto de auto">
+          <div class="card-body card-gam-bg rounded-bottom rounded-lg">
+            <h5 class="card-title">Ventas corporativas</h5>
+            <p class="card-text">Conocé las mejores ofertas para tu negocio</p>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+
+  <footer id="footer" class="pb-4 pt-4 mt-5 footer-gam">
+    <div class="container text-light">
+      <div class="row text-center">
+        <div class="col-12 col-lg">
+          <a href="#">Preguntas frecuentes</a>
+        </div>
+        <div class="col-12 col-lg">
+          <a href="#">Contáctanos</a>
+        </div>
+        <div class="col-12 col-lg">
+          <a href="#">Prensa</a>
+        </div>
+        <div class="col-12 col-lg">
+          <a href="#">Conferencias</a>
+        </div>
+        <div class="col-12 col-lg">
+          <a href="#">Términos y condiciones</a>
+        </div>
+        <div class="col-12 col-lg">
+          <a href="#">Privacidad</a>
+        </div>
+        <div class="col-12 col-lg">
+          <a href="#">Nuestros empleados</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+    <script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -7,4 +7,6 @@ import ar.edu.unju.fi.tpfinal.model.ProductLines;
 
 public interface IProductLinesRepository extends CrudRepository<ProductLines, Long>{
 
+
 }
+
