@@ -4,6 +4,9 @@ import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,9 +17,13 @@ import org.springframework.stereotype.Component;
 @Table(name="PRODUCTLINES")
 public class Productlines {
 	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long productLines; 
 	
-	@Column(name="productlines_productline")
-	private String productLine;
+	@Column(name="productlines_productlinename")
+	private String productLinesName;
 	
 	@Column(name="productlines_textdescription")
 	private String textDescription;
@@ -34,29 +41,44 @@ public class Productlines {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param productLine
+	 * @param productLines
+	 * @param productLinesName
 	 * @param textDescription
 	 * @param htmlDescription
 	 * @param image
 	 */
-	public Productlines(String productLine, String textDescription, String htmlDescription, Blob image) {
+	public Productlines(Long productLines, String productLinesName, String textDescription, String htmlDescription,
+			Blob image) {
 		super();
-		this.productLine = productLine;
+		this.productLines = productLines;
+		this.productLinesName = productLinesName;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
 	/**
-	 * @return the productLine
+	 * @return the productLines
 	 */
-	public String getProductLine() {
-		return productLine;
+	public Long getProductLines() {
+		return productLines;
 	}
 	/**
-	 * @param productLine the productLine to set
+	 * @param productLines the productLines to set
 	 */
-	public void setProductLine(String productLine) {
-		this.productLine = productLine;
+	public void setProductLines(Long productLines) {
+		this.productLines = productLines;
+	}
+	/**
+	 * @return the productLinesName
+	 */
+	public String getProductLinesName() {
+		return productLinesName;
+	}
+	/**
+	 * @param productLinesName the productLinesName to set
+	 */
+	public void setProductLinesName(String productLinesName) {
+		this.productLinesName = productLinesName;
 	}
 	/**
 	 * @return the textDescription
@@ -96,9 +118,9 @@ public class Productlines {
 	}
 	@Override
 	public String toString() {
-		return "Productlines [productLine=" + productLine + ", textDescription=" + textDescription
-				+ ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
+		return "Productlines [productLines=" + productLines + ", productLinesName=" + productLinesName
+				+ ", textDescription=" + textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image
+				+ "]";
 	}
-
 	
 }
