@@ -30,7 +30,7 @@ public class ProductLinesController {
     
     @GetMapping("/productlines")
 	public String getProductoPage(Model model) {
-		model.addAttribute(productlines);
+		model.addAttribute("productlines",productlines);
 		return "product-lines";
     }
 		@PostMapping("/productlines-guardar")
