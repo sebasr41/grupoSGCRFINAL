@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="PRODUCTLINES")
-public class Productlines {
+public class ProductLines {
 	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productLines; 
+	private Long id; 
 	
 	@Column(name="productlines_productlinename")
 	private String productLinesName;
@@ -36,7 +36,7 @@ public class Productlines {
 	/**
 	 * 
 	 */
-	public Productlines() {
+	public ProductLines() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,27 +47,16 @@ public class Productlines {
 	 * @param htmlDescription
 	 * @param image
 	 */
-	public Productlines(Long productLines, String productLinesName, String textDescription, String htmlDescription,
+	public ProductLines(Long id, String productLinesName, String textDescription, String htmlDescription,
 			Blob image) {
 		super();
-		this.productLines = productLines;
+		this.id = id;
 		this.productLinesName = productLinesName;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
-	/**
-	 * @return the productLines
-	 */
-	public Long getProductLines() {
-		return productLines;
-	}
-	/**
-	 * @param productLines the productLines to set
-	 */
-	public void setProductLines(Long productLines) {
-		this.productLines = productLines;
-	}
+	
 	/**
 	 * @return the productLinesName
 	 */
@@ -116,11 +105,19 @@ public class Productlines {
 	public void setImage(Blob image) {
 		this.image = image;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "Productlines [productLines=" + productLines + ", productLinesName=" + productLinesName
-				+ ", textDescription=" + textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image
-				+ "]";
+		return "ProductLines [id=" + id + ", productLinesName=" + productLinesName + ", textDescription="
+				+ textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
 	}
+	
+	
+
 	
 }

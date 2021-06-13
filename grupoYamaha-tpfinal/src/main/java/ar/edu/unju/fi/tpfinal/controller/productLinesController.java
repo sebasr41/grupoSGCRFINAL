@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,13 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
+
 
 @Controller
 public class productLinesController {
+	
     @Autowired
     private ProductLines productlines;
+    
     @Autowired
-	@Qualifier("productLinesMysql")
 	private IProductLinesService productolinesService;
     
     
@@ -42,8 +45,8 @@ public class productLinesController {
 			
 			else {
 				 modelView = new ModelAndView("lista-productlines");
-				 productolinesService.guardarProductlines(productlines);
-			modelView.addObject("productslines", productolinesService.obtenerProductlines());
+				 productolinesService.guardarProductLines(productlines);
+			modelView.addObject("productslines", productolinesService.obtenerProductLines());
 			
 			return modelView;
 			}
@@ -52,7 +55,7 @@ public class productLinesController {
 		public ModelAndView getProductolinesEliminarPage(@PathVariable (value = "id")Long id) {
 			//									redirect recarga la lista de cuentas
 			ModelAndView modelView = new ModelAndView("redirect:/lista-productlines");
-			productolinesService.eliminarProductolines(id);
+			productolinesService.eliminarProductLines(id);
 			return modelView;
 }
 		
