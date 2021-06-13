@@ -22,16 +22,16 @@ public class ProductLines {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
 	
-	@Column(name="productlines_productlinename")
+	@Column(name="productlinename")
 	private String productLinesName;
 	
-	@Column(name="productlines_textdescription")
+	@Column(name="textdescription")
 	private String textDescription;
 	
-	@Column(name="productlines_htmldescription")
+	@Column(name="htmldescription")
 	private String htmlDescription;
 	
-	@Column(name="productlines_image")
+	@Column(name="image")
 	private Blob image;
 	/**
 	 * 
