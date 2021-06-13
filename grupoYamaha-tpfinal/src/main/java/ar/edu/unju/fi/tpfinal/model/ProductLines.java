@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.model;
+package ar.edu.unju.fi.tpfinal.model;
 
 import java.sql.Blob;
 

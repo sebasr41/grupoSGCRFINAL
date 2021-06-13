@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 
 
 @Controller
-public class productLinesController {
+public class ProductLinesController {
 	
     @Autowired
     private ProductLines productlines;

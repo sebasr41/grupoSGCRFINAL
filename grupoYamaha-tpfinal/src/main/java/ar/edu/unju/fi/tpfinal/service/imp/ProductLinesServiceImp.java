@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.repository.IProductLinesRepository;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 
@@ -36,7 +36,7 @@ public class ProductLinesServiceImp implements IProductLinesService {
 
 
 	@Override
-	public Optional<ar.edu.unju.fi.model.ProductLines> getProductolinesPorId(Long id) {
+	public Optional<ar.edu.unju.fi.tpfinal.model.ProductLines> getProductolinesPorId(Long id) {
 		Optional<ProductLines> productLines = productLinesRepository.findById(id);
 		return productLines;
 	}
