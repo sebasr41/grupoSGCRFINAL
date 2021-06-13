@@ -21,7 +21,7 @@
     --white: hsl(0, 0%, 100%);
 }
 body {
-    background-color: var(--dark-Blue-Main-Bg);
+    background-color: hsl(217, 28%, 15%);
 }
 .gam-img {    
     width: 100%;
