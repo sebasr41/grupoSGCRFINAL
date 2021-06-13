@@ -20,8 +20,11 @@
     /* ### Neutral */    
     --white: hsl(0, 0%, 100%);
 }
+.body-gam {
+    background-color: var(--dark-Blue-Main-Bg);
+}
 body {
-    background-color: hsl(217, 28%, 15%);
+    overflow-x: hidden;
 }
 .gam-img {    
     width: 100%;
@@ -58,22 +61,35 @@ body {
     margin-left: .8rem;
     line-height: 1;
 }
-.btn-gam {
+.btn-gam-repo {
     padding: .5rem 1.5rem;
     border-radius: 1rem;
     border: 1px solid rgba(255,255,255,.5);
     color:rgba(255,255,255,.5);
 }
-.gam-cyan {
-    color: var(--cyan);
-}
-.gam-border {
-    border: 1px solid var(--cyan);    
-}
-.btn-gam:hover {
+.btn-gam-repo:hover {
     text-decoration: none;
     border: 1px solid rgba(255,255,255,.75);
     color:rgba(255,255,255,.75);
+}
+.btn-gam--cyan {
+    color: var(--cyan);
+}
+.gam-border--cyan {
+    border: 1px solid var(--cyan);    
+}
+.text-gam--cyan {
+    color: var(--cyan);
+}
+.btn-gam--cyan:hover {
+    border: 1px solid rgba(100, 225, 217, .5);
+    color: rgba(100, 225, 217, .5);
+}
+.btn-gam--blue {
+    background-color: var(--blue);
+}
+.btn-gam--blue:hover {
+    background-color: rgba(51,158, 204,.7);
 }
 .show-case {
     background: url(../img/showcase1.jpg);
@@ -87,26 +103,28 @@ body {
         display: none;
     }
 }
-.fa-facebook {
-	color: #3b5998;
+.card {
+	background-color: transparent;
 }
-.fa-instagram {
-	color: #3f729b;
-}
-.fa-youtube {
-	color: #c4302b;
-}
-.card-gam {
+.card-gam-bg {
     background-color: var(--dark-Blue-Testimonial-Bg);
 }
-@media screen and (max-width: 768px) {
-    .last-card-gam{
-        margin-top: 2rem;
-    }
+.bg-pv--form {
+    background-color: var(--dark-Blue-Testimonial-Bg);
 }
-@media screen and (max-width: 375px){
-    .second-card-gam {
-        margin-top: 2rem;
-    }
+.footer-gam {
+    background-color: var(--dark-Blue-Footer);
+}
 
+/*Formulario de alta*/
+
+.show-case-2{
+    background: url(../img/showcase2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+}
+.gam-overflow {
+    margin-top: -3rem;
 }
