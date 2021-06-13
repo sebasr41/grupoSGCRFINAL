@@ -20,7 +20,7 @@ public class ProductLines {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productLines; 
+	private Long id; 
 	
 	@Column(name="productlines_productlinename")
 	private String productLinesName;
@@ -41,32 +41,31 @@ public class ProductLines {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param productLines
+	 * @param id
 	 * @param productLinesName
 	 * @param textDescription
 	 * @param htmlDescription
 	 * @param image
 	 */
-	public ProductLines(Long productLines, String productLinesName, String textDescription, String htmlDescription,
-			Blob image) {
+	public ProductLines(Long id, String productLinesName, String textDescription, String htmlDescription, Blob image) {
 		super();
-		this.productLines = productLines;
+		this.id = id;
 		this.productLinesName = productLinesName;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
 	/**
-	 * @return the productLines
+	 * @return the id
 	 */
-	public Long getProductLines() {
-		return productLines;
+	public Long getId() {
+		return id;
 	}
 	/**
-	 * @param productLines the productLines to set
+	 * @param id the id to set
 	 */
-	public void setProductLines(Long productLines) {
-		this.productLines = productLines;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	/**
 	 * @return the productLinesName
@@ -118,9 +117,9 @@ public class ProductLines {
 	}
 	@Override
 	public String toString() {
-		return "Productlines [productLines=" + productLines + ", productLinesName=" + productLinesName
-				+ ", textDescription=" + textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image
-				+ "]";
+		return "ProductLines [id=" + id + ", productLinesName=" + productLinesName + ", textDescription="
+				+ textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
 	}
+	
 	
 }
