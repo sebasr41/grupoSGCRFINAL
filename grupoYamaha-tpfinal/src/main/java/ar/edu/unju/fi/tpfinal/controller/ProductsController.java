@@ -85,7 +85,7 @@ public class ProductsController {
 
 	@GetMapping("/products-list")
 	public ModelAndView getComprasPage() {
-		ModelAndView model = new ModelAndView("compras");
+		ModelAndView model = new ModelAndView("lista-productos");
 		
 		model.addObject("product", products);
 		model.addObject("products", productsService.obtenerProducts());
