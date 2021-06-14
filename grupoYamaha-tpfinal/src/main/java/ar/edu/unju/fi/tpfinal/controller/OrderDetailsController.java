@@ -13,32 +13,40 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import ar.edu.unju.fi.tpfinal.model.OrderDetails;
+import ar.edu.unju.fi.tpfinal.model.Orders;
+import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
+import ar.edu.unju.fi.tpfinal.service.IOrdersService;
+import ar.edu.unju.fi.tpfinal.service.IProductsService;
 @Controller
 public class OrderDetailsController {
 	@Autowired
 	private OrderDetails orderdetails;
 	@Autowired
-	private Order order;
+	private Orders order;
 	
-	@Qualifier("OrderDetailsServiceMysql")
 	@Autowired
-	private IOrderDetails orderdetailsService;
+	private IOrderDetailsService orderdetailsService;
 	
-	@Qualifier("OrderMysql")
 	@Autowired
-	private IOrderService orderService;
+	private IOrdersService orderService;
+
+	@Autowired
+	private IProductsService productsService;
 	
 	@GetMapping("/orderdetails-{id}")
 	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") Long id) {
 	
 		
 		ModelAndView modelView = new ModelAndView("orderdetaiils");
-		Optional<Products> products = productsService.getProductsPorId(id);
+		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		
 		return modelView;
 }
 	@PostMapping("/orderdetails-guardar")
-	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails,@ModelAttribute("order") Order order, BindingResult resultadoValidacion){
+	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails,@ModelAttribute("order") Orders order, BindingResult resultadoValidacion){
 		
 		//////// validation
 		ModelAndView modelView;
@@ -50,9 +58,9 @@ public class OrderDetailsController {
 		else {
 			 modelView = new ModelAndView("orderdetails-list");
 			 orderdetailsService.guardarOrderDetails(orderdetails);
-			 orderService.guardarOrder(order);
+			 orderService.guardarOrders(order);
 		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());
-		modelView.addObject("order", orderService.obtenerOrder());
+		modelView.addObject("order", orderService.obtenerOrders());
 		return modelView;
 		}
 	}

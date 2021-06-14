@@ -31,7 +31,7 @@ public class ProductLinesController {
     @GetMapping("/productlines")
 	public String getProductoPage(Model model) {
 		model.addAttribute("productlines",productlines);
-		return "product-lines";
+		return "nueva-categoria";
     }
 		@PostMapping("/productlines-guardar")
 		public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, BindingResult resultadoValidacion){

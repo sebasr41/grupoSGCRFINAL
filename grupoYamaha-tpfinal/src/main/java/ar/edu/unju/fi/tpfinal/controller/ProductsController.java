@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.tpfinal.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
+import ar.edu.unju.fi.tpfinal.service.IProductsService;
+
 
 public class ProductsController {
 	@Autowired
@@ -25,9 +30,8 @@ public class ProductsController {
 
 	
 
-	@Qualifier("ProductsLinesServiceMysql")
 	@Autowired
-	private IProductsLinesService productslinesService;
+	private IProductLinesService productslinesService;
 	
 	
 	@Qualifier("ProductsServiceMysql")
@@ -35,24 +39,24 @@ public class ProductsController {
 	private IProductsService productsService;
 	
 	
-	@GetMapping("/Products")
+	@GetMapping("/products")
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);	
-		model.addAttribute("productslines", productslinesService.obtenerProductsLines());
-		if(productslinesService.obtenerProductsLines().isEmpty()) {
+		model.addAttribute("productslines", productslinesService.obtenerProductLines());
+		if(productslinesService.obtenerProductLines().isEmpty()) {
 			model.addAttribute("bandera", false);
 		}else {
 			model.addAttribute("bandera", true);
 
 		}
-		return "new-products";
+		return "productos";
 	}
 	@PostMapping("/products-save")
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products")Products products, BindingResult resultadoValidacion) {
 		ModelAndView modelView;
 		if(resultadoValidacion.hasErrors()) {
 		modelView= new ModelAndView("new-products"); 
-		List<ProductsLines> productslines = productslinesService.obtenerProductsLines();
+		List<ProductLines> productslines = productslinesService.obtenerProductLines();
 		modelView.addObject("products", products);
 		modelView.addObject("productslines", productslines);
 		modelView.addObject("bandera", true);
@@ -64,12 +68,13 @@ public class ProductsController {
 		else {
 		ModelAndView model = new ModelAndView("products");
 		
-		Optional<ProductsLines> productslines = productoslinesService.getProductsLinesPorId((long)Products.getProductsLines().getQuantityinStock());
-		productslines.ifPresent(Products::setProducsLines);
+		Optional<ProductLines> productslines = productslinesService.getProductolinesPorId(products.getProductLines().getId());
+		
+		productslines.ifPresent(products::setProductLines);
 		
 	
 		productsService.guardarProducts(products);
-		model.addObject("products", productsService.getAllproducts());
+		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("product",products);
 		return model;
 		}		
@@ -79,11 +84,9 @@ public class ProductsController {
 	@GetMapping("/products-list")
 	public ModelAndView getComprasPage() {
 		ModelAndView model = new ModelAndView("compras");
-		if(productsService.getAllProducts() == null) {
-			productsService.generarTablaProducts();
-		}
-		model.addObject("product", compra);
-		model.addObject("products", productsService.getAllProducts());
+		
+		model.addObject("product", products);
+		model.addObject("products", productsService.obtenerProducts());
 		
 		return model;
 	
@@ -100,9 +103,9 @@ public class ProductsController {
 
 		ModelAndView modelView = new ModelAndView("new-products");
 		
-		Optional<Products> products = productsService.getProductsPorId(id);
+		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		
-		List<ProductsLines> productslines = productslinesService.obtenerProductsLines();
+		List<ProductLines> productslines = productslinesService.obtenerProductLines();
 		modelView.addObject("bandera", true);
 		modelView.addObject("products", products);
 		modelView.addObject("productslines", productslines);
@@ -115,7 +118,7 @@ public class ProductsController {
 		
 		
 		model.addAttribute("product", products);
-	    model.addAttribute("products", productsService.buscarProducts(products.getProductsLines().getNombre());
+	    model.addAttribute("products", productsService.buscarProducts(products.getProductLines().getProductLinesName()));
 	    return "products";
 	}
 }

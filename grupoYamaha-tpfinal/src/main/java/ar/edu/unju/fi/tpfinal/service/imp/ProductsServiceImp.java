@@ -1,13 +1,17 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ar.edu.unju.fi.tpfinal.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.repository.IProductsRepository;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
-import ar.edu.unju.fi.tpfinal.service.List;
-import ar.edu.unju.fi.tpfinal.service.Optional;
-import ar.edu.unju.fi.tpfinal.service.Products;
-
+@Service
 public class ProductsServiceImp implements IProductsService{
 
     @Autowired
@@ -34,6 +38,15 @@ public class ProductsServiceImp implements IProductsService{
     @Override
     public Optional<Products> obtenerProductsPorId(Long id) {
         Optional<Products> products = productsRepository.findById(id);
+		return products;
+    }
+
+    @Override
+    public Object buscarProducts(String productLinesName) {
+        List<Products> products = new ArrayList<Products>();
+		if(!productLinesName.isEmpty()) {
+			products = productsRepository.findByproductName(productLinesName);
+		}
 		return products;
     }
     
