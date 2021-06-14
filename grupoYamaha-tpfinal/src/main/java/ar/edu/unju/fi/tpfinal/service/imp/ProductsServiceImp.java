@@ -41,15 +41,32 @@ public class ProductsServiceImp implements IProductsService{
 		return products;
     }
 
-    @Override
-    public Object buscarProducts(String productsName , double price) {
-        List<Products> products = new ArrayList<Products>();
-		if(!productsName.isEmpty()  && price >=0) {
-			products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
-		}else if(productsName.isEmpty() && price >=0) {
-			products= productsRepository.findByBuyPriceGreaterThanEqual(price);
-		}
-		return products;
-    }
+	@Override
+	public Object buscarProducts(String productsName, Long id, double price) {
+	
+				System.out.println("nombre " + productsName+ "id categoria "+id+ " precio "+ price );
+		
+		        List<Products> products = new ArrayList<Products>();
+				
+		        if(!productsName.isEmpty() && id != 0 && price >=0) {
+					products = productsRepository.findByProductNameAndProductLinesIdAndBuyPriceGreaterThanEqual(productsName, id, price);
+				}else {
+					if(!productsName.isEmpty()  && price >=0) {
+						products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
+					}
+			        if(id !=0  && price >=0) {
+						products = productsRepository.findByProductLinesIdAndBuyPriceGreaterThanEqual(id, price);
+					}else if(productsName.isEmpty()&& id==0 && price >=0) {
+						products= productsRepository.findByBuyPriceGreaterThanEqual(price);
+					}
+				}
+		        
+				return products;
+		    }
+		
+		
+	
+
+  
     
 }

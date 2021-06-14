@@ -41,6 +41,15 @@
 						<label for="precioProducto">Monto superior a</label>
 						<input type="number" class="form-control" id="precioProducto" th:field=*{buyPrice}>
 					</div>
+					<div class="form-group col-md-5">
+	                <label for="producto">Nombre de la categoria</label>
+	                <select id="producto" th:field="*{productLines.id}" class="form-control form-control-sm">
+	                <option value="0" >Todas las Categorias</option>
+	                <option th:each="prod : ${productslines}"
+	                 th:value="${prod.id}"
+	                 th:text="${prod.productLinesName}"	                
+	                 th:selected="false"></option>
+	                </select>
 				</div>
 				<div class="ml-3">
 					<button type="submit" class="btn btn-success ml-5">Buscar</button>

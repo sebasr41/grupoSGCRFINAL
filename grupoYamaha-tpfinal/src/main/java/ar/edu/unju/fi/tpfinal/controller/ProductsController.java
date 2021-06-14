@@ -78,6 +78,9 @@ public class ProductsController {
 		productsService.guardarProducts(products);
 		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("product",products);
+		model.addObject("productslines", productslinesService.obtenerProductLines());
+
+		
 		return model;
 		}		
 		
@@ -89,6 +92,8 @@ public class ProductsController {
 		
 		model.addObject("product", products);
 		model.addObject("products", productsService.obtenerProducts());
+		model.addObject("productslines", productslinesService.obtenerProductLines());
+
 		
 		return model;
 	
@@ -120,7 +125,9 @@ public class ProductsController {
 		
 		
 		model.addAttribute("product", products);
-	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(), products.getBuyPrice()));
+	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(),products.getProductLines().getId(), products.getBuyPrice()));
+		model.addAttribute("productslines", productslinesService.obtenerProductLines());
+
 	    return "lista-productos";
 	}
 }

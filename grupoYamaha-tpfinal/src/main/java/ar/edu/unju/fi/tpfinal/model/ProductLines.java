@@ -30,7 +30,6 @@ public class ProductLines {
 	private String htmlDescription;
 	
 	@Lob
-	@Column(columnDefinition = "LONGBLOB")
 	private String image;
 	
 
