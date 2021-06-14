@@ -42,7 +42,7 @@ public class ProductLinesController {
 		return "nueva-categoria";
     }
 		@PostMapping("/productlines-guardar")
-		public ModelAndView ProductLinesPage( @RequestParam("file") MultipartFile image,@Valid @ModelAttribute("productlines") ProductLines productlines, BindingResult resultadoValidacion) throws IOException{
+		public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, @RequestParam("file") MultipartFile image, BindingResult resultadoValidacion) throws IOException{
 			
 			//////// validation
 			ModelAndView modelView;
@@ -53,7 +53,7 @@ public class ProductLinesController {
 			
 			//else {
 				 modelView = new ModelAndView("lista-categoria");
-				 if (image.isEmpty()) {
+				 if (!image.isEmpty()) {
 					Path directorioImagenes = Paths.get("src//main//resources//static/img");
 					String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 					try {
