@@ -128,3 +128,11 @@ body {
 .gam-overflow {
     margin-top: -3rem;
 }
+.gam-text-light {
+    color: #fff;
+}
+.gam-text-light:hover{
+    color: #000;
+    background-color: #fff;
+}
+
