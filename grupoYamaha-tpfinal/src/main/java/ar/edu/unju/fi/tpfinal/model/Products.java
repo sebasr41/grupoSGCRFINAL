@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Table(name="PRODUCTS")
 public class Products {
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productCode;//es varchar

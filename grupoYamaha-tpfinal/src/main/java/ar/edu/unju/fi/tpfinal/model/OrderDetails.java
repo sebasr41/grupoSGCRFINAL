@@ -21,9 +21,7 @@ import org.springframework.stereotype.Component;
 public class OrderDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long orderNumber;
-
-	
+	private Long orderNumber;	
 
 	@Column(name = "Orderdetails_quantityOrdered")
 	private int quantityOrdered;

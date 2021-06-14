@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="PRODUCTLINES")
 public class ProductLines {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

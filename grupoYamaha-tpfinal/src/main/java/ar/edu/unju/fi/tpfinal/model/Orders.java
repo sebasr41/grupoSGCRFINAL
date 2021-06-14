@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 @Table(name="ORDERS")
 public class Orders {
 
-
 	@Id
 	private Long orderNumber;
 	
