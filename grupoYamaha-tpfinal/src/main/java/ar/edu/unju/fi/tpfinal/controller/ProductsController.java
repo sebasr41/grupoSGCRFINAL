@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 
-
+@Controller
 public class ProductsController {
 	@Autowired
 	private Products products;
@@ -34,12 +35,11 @@ public class ProductsController {
 	private IProductLinesService productslinesService;
 	
 	
-	@Qualifier("ProductsServiceMysql")
 	@Autowired
 	private IProductsService productsService;
 	
 	
-	@GetMapping("/products")
+	@GetMapping("/autos")
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);	
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
@@ -51,6 +51,8 @@ public class ProductsController {
 		}
 		return "productos";
 	}
+
+	
 	@PostMapping("/products-save")
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products")Products products, BindingResult resultadoValidacion) {
 		ModelAndView modelView;
