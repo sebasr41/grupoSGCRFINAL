@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -16,23 +16,24 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="PRODUCTLINES")
 public class ProductLines {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
 	
-	@Column(name="productlines_productlinename")
+	@Column(name="productlinename")
 	private String productLinesName;
 	
-	@Column(name="productlines_textdescription")
+	@Column(name="textdescription")
 	private String textDescription;
 	
-	@Column(name="productlines_htmldescription")
+	@Column(name="htmldescription")
 	private String htmlDescription;
 	
-	@Column(name="productlines_image")
+	@Column(name="image")
 	private Blob image;
+	
+
 	/**
 	 * 
 	 */
@@ -41,20 +42,32 @@ public class ProductLines {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param productLines
+	 * @param id
 	 * @param productLinesName
 	 * @param textDescription
 	 * @param htmlDescription
 	 * @param image
 	 */
-	public ProductLines(Long id, String productLinesName, String textDescription, String htmlDescription,
-			Blob image) {
+	public ProductLines(Long id, String productLinesName, String textDescription, String htmlDescription, Blob image) {
 		super();
 		this.id = id;
 		this.productLinesName = productLinesName;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	/**
@@ -105,19 +118,11 @@ public class ProductLines {
 	public void setImage(Blob image) {
 		this.image = image;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	@Override
 	public String toString() {
 		return "ProductLines [id=" + id + ", productLinesName=" + productLinesName + ", textDescription="
 				+ textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
 	}
-	
-	
 
-	
 }
