@@ -120,7 +120,7 @@ public class ProductsController {
 		
 		
 		model.addAttribute("product", products);
-	    model.addAttribute("products", productsService.buscarProducts(products.getProductLines().getProductLinesName()));
-	    return "products";
+	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(), products.getBuyPrice()));
+	    return "lista-productos";
 	}
 }

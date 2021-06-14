@@ -42,10 +42,12 @@ public class ProductsServiceImp implements IProductsService{
     }
 
     @Override
-    public Object buscarProducts(String productLinesName) {
+    public Object buscarProducts(String productsName , double price) {
         List<Products> products = new ArrayList<Products>();
-		if(!productLinesName.isEmpty()) {
-			products = productsRepository.findByproductName(productLinesName);
+		if(!productsName.isEmpty()  && price >=0) {
+			products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
+		}else if(productsName.isEmpty() && price >=0) {
+			products= productsRepository.findByBuyPriceGreaterThanEqual(price);
 		}
 		return products;
     }

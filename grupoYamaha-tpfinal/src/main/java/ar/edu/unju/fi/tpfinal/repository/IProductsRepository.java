@@ -8,6 +8,8 @@ import ar.edu.unju.fi.tpfinal.model.Products;
 
 public interface IProductsRepository extends CrudRepository<Products,Long> {
 
-    List<Products> findByproductName(String productLinesName);
+    List<Products> findByProductNameAndBuyPriceGreaterThanEqual(String productLinesName, double price);
+
+    List<Products> findByBuyPriceGreaterThanEqual(double price);
     
 }
