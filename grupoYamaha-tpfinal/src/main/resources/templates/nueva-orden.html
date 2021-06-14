@@ -16,69 +16,53 @@
   	
   	 <div class="container">
         <div class="show-case-2">
-            <h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Registrá un nuevo vehículo</h1>
+            <h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Detalles De Las Ordenes De Compra</h1>
         </div>
     </div>
     <!--Formulario de alta -->
     <div class="row">
     
         <div class="col-md-8 d-block m-auto">
-            <form th:action="@{/products-save}" method="POST" th:object="${products}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+            <form th:action="@{/order-form}" method="POST" th:object="${orderdetails}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
-                      <label for="nombre">Numero Order <i class="fas fa-signature text-light ml-2"></i></label>
-                      <input th:field="*{orderNumber}" type="text" class="form-control" id="nombre">
-                    </div>
-                    <div class="form-group col-md-5">
-                      <label for="marca">Fecha de orden</label>
-                      <input th:field="*{orderDate}" type="date" class="form-control" id="marca">
+                      <label for="orden">Cantidad De Ordenes</label>
+                      <input th:field="*{quantityOrdered}" type="number" class="form-control" id="date">
                     </div>
                 </div>     
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
-                        <label for="stock">Fecha Requerida<i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
-                        <input th:field="*{requiredDate}" type="date" class="form-control" id="stock">
+                        <label for="precio">Precio de Ordenes<i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+                        <input th:field="*{priceEach}" type="number" class="form-control" id="precio">
                       </div>
                                         
                     <div class="form-group col-md-5">
-                        <label for="precio">Fecha de Envio<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
-                        <input th:field="*{shippedDate}" type="date" class="form-control" id="precio">
+                        <label for="precio">linea de detalle<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+                        <input th:field="*{orderLineNumber}" type="number" class="form-control" id="linea">
                     </div>   
                     
-                </div>   
-                <div class="row d-flex justify-content-center">
-                    <div class="form-group col-md-5">
-                        <label for="precioMSRP">Status</label>
-                        <input th:field="*{status}" type="text" class="form-control" id="precioMSRP">
-                    </div>
-                    
-                    <div class="form-group col-md-5">
-                        <label for="escalaProducto">Comentario</label>
-                        <input th:field="*{comments}" type="text" class="form-control" id="escalaProducto">
-                    </div>
-                </div>    
-                <div class="row d-flex justify-content-center">
-                    <div class="form-group col-md-5">
-                        <label for="productoVendor">Numro cliente</label>
-                        <input th:field="*{customerNumber}" type="number" class="form-control" id="productoVendor">
-                      </div>
-                
-                </div>    
+              	<div class="form-group col-md-5">
+	                <label for="producto">NombreDelProducto</label>
+	                <select id="producto" th:field="*{products.productCode}" class="form-control form-control-sm">
+	                <option th:each="prod : ${products}"
+	                 th:value="${prod.productCode}"
+	                 th:text="${prod.productName}"	                
+	                 th:selected="false"></option>
+	                </select>
+	              
+        			</div>         
                       
-                    <div class="form-group col-md-5">
-                        <label for="exampleFormControlTextarea1">Detalle de orden <i class="far fa-keyboard text-light ml-2"></i></label>
-                        <textarea th:field="*{orderDetails}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>                   
-                </div>
+                 
+              
+                 
                 <div class="row ml-5 pl-4">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Continuar</button>
                 </div>
-            </form>
-            
-            
+           
+                   </form> 
+              </div>
         </div>
-    </div>
-  
+ 
     <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
     <script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
     <script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,11 +23,8 @@ import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 @Controller
 public class OrderDetailsController {
-	@Autowired
-	private OrderDetails orderdetails;
-	@Autowired
-	private Orders order;
-	
+
+
 	@Autowired
 	private IOrderDetailsService orderdetailsService;
 	
@@ -35,17 +33,25 @@ public class OrderDetailsController {
 
 	@Autowired
 	private IProductsService productsService;
-	
+	@Autowired
+	private Orders orders;
+	@Autowired
+	private OrderDetails orderdetails;
+	@Autowired
+	private Products products;
 	@GetMapping("/orderdetails-{id}")
-	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") Long id) {
+	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") Long id, Model model) {
 	
 		
-		ModelAndView modelView = new ModelAndView("orderdetaiils");
+		ModelAndView modelView = new ModelAndView("nueva-orden");
+		model.addAttribute("orders", orders);
+		model.addAttribute("orderdetails", orderdetails);
+		model.addAttribute("products", products);
 		Optional<Products> products = productsService.obtenerProductsPorId(id);
-		
+		//modelView.addObject("products", products);
 		return modelView;
 }
-	@PostMapping("/orderdetails-guardar")
+	@PostMapping("order-form")
 	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails,@ModelAttribute("order") Orders order, BindingResult resultadoValidacion){
 		
 		//////// validation
