@@ -1,0 +1,130 @@
+:root {
+    /* ## Colors */    
+    /* ### Primary */
+    /* (intro and email sign up background) */
+    --dark-Blue-Intro-Email : hsl(217, 28%, 15%);
+    /* (main background) */
+    --dark-Blue-Main-Bg: hsl(218, 28%, 13%);
+    /* (footer background) */
+    --dark-Blue-Footer : hsl(216, 53%, 9%);
+    /* (testimonials background) */
+    --dark-Blue-Testimonial-Bg : hsl(219, 30%, 18%);
+    
+    /* ### Accent */
+    /* (inside call-to-action gradient) */
+    --cyan : hsl(176, 68%, 64%);
+    /* (inside call-to-action gradient) */
+    --blue : hsl(198, 60%, 50%);
+    /* (error) */
+    --light-Red: hsl(0, 100%, 63%);    
+    /* ### Neutral */    
+    --white: hsl(0, 0%, 100%);
+}
+.body-gam {
+    background-color: var(--dark-Blue-Main-Bg);
+}
+body {
+    overflow-x: hidden;
+}
+.gam-img {    
+    width: 100%;
+    height: 500px;
+}
+.gam-img-carousel-1 {
+    background: url(../img/car4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.gam-img-carousel-2 {
+    background: url(../img/car7.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 70%;        
+}
+.gam-img-carousel-3 {
+    background: url(../img/car8.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+.gam-gradiente {
+    background-image: linear-gradient(to top, rgba(23,30,42,1), rgba(23,30,42,.8), rgba(23,30,42,.4), transparent 100%);
+    margin: 0;    
+    padding-bottom: 16px;
+}
+.gam-bg--nav {
+    background-color: var(--dark-Blue-Main-Bg);
+}
+.fa-github {
+    font-size: 1.2rem;
+    margin-left: .8rem;
+    line-height: 1;
+}
+.btn-gam-repo {
+    padding: .5rem 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,.5);
+    color:rgba(255,255,255,.5);
+}
+.btn-gam-repo:hover {
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,.75);
+    color:rgba(255,255,255,.75);
+}
+.btn-gam--cyan {
+    color: var(--cyan);
+}
+.gam-border--cyan {
+    border: 1px solid var(--cyan);    
+}
+.text-gam--cyan {
+    color: var(--cyan);
+}
+.btn-gam--cyan:hover {
+    border: 1px solid rgba(100, 225, 217, .5);
+    color: rgba(100, 225, 217, .5);
+}
+.btn-gam--blue {
+    background-color: var(--blue);
+}
+.btn-gam--blue:hover {
+    background-color: rgba(51,158, 204,.7);
+}
+.show-case {
+    background: url(../img/showcase1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+@media screen and (max-width: 768px){
+    .navbar-gam {
+        display: none;
+    }
+}
+.card {
+	background-color: transparent;
+}
+.card-gam-bg {
+    background-color: var(--dark-Blue-Testimonial-Bg);
+}
+.bg-pv--form {
+    background-color: var(--dark-Blue-Testimonial-Bg);
+}
+.footer-gam {
+    background-color: var(--dark-Blue-Footer);
+}
+
+/*Formulario de alta*/
+
+.show-case-2{
+    background: url(../img/showcase2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+}
+.gam-overflow {
+    margin-top: -3rem;
+}

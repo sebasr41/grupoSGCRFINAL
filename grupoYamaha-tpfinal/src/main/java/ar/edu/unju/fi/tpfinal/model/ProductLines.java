@@ -33,8 +33,7 @@ public class ProductLines {
 	@Column(name="image")
 	private Blob image;
 	
-	
-	
+
 	/**
 	 * 
 	 */
@@ -57,6 +56,7 @@ public class ProductLines {
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
+
 	/**
 	 * @return the id
 	 */
@@ -69,6 +69,7 @@ public class ProductLines {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	/**
 	 * @return the productLinesName
 	 */
@@ -117,11 +118,11 @@ public class ProductLines {
 	public void setImage(Blob image) {
 		this.image = image;
 	}
+
 	@Override
 	public String toString() {
 		return "ProductLines [id=" + id + ", productLinesName=" + productLinesName + ", textDescription="
 				+ textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
 	}
-	
-		
+
 }
