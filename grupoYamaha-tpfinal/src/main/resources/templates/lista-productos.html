@@ -46,37 +46,7 @@
 		</div>
 		<!--Resultados-->
 		<!--Como se debería ver-->
-		<div class="col-md-10 d-block m-auto rounded">
-			<table class="table bg-pv--form text-light">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">First</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td colspan="2">Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		
 		<!--Resultados-->
 		<!--Con bucle-->
 		<div class="col-md-10 d-block m-auto rounded">
@@ -95,15 +65,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="comp : ${compra}">
-						<td th:text="${comp.id}"></td>
-						<td th:text="${comp.producto.id}"></td>
-						<td th:text="${comp.producto.nombre}"></td>
-						<td th:text=" '$ ' + ${comp.producto.precio}"></td>
-						<td th:text="${comp.producto.marca}"></td>
-						<td th:text="${comp.producto.stock}"></td>
-						<td th:text="${comp.cantidad}"></td>
-						<td th:text=" '$ ' + ${comp.getTotal}"></td>
+					<tr th:each="prod : ${products}">
+						<td th:text="${prod.productCode}"></td>
+						<td th:text="${prod.productLines.id}"></td>
+						<td th:text="${prod.productLines.productLinesName}"></td>
+						<td th:text="${prod.productLines.textDescription}"></td>
+						<td th:text="${prod.productLine}"></td>
+						<td th:text="${prod.quantityInStock}"></td>
+						<td th:text=" '$ ' + ${prod.buyPrice}"></td>
 						<td>
 							<!-- Edita por medio del id -->
 							<a th:href="@{/compra-editar-} + ${comp.id}" class="btn btn-warning mr-3">Editar</a>

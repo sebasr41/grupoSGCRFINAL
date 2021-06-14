@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -30,8 +30,9 @@ public class ProductLines {
 	@Column(name="htmldescription")
 	private String htmlDescription;
 	
-	@Column(name="image")
-	private Blob image;
+	@Lob
+	@Column(columnDefinition = "LONGBLOB")
+	private String image;
 	
 
 	/**
@@ -48,7 +49,7 @@ public class ProductLines {
 	 * @param htmlDescription
 	 * @param image
 	 */
-	public ProductLines(Long id, String productLinesName, String textDescription, String htmlDescription, Blob image) {
+	public ProductLines(Long id, String productLinesName, String textDescription, String htmlDescription, String image) {
 		super();
 		this.id = id;
 		this.productLinesName = productLinesName;
@@ -109,16 +110,16 @@ public class ProductLines {
 	/**
 	 * @return the image
 	 */
-	public Blob getImage() {
-		return image;
-	}
-	/**
-	 * @param image the image to set
-	 */
-	public void setImage(Blob image) {
-		this.image = image;
+
+
+	public String getImage() {
+		return this.image;
 	}
 
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProductLines [id=" + id + ", productLinesName=" + productLinesName + ", textDescription="

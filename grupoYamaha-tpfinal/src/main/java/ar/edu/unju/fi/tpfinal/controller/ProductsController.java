@@ -49,7 +49,7 @@ public class ProductsController {
 			model.addAttribute("bandera", true);
 
 		}
-		return "productos";
+		return "nuevo-producto";
 	}
 
 	
@@ -57,7 +57,7 @@ public class ProductsController {
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products")Products products, BindingResult resultadoValidacion) {
 		ModelAndView modelView;
 		if(resultadoValidacion.hasErrors()) {
-		modelView= new ModelAndView("new-products"); 
+		modelView= new ModelAndView("nuevo-producto"); 
 		List<ProductLines> productslines = productslinesService.obtenerProductLines();
 		modelView.addObject("products", products);
 		modelView.addObject("productslines", productslines);
@@ -68,7 +68,7 @@ public class ProductsController {
 		}
 		
 		else {
-		ModelAndView model = new ModelAndView("products");
+		ModelAndView model = new ModelAndView("lista-productos");
 		
 		Optional<ProductLines> productslines = productslinesService.getProductolinesPorId(products.getProductLines().getId());
 		
@@ -103,7 +103,7 @@ public class ProductsController {
 	@GetMapping("/products-editar-{id}")
 	public ModelAndView getProductsEditPage(@PathVariable (value = "id") Long id) {
 
-		ModelAndView modelView = new ModelAndView("new-products");
+		ModelAndView modelView = new ModelAndView("lista-productos");
 		
 		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		

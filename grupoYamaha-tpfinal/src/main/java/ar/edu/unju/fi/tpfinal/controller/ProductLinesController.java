@@ -1,5 +1,10 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.ProductLines;
@@ -30,26 +37,40 @@ public class ProductLinesController {
     
     @GetMapping("/productlines")
 	public String getProductoPage(Model model) {
+		productlines.setImage("");
 		model.addAttribute("productlines",productlines);
 		return "nueva-categoria";
     }
 		@PostMapping("/productlines-guardar")
-		public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, BindingResult resultadoValidacion){
+		public ModelAndView ProductLinesPage( @RequestParam("file") MultipartFile image,@Valid @ModelAttribute("productlines") ProductLines productlines, BindingResult resultadoValidacion) throws IOException{
 			
 			//////// validation
 			ModelAndView modelView;
-			if(resultadoValidacion.hasErrors()) {
-			modelView= new ModelAndView("product-lines"); 
-			return modelView;
-			}
+			//if(resultadoValidacion.hasErrors()) {
+			//modelView= new ModelAndView("nueva-categoria"); 
+			//return modelView;
+			//}
 			
-			else {
-				 modelView = new ModelAndView("lista-productlines");
+			//else {
+				 modelView = new ModelAndView("lista-categoria");
+				 if (image.isEmpty()) {
+					Path directorioImagenes = Paths.get("src//main//resources//static/img");
+					String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+					try {
+						byte[] bytesImg = image.getBytes();
+						Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + image.getOriginalFilename());
+						Files.write(rutaCompleta, bytesImg);
+	
+						productlines.setImage(image.getOriginalFilename());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 				 productolinesService.guardarProductLines(productlines);
 			modelView.addObject("productslines", productolinesService.obtenerProductLines());
 			
 			return modelView;
-			}
+			//}
 		}
 		@GetMapping("/productolines-eliminar-{id}")
 		public ModelAndView getProductolinesEliminarPage(@PathVariable (value = "id")Long id) {

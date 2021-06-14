@@ -65,11 +65,11 @@
                 
                 	<div class="form-group col-md-5">
 	                <label for="producto">Nombre de la categoria</label>
-	                <select id="producto" th:field="*{producto.stock}" class="form-control form-control-sm">
-	                <option th:each="prod : ${productos}"
+	                <select id="producto" th:field="*{productLines.id}" class="form-control form-control-sm">
+	                <option th:each="prod : ${productslines}"
 	                 th:value="${prod.id}"
-	                 th:text="${prod.nombre}"	                
-	                 th:selected="false"/>
+	                 th:text="${prod.productLinesName}"	                
+	                 th:selected="false"></option>
 	                </select>
 	              
         			</div>                                 
