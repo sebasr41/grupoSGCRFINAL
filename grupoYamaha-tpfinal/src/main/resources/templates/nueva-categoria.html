@@ -37,15 +37,15 @@
 						<label for="exampleFormControlTextarea1">Html descripción <i
 								class="far fa-keyboard text-light ml-2"></i></label>
 						<textarea th:field="*{textDescription}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-					</div>
-					<div class="form-group col-md-5">
-						<label for="exampleFormControlTextarea2">Nombre <i
-								class="far fa-keyboard text-light ml-2"></i></label>
-						<textarea th:field="*{productLinesName}" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
-					</div>
+					</div>									
 
 				</div>
 				<div class="row d-flex justify-content-center">
+					
+					<div class="form-group col-md-5">
+                        <label for="nombreCategoria">Nombre de la categoría</label>
+                        <input th:field="*{productLinesName}" type="text" class="form-control" id="nombreCategoria">
+                    </div>										
 					
 					<div class="form-group col-md-5">
 						<label for="exampleFormControlFile1">Subí la imagen del vehículo <i
