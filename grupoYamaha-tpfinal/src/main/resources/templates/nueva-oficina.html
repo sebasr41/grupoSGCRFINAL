@@ -22,63 +22,50 @@
     <!--Formulario de alta -->
     <div class="row">
         <div class="col-md-8 d-block m-auto">
-            <form th:action="@{/products-save}" method="POST" th:object="${products}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+            <form th:action="@{/employees-save}" method="POST" th:object="${employees}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
-                      <label for="nombre">Nombre <i class="fas fa-signature text-light ml-2"></i></label>
-                      <input th:field="*{productName}" type="text" class="form-control" id="nombre">
+                      <label for="ciudad">Ciudad <i class="fas fa-signature text-light ml-2"></i></label>
+                      <input th:field="*{city}" type="text" class="form-control" id="ciudad">
                     </div>
                     <div class="form-group col-md-5">
-                      <label for="marca">Marca</label>
-                      <input th:field="*{productLine}" type="text" class="form-control" id="marca">
+                      <label for="telefono">Teléfono</label>
+                      <input th:field="*{phone}" type="text" class="form-control" id="telefono">
                     </div>
                 </div> 
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
-                        <label for="stock">Stock <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
-                        <input th:field="*{quantityInStock}" type="number" class="form-control" id="stock">
+                        <label for="dirrecion1">Dirección 1 <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+                        <input th:field="*{addressLine1}" type="text" class="form-control" id="dirrecion1">
                       </div>
                     <div class="form-group col-md-5">
-                        <label for="precio">Precio <i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
-                        <input th:field="*{buyPrice}" type="number" class="form-control" id="precio">
+                        <label for="dirrecion2">Dirección 2 <i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+                        <input th:field="*{addressLine2}" type="text" class="form-control" id="dirrecion2">
                     </div>
                 </div>   
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
-                        <label for="precioMSRP">Precio sugerido por el fabricante (MSRP)</label>
-                        <input th:field="*{MSRP}" type="number" class="form-control" id="precioMSRP">
+                        <label for="provincia">Provincia</label>
+                        <input th:field="*{state}" type="number" class="form-control" id="provincia">
                     </div>
                     
                     <div class="form-group col-md-5">
-                        <label for="escalaProducto">Escala del producto</label>
-                        <input th:field="*{productScale}" type="text" class="form-control" id="escalaProducto">
+                        <label for="pais">Country</label>
+                        <input th:field="*{country}" type="text" class="form-control" id="pais">
                     </div>
                 </div>    
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
-                        <label for="productoVendor">Producto vendedor</label>
-                        <input th:field="*{productVendor}" type="text" class="form-control" id="productoVendor">
+                        <label for="codigoPostal">Código postal</label>
+                        <input th:field="*{postalCode}" type="text" class="form-control" id="codigoPostal">
+                      </div>
+                      <div class="form-group col-md-5">
+                        <label for="territorio">Territorio</label>
+                        <input th:field="*{territory}" type="text" class="form-control" id="territorio">
                       </div>
                    
                 </div>    
-                <div class="row d-flex justify-content-center">
                 
-                	<div class="form-group col-md-5">
-	                <label for="producto">Nombre de la categoria</label>
-	                <select id="producto" th:field="*{productLines.id}" class="form-control form-control-sm">
-	                <option th:each="prod : ${productslines}"
-	                 th:value="${prod.id}"
-	                 th:text="${prod.productLinesName}"	                
-	                 th:selected="false"></option>
-	                </select>
-	              
-        			</div>                                 
-                      
-                    <div class="form-group col-md-5">
-                        <label for="exampleFormControlTextarea1">Descripción <i class="far fa-keyboard text-light ml-2"></i></label>
-                        <textarea th:field="*{productDescription}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>                   
-                </div>
                 <div class="row ml-5 pl-4">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>

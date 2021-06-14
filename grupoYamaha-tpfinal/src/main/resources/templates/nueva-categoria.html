@@ -25,7 +25,7 @@
 	<!--Formulario de alta -->
 	<div class="row">
 		<div class="col-md-8 d-block m-auto">
-			<form th:action="@{/productlines-guardar}" method="POST" th:object="${productlines}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+			<form  th:action="@{/productlines-guardar}" method="POST" enctype="multipart/form-data" th:object="${productlines}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
@@ -48,9 +48,11 @@
                     </div>										
 					
 					<div class="form-group col-md-5">
-						<label for="exampleFormControlFile1">Subí la imagen del vehículo <i
+						<label for="image">Subí la imagen del vehículo <i
 								class="fas fa-upload text-light ml-2"></i></label>
-						<input th:field="*{image}" type="file" class="form-control-file" id="exampleFormControlFile1">
+								<div class="form-group row">
+										<input class="form-control" type="file" id="image" name="file">				        
+									</div>
 					</div>
 				</div>
 				<div class="row ml-5 pl-4">
