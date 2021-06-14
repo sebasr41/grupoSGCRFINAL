@@ -16,7 +16,8 @@
 <body class="body-gam">
 	<!--   HEADER    -->
 	<div th:replace="layouts/header :: header"></div>
-
+	<!--   NAV WITH TABS    -->
+	<div th:replace="layouts/nav-tabs :: div"></div>
 	<div class="container">
 		<div class="show-case-2">
 			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Agregá un nuevo vehículo</h1>
@@ -25,34 +26,37 @@
 	<!--Formulario de alta -->
 	<div class="row">
 		<div class="col-md-8 d-block m-auto">
-			<form  th:action="@{/productlines-guardar}" method="POST" enctype="multipart/form-data" th:object="${productlines}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+			<form th:action="@{/productlines-guardar}" method="POST" enctype="multipart/form-data"
+				th:object="${productlines}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="exampleFormControlTextarea1">Text descripción <i
 								class="far fa-keyboard text-light ml-2"></i></label>
-						<textarea th:field="*{htmlDescription}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<textarea th:field="*{htmlDescription}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3"></textarea>
 					</div>
 					<div class="form-group col-md-5">
 						<label for="exampleFormControlTextarea1">Html descripción <i
 								class="far fa-keyboard text-light ml-2"></i></label>
-						<textarea th:field="*{textDescription}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-					</div>									
+						<textarea th:field="*{textDescription}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3"></textarea>
+					</div>
 
 				</div>
 				<div class="row d-flex justify-content-center">
-					
+
 					<div class="form-group col-md-5">
-                        <label for="nombreCategoria">Nombre de la categoría</label>
-                        <input th:field="*{productLinesName}" type="text" class="form-control" id="nombreCategoria">
-                    </div>										
-					
+						<label for="nombreCategoria">Nombre de la categoría</label>
+						<input th:field="*{productLinesName}" type="text" class="form-control" id="nombreCategoria">
+					</div>
+
 					<div class="form-group col-md-5">
 						<label for="image">Subí la imagen del vehículo <i
 								class="fas fa-upload text-light ml-2"></i></label>
-								<div class="form-group row">
-										<input class="form-control" type="file" id="image" name="file">				        
-									</div>
+						<div class="form-group row">
+							<input class="form-control" type="file" id="image" name="file">
+						</div>
 					</div>
 				</div>
 				<div class="row ml-5 pl-4">
