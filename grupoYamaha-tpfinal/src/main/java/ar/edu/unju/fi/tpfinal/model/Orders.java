@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -23,8 +24,6 @@ public class Orders {
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="orders_ordernumber")
 	private Long orderNumber;
 	
 	@Column(name="orders_orderdate")
@@ -44,6 +43,12 @@ public class Orders {
 	
 	@Column(name="orders_customernumber")
 	private int customerNumber;
+
+	@OneToOne
+	@JoinColumn(name = "orderNumber")
+	@MapsId
+	private OrderDetails orderDetails;
+
 	/**
 	 * 
 	 */

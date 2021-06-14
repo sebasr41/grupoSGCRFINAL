@@ -124,6 +124,5 @@ public class ProductLines {
 				+ textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
 	}
 	
-	
-	
+		
 }

@@ -20,7 +20,6 @@ public class Products {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "produc_code")
 	private Long productCode;//es varchar
 	
 	
@@ -48,6 +47,10 @@ public class Products {
 	@Column(name = "produc_msrp")
 	private double MSRP;
 	
+
+	@OneToOne(mappedBy = "products")
+	private OrderDetails orderDetails;
+
 	
 	@ManyToOne
 	@Autowired
@@ -213,5 +216,4 @@ public class Products {
 				+ MSRP + ", productLines=" + productLines + "]";
 	}
 	
-
 }
