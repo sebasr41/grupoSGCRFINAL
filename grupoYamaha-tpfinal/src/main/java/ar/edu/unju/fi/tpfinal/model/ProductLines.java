@@ -33,6 +33,9 @@ public class ProductLines {
 	
 	@Column(name="image")
 	private Blob image;
+	
+	
+	
 	/**
 	 * 
 	 */
@@ -120,6 +123,7 @@ public class ProductLines {
 		return "ProductLines [id=" + id + ", productLinesName=" + productLinesName + ", textDescription="
 				+ textDescription + ", htmlDescription=" + htmlDescription + ", image=" + image + "]";
 	}
+	
 	
 	
 }
