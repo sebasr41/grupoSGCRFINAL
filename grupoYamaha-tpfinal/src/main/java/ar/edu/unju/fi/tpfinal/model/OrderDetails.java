@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="ORDERDETAILS")
 public class OrderDetails {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderNumber;	

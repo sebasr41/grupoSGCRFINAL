@@ -69,7 +69,6 @@
 						<th>Categoria</th>
 						<th>C. Descripcion</th>
 						<th>Nombre</th>
-						<th>Marca</th>
 						<th>Cantidad</th>
 						<th>Precio</th>
 						<th>Acciones</th>
@@ -82,13 +81,13 @@
 						<td th:text="${prod.productLines.productLinesName}"></td>
 						<td th:text="${prod.productLines.textDescription}"></td>
 						<td th:text="${prod.productName}"></td>
-						<td th:text="${prod.productLine}"></td>
 						<td th:text="${prod.quantityInStock}"></td>
 						<td th:text=" '$ ' + ${prod.buyPrice}"></td>
 						<td>
 							<!-- Edita por medio del id -->
 							<a th:href="@{/compra-editar-} + ${prod.productCode}" class="btn btn-warning mr-3">Editar</a>
 							<a th:href="@{/compra-eliminar-} + ${prod.productCode}" class="btn btn-danger">Eliminar</a>
+							<a th:href="@{/orderdetails-} + ${prod.productCode}" class="btn btn-warning mr-3">Buy</a>
 						</td>
 					</tr>
 				</tbody>

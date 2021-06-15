@@ -42,18 +42,17 @@ public class OrderDetailsController {
 	@GetMapping("/orderdetails-{id}")
 	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") Long id, Model model) {
 	
-		
 		ModelAndView modelView = new ModelAndView("nueva-orden");
+		Optional<Products> products = productsService.obtenerProductsPorId(id);
+		products.ifPresent(orderdetails::setProducts);
 		model.addAttribute("orders", orders);
 		model.addAttribute("orderdetails", orderdetails);
-		model.addAttribute("products", products);
-		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		//modelView.addObject("products", products);
 		return modelView;
 }
 	@PostMapping("order-form")
 	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails,@ModelAttribute("order") Orders order, BindingResult resultadoValidacion){
-		
+		System.out.println("orden"+ orderdetails);
 		//////// validation
 		ModelAndView modelView;
 		if(resultadoValidacion.hasErrors()) {
@@ -62,7 +61,7 @@ public class OrderDetailsController {
 		}
 		
 		else {
-			 modelView = new ModelAndView("orderdetails-list");
+			 modelView = new ModelAndView("lista-ordenes");
 			 orderdetailsService.guardarOrderDetails(orderdetails);
 			 orderService.guardarOrders(order);
 		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());

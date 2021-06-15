@@ -25,9 +25,6 @@ public class Products {
 	@Column(name = "produc_name")
 	private String productName;
 	
-	@Column(name = "produc_line")
-	private String productLine;
-	
 	@Column(name = "produc_scale")
 	private String productScale;
 	
@@ -73,12 +70,11 @@ public class Products {
 	 * @param mSRP
 	 * @param productLines
 	 */
-	public Products(Long productCode, String productName, String productLine, String productScale, String productVendor,
+	public Products(Long productCode, String productName, String productScale, String productVendor,
 			String productDescription, int quantityInStock, double buyPrice, double mSRP, ProductLines productLines) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
-		this.productLine = productLine;
 		this.productScale = productScale;
 		this.productVendor = productVendor;
 		this.productDescription = productDescription;
@@ -111,18 +107,7 @@ public class Products {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	/**
-	 * @return the productLine
-	 */
-	public String getProductLine() {
-		return productLine;
-	}
-	/**
-	 * @param productLine the productLine to set
-	 */
-	public void setProductLine(String productLine) {
-		this.productLine = productLine;
-	}
+	
 	/**
 	 * @return the productScale
 	 */
@@ -158,6 +143,12 @@ public class Products {
 	 */
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
+	}
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 	/**
 	 * @return the quantityInStock
@@ -209,8 +200,7 @@ public class Products {
 	}
 	@Override
 	public String toString() {
-		return "Products [productCode=" + productCode + ", productName=" + productName + ", productLine=" + productLine
-				+ ", productScale=" + productScale + ", productVendor=" + productVendor + ", productDescription="
+		return "Products [productCode=" + productCode + ", productName=" + productName +  ", productScale=" + productScale + ", productVendor=" + productVendor + ", productDescription="
 				+ productDescription + ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP="
 				+ MSRP + ", productLines=" + productLines + "]";
 	}

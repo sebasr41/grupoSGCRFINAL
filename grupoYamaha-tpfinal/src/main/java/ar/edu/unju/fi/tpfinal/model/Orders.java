@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,6 +29,7 @@ public class Orders {
 	@Column(name="orders_orderdate")
 	private LocalDate orderDate;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="orders_requiredDate")
 	private LocalDate requiredDate;
 	
@@ -40,9 +42,6 @@ public class Orders {
 	@Column(name="orders_comments")
 	private String comments;
 	
-	@Column(name="orders_customernumber")
-	private int customerNumber;
-
 	@OneToOne
 	@JoinColumn(name = "orderNumber")
 	@MapsId
@@ -65,7 +64,7 @@ public class Orders {
 	 * @param customerNumber
 	 */
 	public Orders(Long orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String status,
-			String comments, int customerNumber) {
+			String comments) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderDate = orderDate;
@@ -73,7 +72,6 @@ public class Orders {
 		this.shippedDate = shippedDate;
 		this.status = status;
 		this.comments = comments;
-		this.customerNumber = customerNumber;
 	}
 	/**
 	 * @return the orderNumber
@@ -129,6 +127,12 @@ public class Orders {
 	public String getStatus() {
 		return status;
 	}
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 	/**
 	 * @param status the status to set
 	 */
@@ -147,23 +151,11 @@ public class Orders {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	/**
-	 * @return the customerNumber
-	 */
-	public int getCustomerNumber() {
-		return customerNumber;
-	}
-	/**
-	 * @param customerNumber the customerNumber to set
-	 */
-	public void setCustomerNumber(int customerNumber) {
-		this.customerNumber = customerNumber;
-	}
+	
 	@Override
 	public String toString() {
 		return "Orders [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
-				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customerNumber="
-				+ customerNumber + "]";
+				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + "]";
 	}
 
 	

@@ -24,6 +24,10 @@
     <div class="row">
     
         <div class="col-md-8 d-block m-auto">
+        
+        	
+		
+        
             <form th:action="@{/order-form}" method="POST" th:object="${orderdetails}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
@@ -32,28 +36,51 @@
                     </div>
                 </div>     
                 <div class="row d-flex justify-content-center">
-                    <div class="form-group col-md-5">
-                        <label for="precio">Precio de Ordenes<i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
-                        <input th:field="*{priceEach}" type="number" class="form-control" id="precio">
-                      </div>
+                    
                                         
                     <div class="form-group col-md-5">
                         <label for="precio">linea de detalle<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
                         <input th:field="*{orderLineNumber}" type="number" class="form-control" id="linea">
                     </div>   
                     
-              	<div class="form-group col-md-5">
-	                <label for="producto">NombreDelProducto</label>
-	                <select id="producto" th:field="*{products.productCode}" class="form-control form-control-sm">
-	                <option th:each="prod : ${products}"
-	                 th:value="${prod.productCode}"
-	                 th:text="${prod.productName}"	                
-	                 th:selected="false"></option>
-	                </select>
+                    <div class="form-group col-md-5">
+                        <label for="fech">Fecha Requerida<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+                        <input th:field="*{orders.requiredDate}" type="date" class="form-control" id="fech">
+                    </div>   
+                    
+                    <div class="form-group col-md-5">
+                        <label for="com">Comentario<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+                        <input th:field="*{orders.comments}" type="text" class="form-control" id="com">
+                    </div>   
+                    
+                   
+                    
+                    
+                    
+                    
+                    
+                    <div class="form-group col-md-5">
+                        
+                        <div class="col mb-4" th:each="ord : ${orderdetails}">
+						<div class="card">
+							<div class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
+								<h5 class="card-title" th:text="${ord.products.productName}"></h5>
+								<p class="card-text" th:text="${ord.products.productLines.textDescription}"></p>
+								<label for="precio"></label>
+                        	<input th:field="*{products}" th:value="${ord.products}" type="hidden" class="form-control"  id="linea">
+							</div>
+						</div>
+                        
+                        
+                    
+                    
+                    </div> 
+                    
+              	
 	              
         			</div>         
                       
-                 
+                 </div>
               
                  
                 <div class="row ml-5 pl-4">
