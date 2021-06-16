@@ -32,30 +32,33 @@
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>P. Cod.</th>
-						<th>P. Nom.</th>
-						<th>P. Prec.</th>
-						<th>P. Marca.</th>
-						<th>P. Stock</th>
+						<th>Producto</th>
+						<th>Precio</th>
 						<th>Cantidad</th>
-						<th>Total</th>
-						<th>Acciones</th>
+						<th>Linea de Orden</th>
+						<th>F. de Compra</th>
+						<th>F. Enviada</th>
+						<th>F. Requerida</th>
+						<th>Comentarios</th>
+						<th>Estado</th>
+						<th>Accion</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="comp : ${compra}">
-						<td th:text="${comp.id}"></td>
-						<td th:text="${comp.producto.id}"></td>
-						<td th:text="${comp.producto.nombre}"></td>
-						<td th:text=" '$ ' + ${comp.producto.precio}"></td>
-						<td th:text="${comp.producto.marca}"></td>
-						<td th:text="${comp.producto.stock}"></td>
-						<td th:text="${comp.cantidad}"></td>
-						<td th:text=" '$ ' + ${comp.getTotal}"></td>
+					<tr th:each="orD : ${orderDetails}">
+						<td th:text="${orD.orderNumber}"></td>
+						<td th:text="${orD.products.productName}"></td>
+						<td th:text=" '$ ' + ${orD.priceEach}"></td>
+						<td th:text="${orD.quantityOrdered}"></td>
+						<td th:text="${orD.orderLineNumber}"></td>
+						<td th:text="${orD.orders.orderDate}"></td>
+						<td th:text="${orD.orders.shippedDate}"></td>
+						<td th:text="${orD.orders.requiredDate}"></td>
+						<td th:text="${orD.orders.comments}"></td>
+						<td th:text="${orD.orders.status}"></td>
 						<td>
 							<!-- Edita por medio del id -->
-							<a th:href="@{/compra-editar-} + ${comp.id}" class="btn btn-warning mr-3">Editar</a>
-							<a th:href="@{/compra-eliminar-} + ${comp.id}" class="btn btn-danger">Eliminar</a>
+							<a th:href="@{/orden-cancelar-} + ${orD.orderNumber}" class="btn btn-warning mr-3">Cancelar</a>
 						</td>
 					</tr>
 				</tbody>

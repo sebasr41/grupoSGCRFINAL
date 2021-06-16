@@ -30,6 +30,10 @@ public class OrderDetailsController {
 	
 	@Autowired
 	private IOrdersService orderService;
+	
+
+	@Autowired
+	private OrderDetails orderDaux;
 
 	@Autowired
 	private IProductsService productsService;
@@ -52,6 +56,38 @@ public class OrderDetailsController {
 		//modelView.addObject("products", products);
 		return modelView;
 }
+	@GetMapping("/orden-cancelar-{id}")
+	public ModelAndView getOrderCancellPage(@PathVariable (value = "id") Long id, Model model) {
+	
+		ModelAndView modelView = new ModelAndView("redirect:/order-list");
+		
+		Optional<Orders> order =orderService.obtenerOrdersPorId(id);
+		System.out.println(order);
+		order.ifPresent(orderDaux::setOrders);
+		System.out.println("aaaaaaaaaaaaa "+orderDaux);
+		Orders orderGuardar = orderDaux.getOrders();
+		orderGuardar.setStatus("Cancelado");
+		
+		orderService.guardarOrders(orderGuardar);
+		
+		modelView.addObject("orders", orderService.obtenerOrders());
+		modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
+
+		//modelView.addObject("products", products);
+		return modelView;
+}
+	@GetMapping("/order-list")
+	public ModelAndView getComprasPage() {
+		ModelAndView model = new ModelAndView("lista-ordenes");
+		
+		model.addObject("orders", orderService.obtenerOrders());
+		model.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
+		
+
+		
+		return model;
+	
+	}
 	@PostMapping("order-form")
 	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
 		//////// validation
