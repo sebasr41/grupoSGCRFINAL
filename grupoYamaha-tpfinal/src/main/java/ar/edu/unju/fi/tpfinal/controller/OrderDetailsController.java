@@ -46,12 +46,12 @@ public class OrderDetailsController {
 		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		products.ifPresent(orderdetails::setProducts);
 		model.addAttribute("orderdetails", orderdetails);
+
 		//modelView.addObject("products", products);
 		return modelView;
 }
 	@PostMapping("order-form")
 	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
-		System.out.println("orden"+ orderdetails);
 		//////// validation
 		ModelAndView modelView;
 		if(resultadoValidacion.hasErrors()) {
@@ -60,17 +60,16 @@ public class OrderDetailsController {
 		}
 		
 		else {
-			Orders order = orderdetails.getOrders();
+			orders = orderdetails.getOrders();
+			System.out.println("bbbbbbbbbbbb: " + orders);
 			modelView = new ModelAndView("lista-ordenes");
-			
-			 orderdetails.setOrders(null);
-				System.out.println("orden"+ orderdetails);
+			orders.setOrderDetails(orderdetails);
 
-			 orders.setOrderDetails(orderdetailsService.guardarOrderDetails(orderdetails));
-			 
-			 orders.setComments(order.getComments());
-			 orders.setRequiredDate(order.getRequiredDate());
-			 
+			 orderdetails.setOrders(null);
+			 Long id = orderdetailsService.guardarOrderDetails(orderdetails).getOrderNumber();
+			 orders.setOrderNumber(id);
+			 System.out.println("aaaaaaaaaaaaaaaaaaaa: "+orders);
+
 			 orderService.guardarOrders(orders);
 		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());
 		modelView.addObject("order", orderService.obtenerOrders());

@@ -1,11 +1,15 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -56,8 +60,8 @@ public class Products {
 	private double MSRP;
 	
 
-	@OneToOne(mappedBy = "products")
-	private OrderDetails orderDetails;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
+	private List<OrderDetails> orderDetails;
 
 	
 	@ManyToOne
@@ -91,7 +95,7 @@ public class Products {
 		return productCode;
 	}
 	public Products(String productCode, String productName, String productScale, String productVendor,
-			String productDescription, int quantityInStock, double buyPrice, double mSRP, OrderDetails orderDetails,
+			String productDescription, int quantityInStock, double buyPrice, double mSRP, List<OrderDetails> orderDetails,
 			ProductLines productLines) {
 		super();
 		this.productCode = productCode;
@@ -177,12 +181,12 @@ public class Products {
 	}
 
 
-	public OrderDetails getOrderDetails() {
+	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
 
 
-	public void setOrderDetails(OrderDetails orderDetails) {
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,8 +34,8 @@ public class OrderDetails {
 	@Column(name = "Orderdetails_orderlinenumber")
 	private int orderLineNumber;//smallint
 	
-
-	@OneToOne
+	@Autowired
+	@ManyToOne
 	private Products products;
 
 
@@ -111,16 +112,6 @@ public class OrderDetails {
 	}
 
 
-	@Override
-	public String toString() {
-		return "{" +
-			" orderNumber='" + getOrderNumber() + "'"  + "'" +
-			", quantityOrdered='" + getQuantityOrdered() + "'" +
-			", priceEach='" + getPriceEach() + "'" +
-			", orderLineNumber='" + getOrderLineNumber() + "'" +
-			", products='" + getProducts() + "'" +
-			", orders='" + getOrders() + "'" +
-			"}";
-	}
+	
 
 }
