@@ -7,7 +7,7 @@ import ar.edu.unju.fi.tpfinal.model.OrderDetails;
 
 public interface IOrderDetailsService {
     	
-	public void guardarOrderDetails(OrderDetails orderDetails);
+	public OrderDetails guardarOrderDetails(OrderDetails orderDetails);
 	
 	public List<OrderDetails> obtenerOrderDetails();
 	

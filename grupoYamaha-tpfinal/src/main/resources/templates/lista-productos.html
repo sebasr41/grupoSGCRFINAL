@@ -52,13 +52,14 @@
 				<div class="ml-3">
 					<button type="submit" class="btn btn-success ml-5">Buscar</button>
 				</div>
+				</div>
 			</form>
 		</div>
 
 		
 		<!--Resultados-->
 		<!--Con bucle-->
-		<div class="col-md-10 d-block m-auto rounded">
+		<div th:each="prod : ${products}" class="col-md-10 d-block m-auto rounded">
 			<table class="table table-striped table-responsive-xl bg-pv--form text-light">
 				<thead>
 					<tr>
@@ -72,7 +73,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="prod : ${products}">
+					<tr >
 						<td th:text="${prod.productCode}"></td>
 						<td th:text="${prod.productLines.productLinesName}"></td>
 						<td th:text="${prod.productLines.textDescription}"></td>
@@ -84,10 +85,15 @@
 							<a th:href="@{/compra-editar-} + ${prod.productCode}" class="btn btn-warning mr-3">Editar</a>
 							<a th:href="@{/compra-eliminar-} + ${prod.productCode}" class="btn btn-danger">Eliminar</a>
 							<a th:href="@{/orderdetails-} + ${prod.productCode}" class="btn btn-warning mr-3">Buy</a>
+							
 						</td>
 					</tr>
 				</tbody>
 			</table>
+			
+			
+		
+			
 		</div>
 	</div>
 

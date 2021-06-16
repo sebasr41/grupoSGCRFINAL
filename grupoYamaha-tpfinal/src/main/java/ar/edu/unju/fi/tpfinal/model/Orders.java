@@ -42,7 +42,7 @@ public class Orders {
 	@Column(name="orders_comments")
 	private String comments;
 	
-	@OneToOne
+	@OneToOne( cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderNumber")
 	@MapsId
 	private OrderDetails orderDetails;

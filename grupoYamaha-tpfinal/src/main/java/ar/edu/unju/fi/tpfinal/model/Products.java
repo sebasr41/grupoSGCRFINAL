@@ -9,8 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator;
 
 @Component
 @Entity
@@ -18,6 +23,14 @@ import org.springframework.stereotype.Component;
 public class Products {
 	
 	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
+    @GenericGenerator(
+        name = "prod_seq", 
+        strategy = "ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator", 
+        parameters = {
+            @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
+            @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "S10_"),
+            @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
 	private String productCode;//es varchar
 	
 	

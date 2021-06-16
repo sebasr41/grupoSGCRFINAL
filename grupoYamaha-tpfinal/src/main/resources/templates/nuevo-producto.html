@@ -30,13 +30,7 @@
 		<div class="col-md-8 d-block m-auto">
 			<form th:action="@{/products-save}" method="POST" th:object="${products}"
 				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
-					<div class="row d-flex justify-content-center">
-					<div class="form-group col-md-5">
-						<label for="codigo">Codigo del producto <i class="fas fa-signature text-light ml-2"></i></label>
-						<input th:field="*{productCode}" type="text" class="form-control" id="codigo">
-					</div>
-
-				</div>
+					
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="nombre">Nombre <i class="fas fa-signature text-light ml-2"></i></label>

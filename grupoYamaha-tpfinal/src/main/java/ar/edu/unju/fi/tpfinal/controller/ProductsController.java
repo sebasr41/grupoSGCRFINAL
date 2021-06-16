@@ -18,8 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.tpfinal.model.OrderDetails;
+import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
+import ar.edu.unju.fi.tpfinal.model.Orders;
 import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
+import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 
@@ -29,7 +34,20 @@ public class ProductsController {
 	private Products products;
 	
 
+	@Autowired
+	private OrderDetails orderDetails;
 	
+	@Autowired
+	private Orders orders;
+	
+	@Autowired
+	private OrderDetailsId orderID;
+
+	@Autowired
+	private IOrdersService orderService;
+	
+	@Autowired
+	private IOrderDetailsService orderDetailsService;
 
 	@Autowired
 	private IProductLinesService productslinesService;
@@ -76,6 +94,7 @@ public class ProductsController {
 		
 	
 		productsService.guardarProducts(products);
+		
 		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("product",products);
 		model.addObject("productslines", productslinesService.obtenerProductLines());
@@ -90,6 +109,9 @@ public class ProductsController {
 	public ModelAndView getComprasPage() {
 		ModelAndView model = new ModelAndView("lista-productos");
 		
+		model.addObject("orders", orders);
+		model.addObject("orderDetails", orderDetails);
+		model.addObject("orderID", orderID);
 		model.addObject("product", products);
 		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("productslines", productslinesService.obtenerProductLines());

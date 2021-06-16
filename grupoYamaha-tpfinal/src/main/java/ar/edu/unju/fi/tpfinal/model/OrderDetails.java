@@ -38,7 +38,7 @@ public class OrderDetails {
 	private Products products;
 
 
-	@OneToOne(mappedBy = "orderDetails")
+	@OneToOne(mappedBy = "orderDetails",cascade = CascadeType.ALL)
 	private Orders orders;
 	/**
 	 * 

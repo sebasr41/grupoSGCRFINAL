@@ -45,7 +45,6 @@ public class OrderDetailsController {
 		ModelAndView modelView = new ModelAndView("nueva-orden");
 		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		products.ifPresent(orderdetails::setProducts);
-		model.addAttribute("orders", orders);
 		model.addAttribute("orderdetails", orderdetails);
 		//modelView.addObject("products", products);
 		return modelView;
@@ -61,9 +60,11 @@ public class OrderDetailsController {
 		}
 		
 		else {
+			System.out.println(orderdetailsService.guardarOrderDetails(orderdetails));
 			 modelView = new ModelAndView("lista-ordenes");
-			 orderdetailsService.guardarOrderDetails(orderdetails);
+			 orders.setOrderDetails(orderdetailsService.guardarOrderDetails(orderdetails));
 			 orderService.guardarOrders(order);
+			 
 		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());
 		modelView.addObject("order", orderService.obtenerOrders());
 		return modelView;

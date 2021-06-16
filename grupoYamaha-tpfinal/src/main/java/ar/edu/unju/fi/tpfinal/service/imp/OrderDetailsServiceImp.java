@@ -19,9 +19,9 @@ public class OrderDetailsServiceImp implements IOrderDetailsService {
     private IOrderDetailsRepository orderDetailsRepository;
 
     @Override
-    public void guardarOrderDetails(OrderDetails orderDetails) {
+    public OrderDetails guardarOrderDetails(OrderDetails orderDetails) {
         
-        orderDetailsRepository.save(orderDetails);
+        return orderDetailsRepository.save(orderDetails);
     }
 
     @Override

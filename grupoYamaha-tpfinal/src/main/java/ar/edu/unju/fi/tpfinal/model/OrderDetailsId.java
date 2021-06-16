@@ -6,6 +6,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.stereotype.Component;
+@Component
 @Embeddable
 public class OrderDetailsId implements Serializable{
 	
