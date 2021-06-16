@@ -40,7 +40,7 @@ public class OrderDetailsController {
 	@Autowired
 	private Products products;
 	@GetMapping("/orderdetails-{id}")
-	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") Long id, Model model) {
+	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") String id, Model model) {
 	
 		ModelAndView modelView = new ModelAndView("nueva-orden");
 		Optional<Products> products = productsService.obtenerProductsPorId(id);

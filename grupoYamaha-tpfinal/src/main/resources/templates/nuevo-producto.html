@@ -30,6 +30,13 @@
 		<div class="col-md-8 d-block m-auto">
 			<form th:action="@{/products-save}" method="POST" th:object="${products}"
 				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+					<div class="row d-flex justify-content-center">
+					<div class="form-group col-md-5">
+						<label for="codigo">Codigo del producto <i class="fas fa-signature text-light ml-2"></i></label>
+						<input th:field="*{productCode}" type="text" class="form-control" id="codigo">
+					</div>
+
+				</div>
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="nombre">Nombre <i class="fas fa-signature text-light ml-2"></i></label>
@@ -65,8 +72,8 @@
 					</div>
 					<div class="form-group col-md-5">
 						<label for="producto">Nombre de la categoria</label>
-						<select id="producto" th:field="*{productLines.id}" class="form-control form-control-sm">
-							<option th:each="prod : ${productslines}" th:value="${prod.id}"
+						<select id="producto" th:field="*{productLines.productLinesName}" class="form-control form-control-sm">
+							<option th:each="prod : ${productslines}" th:value="${prod.productLinesName}"
 								th:text="${prod.productLinesName}" th:selected="false"></option>
 						</select>
 

@@ -10,10 +10,10 @@ public interface IProductLinesService {
 	
 	public void guardarProductLines(ProductLines productLine);
 
-	public void eliminarProductLines(Long id);
+	public void eliminarProductLines(String id);
 
 	public List<ProductLines> obtenerProductLines();
 
-	public Optional<ProductLines> getProductolinesPorId(Long id);
+	public Optional<ProductLines> getProductolinesPorId(String id);
 
 }

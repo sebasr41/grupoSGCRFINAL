@@ -70,7 +70,7 @@ public class ProductsController {
 		else {
 		ModelAndView model = new ModelAndView("lista-productos");
 		
-		Optional<ProductLines> productslines = productslinesService.getProductolinesPorId(products.getProductLines().getId());
+		Optional<ProductLines> productslines = productslinesService.getProductolinesPorId(products.getProductLines().getProductLinesName());
 		
 		productslines.ifPresent(products::setProductLines);
 		
@@ -99,14 +99,14 @@ public class ProductsController {
 	
 	}
 	@GetMapping("/products-eliminar-{id}")
-	public ModelAndView getProductsEliminarPage(@PathVariable (value = "id")Long id) {
+	public ModelAndView getProductsEliminarPage(@PathVariable (value = "id")String id) {
 		ModelAndView modelView = new ModelAndView("redirect:/products-list");
 		productsService.eliminarProducts(id);
 		return modelView;
 }
 	
 	@GetMapping("/products-editar-{id}")
-	public ModelAndView getProductsEditPage(@PathVariable (value = "id") Long id) {
+	public ModelAndView getProductsEditPage(@PathVariable (value = "id") String id) {
 
 		ModelAndView modelView = new ModelAndView("lista-productos");
 		
@@ -125,7 +125,7 @@ public class ProductsController {
 		
 		
 		model.addAttribute("product", products);
-	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(),products.getProductLines().getId(), products.getBuyPrice()));
+	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(),products.getBuyPrice()));
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
 
 	    return "lista-productos";

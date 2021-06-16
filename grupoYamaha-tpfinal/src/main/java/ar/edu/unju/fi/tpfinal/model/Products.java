@@ -18,8 +18,7 @@ import org.springframework.stereotype.Component;
 public class Products {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productCode;//es varchar
+	private String productCode;//es varchar
 	
 	
 	@Column(name = "produc_name")
@@ -70,8 +69,17 @@ public class Products {
 	 * @param mSRP
 	 * @param productLines
 	 */
-	public Products(Long productCode, String productName, String productScale, String productVendor,
-			String productDescription, int quantityInStock, double buyPrice, double mSRP, ProductLines productLines) {
+	
+	
+	/**
+	 * @return the productCode
+	 */
+	public String getProductCode() {
+		return productCode;
+	}
+	public Products(String productCode, String productName, String productScale, String productVendor,
+			String productDescription, int quantityInStock, double buyPrice, double mSRP, OrderDetails orderDetails,
+			ProductLines productLines) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
@@ -81,128 +89,112 @@ public class Products {
 		this.quantityInStock = quantityInStock;
 		this.buyPrice = buyPrice;
 		MSRP = mSRP;
+		this.orderDetails = orderDetails;
 		this.productLines = productLines;
 	}
-	/**
-	 * @return the productCode
-	 */
-	public Long getProductCode() {
-		return productCode;
-	}
-	/**
-	 * @param productCode the productCode to set
-	 */
-	public void setProductCode(Long productCode) {
-		this.productCode = productCode;
-	}
-	/**
-	 * @return the productName
-	 */
+
+
 	public String getProductName() {
 		return productName;
 	}
-	/**
-	 * @param productName the productName to set
-	 */
+
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	
-	/**
-	 * @return the productScale
-	 */
+
+
 	public String getProductScale() {
 		return productScale;
 	}
-	/**
-	 * @param productScale the productScale to set
-	 */
+
+
 	public void setProductScale(String productScale) {
 		this.productScale = productScale;
 	}
-	/**
-	 * @return the productVendor
-	 */
+
+
 	public String getProductVendor() {
 		return productVendor;
 	}
-	/**
-	 * @param productVendor the productVendor to set
-	 */
+
+
 	public void setProductVendor(String productVendor) {
 		this.productVendor = productVendor;
 	}
-	/**
-	 * @return the productDescription
-	 */
+
+
 	public String getProductDescription() {
 		return productDescription;
 	}
-	/**
-	 * @param productDescription the productDescription to set
-	 */
+
+
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
-	public OrderDetails getOrderDetails() {
-		return orderDetails;
-	}
-	public void setOrderDetails(OrderDetails orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-	/**
-	 * @return the quantityInStock
-	 */
+
+
 	public int getQuantityInStock() {
 		return quantityInStock;
 	}
-	/**
-	 * @param quantityInStock the quantityInStock to set
-	 */
+
+
 	public void setQuantityInStock(int quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
-	/**
-	 * @return the buyPrice
-	 */
+
+
 	public double getBuyPrice() {
 		return buyPrice;
 	}
-	/**
-	 * @param buyPrice the buyPrice to set
-	 */
+
+
 	public void setBuyPrice(double buyPrice) {
 		this.buyPrice = buyPrice;
 	}
-	/**
-	 * @return the mSRP
-	 */
+
+
 	public double getMSRP() {
 		return MSRP;
 	}
-	/**
-	 * @param mSRP the mSRP to set
-	 */
+
+
 	public void setMSRP(double mSRP) {
 		MSRP = mSRP;
 	}
-	/**
-	 * @return the productLines
-	 */
+
+
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
+	}
+
+
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+
 	public ProductLines getProductLines() {
 		return productLines;
 	}
-	/**
-	 * @param productLines the productLines to set
-	 */
+
+
 	public void setProductLines(ProductLines productLines) {
 		this.productLines = productLines;
 	}
+
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Products [productCode=" + productCode + ", productName=" + productName +  ", productScale=" + productScale + ", productVendor=" + productVendor + ", productDescription="
-				+ productDescription + ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP="
-				+ MSRP + ", productLines=" + productLines + "]";
+		return "Products [productCode=" + productCode + ", productName=" + productName + ", productScale="
+				+ productScale + ", productVendor=" + productVendor + ", productDescription=" + productDescription
+				+ ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP=" + MSRP
+				+ ", orderDetails=" + orderDetails + ", productLines=" + productLines + "]";
 	}
-	
+
 }

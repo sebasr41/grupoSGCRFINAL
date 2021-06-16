@@ -24,7 +24,7 @@ public class ProductLinesServiceImp implements IProductLinesService {
 	}
 
 	@Override
-	public void eliminarProductLines(Long id) {
+	public void eliminarProductLines(String id) {
 		productLinesRepository.deleteById(id);		
 	}
 
@@ -36,7 +36,7 @@ public class ProductLinesServiceImp implements IProductLinesService {
 
 
 	@Override
-	public Optional<ar.edu.unju.fi.tpfinal.model.ProductLines> getProductolinesPorId(Long id) {
+	public Optional <ProductLines> getProductolinesPorId(String id) {
 		Optional<ProductLines> productLines = productLinesRepository.findById(id);
 		return productLines;
 	}

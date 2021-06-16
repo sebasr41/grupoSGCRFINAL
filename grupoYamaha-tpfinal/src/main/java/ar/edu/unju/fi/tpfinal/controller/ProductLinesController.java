@@ -73,7 +73,7 @@ public class ProductLinesController {
 			//}
 		}
 		@GetMapping("/productolines-eliminar-{id}")
-		public ModelAndView getProductolinesEliminarPage(@PathVariable (value = "id")Long id) {
+		public ModelAndView getProductolinesEliminarPage(@PathVariable (value = "id")String id) {
 			//									redirect recarga la lista de cuentas
 			ModelAndView modelView = new ModelAndView("redirect:/lista-productlines");
 			productolinesService.eliminarProductLines(id);
@@ -82,7 +82,7 @@ public class ProductLinesController {
 		
 		
 		@GetMapping("/productolines-editar-{id}")
-		public ModelAndView getProductolinesEditPage(@PathVariable (value = "id") Long id) {
+		public ModelAndView getProductolinesEditPage(@PathVariable (value = "id") String id) {
 		
 			
 			ModelAndView modelView = new ModelAndView("product-lines");

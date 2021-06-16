@@ -11,9 +11,9 @@ public interface IProductsService{
     
     public List<Products> obtenerProducts();
     
-	public void eliminarProducts(Long id);
+	public void eliminarProducts(String id);
 
-	public Optional<Products> obtenerProductsPorId(Long id);
+	public Optional<Products> obtenerProductsPorId(String id);
 
-    public Object buscarProducts(String productsName,Long id, double price);
+    public Object buscarProducts(String id, double price);
 }
