@@ -15,5 +15,5 @@ public interface IProductsService{
 
 	public Optional<Products> obtenerProductsPorId(String id);
 
-    public Object buscarProducts(String id, double price);
+    public Object buscarProducts(String productsName,String id, double price);
 }

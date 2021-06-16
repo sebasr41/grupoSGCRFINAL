@@ -39,7 +39,7 @@ public class ProductsController {
 	private IProductsService productsService;
 	
 	
-	@GetMapping("/autos")
+	@GetMapping("/products")
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);	
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
@@ -125,7 +125,7 @@ public class ProductsController {
 		
 		
 		model.addAttribute("product", products);
-	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(),products.getBuyPrice()));
+	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(), products.getProductLines().getProductLinesName(), products.getBuyPrice()));
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
 
 	    return "lista-productos";

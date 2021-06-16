@@ -42,31 +42,31 @@ public class ProductsServiceImp implements IProductsService{
     }
 
 	@Override
-	public Object buscarProducts(String id, double price) {
+	public Object buscarProducts(String productsName,String id, double price) {
 	
 				//System.out.println("nombre " + productsName+ "id categoria "+id+ " precio "+ price );
 		
 		 List<Products> products = new ArrayList<Products>();
 				
-		     //   if(!productsName.isEmpty() && id != 0 && price >=0) {
-					//products = productsRepository.findByProductNameAndProductLinesIdAndBuyPriceGreaterThanEqual(productsName, id, price);
-				//}else {
-					//if(!productsName.isEmpty()  && price >=0) {
-				//		products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
-					//}
-			        //if(id !=0  && price >=0) {
-						//products = productsRepository.findByProductLinesIdAndBuyPriceGreaterThanEqual(id, price);
-					//}else if(productsName.isEmpty()&& id==0 && price >=0) {
-						//products= productsRepository.findByBuyPriceGreaterThanEqual(price);
-			//		}
-			//	}
+		        if(!productsName.isEmpty() && !id.isEmpty() && price >=0) {
+					products = productsRepository.findByProductNameAndProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(productsName, id, price);
+				}else {
+					if(!productsName.isEmpty()  && price >=0) {
+						products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
+					}
+			        if(!id.isEmpty()  && price >=0) {
+						products = productsRepository.findByProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(id, price);
+					}else if(productsName.isEmpty()&& id.isEmpty() && price >=0) {
+						products= productsRepository.findByBuyPriceGreaterThanEqual(price);
+					}
+				}
 		        
 			return products;
-		  //  }
+		   }
 		
 		
 	
 
   
-	}   
+	   
 }

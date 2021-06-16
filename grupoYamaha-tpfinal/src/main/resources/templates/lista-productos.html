@@ -44,6 +44,7 @@
 					<div class="form-group col-md-5">
 						<label for="producto">Nombre de la categoria</label>
 						<select id="producto" th:field="*{productLines.productLinesName}" class="form-control form-control-sm">
+							<option value="" >Todas las Categorias</option>
 							<option th:each="prod : ${productslines}" th:value="${prod.productLinesName}"
 								th:text="${prod.productLinesName}" th:selected="false"></option>
 						</select>

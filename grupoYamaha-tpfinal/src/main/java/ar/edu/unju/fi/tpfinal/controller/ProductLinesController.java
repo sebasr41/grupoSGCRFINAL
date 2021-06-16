@@ -72,6 +72,17 @@ public class ProductLinesController {
 			return modelView;
 			//}
 		}
+		@GetMapping("/productLines-list")
+		public ModelAndView getComprasPage() {
+			ModelAndView model = new ModelAndView("lista-categoria");
+			
+			model.addObject("productslines", productolinesService.obtenerProductLines());
+			
+
+			
+			return model;
+		
+		}
 		@GetMapping("/productolines-eliminar-{id}")
 		public ModelAndView getProductolinesEliminarPage(@PathVariable (value = "id")String id) {
 			//									redirect recarga la lista de cuentas
