@@ -50,7 +50,7 @@ public class OrderDetailsController {
 		return modelView;
 }
 	@PostMapping("order-form")
-	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails,@ModelAttribute("order") Orders order, BindingResult resultadoValidacion){
+	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
 		System.out.println("orden"+ orderdetails);
 		//////// validation
 		ModelAndView modelView;
@@ -60,11 +60,18 @@ public class OrderDetailsController {
 		}
 		
 		else {
-			System.out.println(orderdetailsService.guardarOrderDetails(orderdetails));
-			 modelView = new ModelAndView("lista-ordenes");
+			Orders order = orderdetails.getOrders();
+			modelView = new ModelAndView("lista-ordenes");
+			
+			 orderdetails.setOrders(null);
+				System.out.println("orden"+ orderdetails);
+
 			 orders.setOrderDetails(orderdetailsService.guardarOrderDetails(orderdetails));
-			 orderService.guardarOrders(order);
 			 
+			 orders.setComments(order.getComments());
+			 orders.setRequiredDate(order.getRequiredDate());
+			 
+			 orderService.guardarOrders(orders);
 		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());
 		modelView.addObject("order", orderService.obtenerOrders());
 		return modelView;
