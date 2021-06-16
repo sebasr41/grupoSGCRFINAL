@@ -25,8 +25,6 @@
     
         <div class="col-md-8 d-block m-auto">
         
-        	
-		
         
             <form th:action="@{/order-form}" method="POST" th:object="${orderdetails}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
                 <div class="row d-flex justify-content-center">
@@ -53,12 +51,6 @@
                         <input th:field="*{orders.comments}" type="text" class="form-control" id="com">
                     </div>   
                     
-                   
-                    
-                    
-                    
-                    
-                    
                     <div class="form-group col-md-5">
                         
                         <div class="col mb-4" th:each="ord : ${orderdetails}">
@@ -70,19 +62,13 @@
                         	<input th:field="*{products}" th:value="${ord.products}" type="hidden" class="form-control"  id="linea">
 							</div>
 						</div>
-                        
-                        
                     
-                    
-                    </div> 
-                    
-              	
-	              
+                    	</div> 
+
         			</div>         
                       
                  </div>
-              
-                 
+
                 <div class="row ml-5 pl-4">
                     <button type="submit" class="btn btn-primary">Continuar</button>
                 </div>

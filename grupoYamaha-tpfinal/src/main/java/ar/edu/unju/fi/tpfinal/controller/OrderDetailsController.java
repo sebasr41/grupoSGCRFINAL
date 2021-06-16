@@ -40,12 +40,14 @@ public class OrderDetailsController {
 	@Autowired
 	private Products products;
 	@GetMapping("/orderdetails-{id}")
-	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") String id, Model model) {
+	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") String id, Model model) {  //no pasa por aqui
 	
-		ModelAndView modelView = new ModelAndView("nueva-orden");
+		//ModelAndView modelView = new ModelAndView("nueva-orden");
+		ModelAndView modelView = new ModelAndView("lista-productos");
 		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		products.ifPresent(orderdetails::setProducts);
-		model.addAttribute("orderdetails", orderdetails);
+		System.out.println("sale por aqui??");
+		model.addAttribute("orderdetails", orderdetails);		
 
 		//modelView.addObject("products", products);
 		return modelView;

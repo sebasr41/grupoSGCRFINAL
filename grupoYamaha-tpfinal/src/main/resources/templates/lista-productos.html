@@ -28,7 +28,6 @@
 		<div class="col-md-8 d-block m-auto">
 
 			<form class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow" th:action="@{/products-busqueda}"
-
 				th:object="${product}" th:method="POST">
 				<div class="row d-flex justify-content-center">
 
@@ -43,23 +42,24 @@
 					</div>
 					<div class="form-group col-md-5">
 						<label for="producto">Nombre de la categoria</label>
-						<select id="producto" th:field="*{productLines.productLinesName}" class="form-control form-control-sm">
-							<option value="" >Todas las Categorias</option>
+						<select id="producto" th:field="*{productLines.productLinesName}"
+							class="form-control form-control-sm">
+							<option value="">Todas las Categorias</option>
 							<option th:each="prod : ${productslines}" th:value="${prod.productLinesName}"
 								th:text="${prod.productLinesName}" th:selected="false"></option>
 						</select>
-				</div>
-				<div class="ml-3">
-					<button type="submit" class="btn btn-success ml-5">Buscar</button>
-				</div>
+					</div>
+					<div class="ml-3">
+						<button type="submit" class="btn btn-success ml-5">Buscar</button>
+					</div>
 				</div>
 			</form>
 		</div>
 
-		
+
 		<!--Resultados-->
 		<!--Con bucle-->
-		<div th:each="prod : ${products}" class="col-md-10 d-block m-auto rounded">
+		<div class="col-md-10 d-block m-auto rounded">
 			<table class="table table-striped table-responsive-xl bg-pv--form text-light">
 				<thead>
 					<tr>
@@ -69,11 +69,13 @@
 						<th>Nombre</th>
 						<th>Cantidad</th>
 						<th>Precio</th>
-						<th>Acciones</th>
+						<th>Comprar</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr >
+					<tr th:each="prod : ${products}">
 						<td th:text="${prod.productCode}"></td>
 						<td th:text="${prod.productLines.productLinesName}"></td>
 						<td th:text="${prod.productLines.textDescription}"></td>
@@ -81,19 +83,121 @@
 						<td th:text="${prod.quantityInStock}"></td>
 						<td th:text=" '$ ' + ${prod.buyPrice}"></td>
 						<td>
-							<!-- Edita por medio del id -->
-							<a th:href="@{/compra-editar-} + ${prod.productCode}" class="btn btn-warning mr-3">Editar</a>
-							<a th:href="@{/compra-eliminar-} + ${prod.productCode}" class="btn btn-danger">Eliminar</a>
+							<button type="button" class="btn btn-success btn-lg" data-toggle="modal"
+								data-target="#myModal" th:attrappend="data-target=${prod.productCode}">Comprar!
+							</button>									
+						<!--
+							<a th:href="@{/orderdetails-} + ${prod.productCode}" type="button" data-toggle="modal"
+								data-target="#myModal" class="btn btn-success mr-3">Buy</a>
+						-->
+
+							<div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${prod.productCode}">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+
+											<!--Form code start from here  -->
+
+											<!-- Form Name -->
+											<legend>Buy Form</legend>
+
+											<form th:action="@{/order-form}" method="POST" th:object="${orderdetails}"
+												class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+												<div class="row d-flex justify-content-center">
+													<div class="form-group col-md-5">
+														<label for="orden">Cantidad De Ordenes</label>
+														<input th:field="*{quantityOrdered}" type="number"
+															class="form-control" id="date">
+													</div>
+												</div>
+												<div class="row d-flex justify-content-center">
+
+
+													<div class="form-group col-md-5">
+														<label for="precio">linea de detalle<i
+																class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+														<input th:field="*{orderLineNumber}" type="number"
+															class="form-control" id="linea">
+													</div>
+
+													<div class="form-group col-md-5">
+														<label for="fech">Fecha Requerida<i
+																class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+														<input th:field="*{orders.requiredDate}" type="date"
+															class="form-control" id="fech">
+													</div>
+
+													<div class="form-group col-md-5">
+														<label for="com">Comentario<i
+																class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+														<input th:field="*{orders.comments}" type="text"
+															class="form-control" id="com">
+													</div>
+
+													<div class="form-group col-md-5">
+
+														<div class="col mb-4" th:each="ord : ${orderdetails}">
+															<div class="card">
+																<div
+																	class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
+																	<h5 class="card-title"
+																		th:text="${ord.products.productName}"></h5>
+																	<p class="card-text"
+																		th:text="${ord.products.productLines.textDescription}">
+																	</p>
+																	<label for="precio"></label>
+																	<input th:field="*{products}"
+																		th:value="${ord.products}" type="hidden"
+																		class="form-control" id="linea">
+																</div>
+															</div>
+
+														</div>
+
+													</div>
+
+												</div>
+
+												<div class="row ml-5 pl-4">
+													<button type="submit" class="btn btn-primary">Hecho</button>
+												</div>
+
+											</form>
+
+
+										</div>
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+
+
+									</div>
+
+								</div>
+							</div>
+
+							<!-- Edita por medio del id 
 							<a th:href="@{/orderdetails-} + ${prod.productCode}" class="btn btn-warning mr-3">Buy</a>
-							
+							-->
+						</td>
+						<td>
+							<a th:href="@{/compra-editar-} + ${prod.productCode}"
+								class="btn btn-warning mr-3">Editar</a>
+						</td>
+						<td>
+							<a th:href="@{/compra-eliminar-} + ${prod.productCode}" class="btn btn-danger">Eliminar</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			
-			
-		
-			
+
 		</div>
 	</div>
 

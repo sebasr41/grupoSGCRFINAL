@@ -56,6 +56,9 @@ public class ProductsController {
 	@Autowired
 	private IProductsService productsService;
 	
+	@Autowired
+	private OrderDetails orderdetails;
+	
 	
 	@GetMapping("/products")
 	public String getProductsPage(Model model) {
@@ -81,7 +84,6 @@ public class ProductsController {
 		modelView.addObject("productslines", productslines);
 		modelView.addObject("bandera", true);
 		return modelView;
-		
 	
 		}
 		
@@ -115,7 +117,8 @@ public class ProductsController {
 		model.addObject("product", products);
 		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("productslines", productslinesService.obtenerProductLines());
-
+		//New
+		model.addObject("orderdetails", orderdetails);
 		
 		return model;
 	
