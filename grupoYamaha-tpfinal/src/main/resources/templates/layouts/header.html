@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org/">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<!--   HEADER    -->
+  <header th:fragment="header">
+	  <div class="container">
+	    <nav class="navbar navbar-expand-lg navbar-dark  gam-bg--nav">
+	      <a class="navbar-brand" href="#">
+	        <img th:src="@{/img/logo.svg}" width="80" height="40" alt="logo">
+	      </a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	      
+	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	          <ul class="navbar-nav mr-auto">            
+	            <li class="nav-item">
+	              <a class="nav-link" href="#">Creá tu cuenta</a>
+	            </li>    
+	            <li class="nav-item">
+	              <a class="nav-link" href="/productlines">Acciones</a>
+	            </li>        	         
+	            
+	            <li class="nav-item dropdown">
+	              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                <i class="fas fa-car"></i> Comprar 
+	              </a>
+	              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                <a class="dropdown-item" href="#">Nueva</a>
+	                <a class="dropdown-item" href="#">Listado</a>                                
+	              </div>
+	            </li>
+	            
+	          </ul>
+	          <ul class="navbar-nav ml-auto navbar-gam">
+	            <li class="nav-item">
+	              <a class="btn-gam-repo" role="button" href="#">Nuestro repositorio<i class="fab fa-github"></i></a>
+	            </li>
+	          </ul>         
+	        </div>
+	    </nav>
+	  </div>	   
+  </header>
+    
+</body>
+</html>
+
