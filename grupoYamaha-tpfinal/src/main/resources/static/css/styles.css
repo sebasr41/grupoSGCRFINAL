@@ -129,10 +129,13 @@ body {
     margin-top: -3rem;
 }
 .gam-text-light {
-    color: #fff;
+    color: rgba(255,255,255,.5);
 }
 .gam-text-light:hover{
     color: #000;
     background-color: #fff;
+}
+.gam-border-bottom {
+	border-bottom: 1px solid var(--dark-Blue-Main-Bg) !important;
 }
 

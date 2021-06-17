@@ -7,42 +7,44 @@
 
 <body>
 	<!--   NAV WITH TABS    -->
-	<div th:fragment="header">
-		<div class="container mt-3">
-			<ul class="nav nav-tabs">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
-						aria-haspopup="true" aria-expanded="false">Categoría</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Nueva</a>
-						<a class="dropdown-item" href="#">Lista</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle gam-text-light " data-toggle="dropdown" href="#" role="button"
-						aria-haspopup="true" aria-expanded="false">Ordenes</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Registrar</a>
-						<a class="dropdown-item" href="#">Detalles</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle gam-text-light " data-toggle="dropdown" href="#" role="button"
-						aria-haspopup="true" aria-expanded="false">Vehículos</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Registrar</a>
-						<a class="dropdown-item" href="#">Lista</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle gam-text-light " data-toggle="dropdown" href="#" role="button"
-						aria-haspopup="true" aria-expanded="false">Cliente</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Registrar</a>
-						<a class="dropdown-item" href="#">Lista</a>
-					</div>
-				</li>
-			</ul>
+	<div th:fragment="navegation">
+	
+		<div class="navbar navbar-expand-lg container">			
+
+			<div>
+				<ul class="nav nav-tabs">					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Categoría
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/productlines">Nueva</a>
+							<a class="dropdown-item" href="/productLines-list">Lista</a>							
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Autos
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/products">Nuevo</a>							
+							<a class="dropdown-item" href="/products-list">Lista</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Ordenes
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">							
+							<a class="dropdown-item" href="/order-list">Lista</a>							
+						</div>
+					</li>
+				</ul>
+				
+			</div>
 		</div>
 	</div>
 
