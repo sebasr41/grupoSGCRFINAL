@@ -98,19 +98,21 @@ public class OrderDetailsController {
 		}
 		
 		else {
+			Optional<Products> products = productsService.obtenerProductsPorId(orderdetails.getProducts().getProductCode());
+			products.ifPresent(orderdetails::setProducts);
 			orders = orderdetails.getOrders();
-			System.out.println("bbbbbbbbbbbb: " + orders);
-			modelView = new ModelAndView("lista-ordenes");
+			modelView = new ModelAndView("redirect:/order-list");
 			orders.setOrderDetails(orderdetails);
 
 			 orderdetails.setOrders(null);
+			 products.ifPresent(orderdetails::setProducts);
 			 Long id = orderdetailsService.guardarOrderDetails(orderdetails).getOrderNumber();
 			 orders.setOrderNumber(id);
-			 System.out.println("aaaaaaaaaaaaaaaaaaaa: "+orders);
 
 			 orderService.guardarOrders(orders);
-		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());
-		modelView.addObject("order", orderService.obtenerOrders());
+				//modelView.addObject("orders", orderService.obtenerOrders());
+				//modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
+				
 		return modelView;
 		}
 	}

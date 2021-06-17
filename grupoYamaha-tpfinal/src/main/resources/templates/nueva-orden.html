@@ -1,84 +1,102 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.15.3/css/all.css}" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link th:rel="stylesheet" th:href="@{css/styles.css}">
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
-    <link rel="shortcut icon" href="img/favicon.png"/>
-    <title>Details</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:rel="stylesheet"
+	th:href="@{https://use.fontawesome.com/releases/v5.15.3/css/all.css}"
+	integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+	crossorigin="anonymous">
+<link th:rel="stylesheet" th:href="@{css/styles.css}">
+<link th:rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+<link rel="shortcut icon" href="img/favicon.png" />
+<title>Details</title>
 </head>
 <body class="body-gam">
 	<!--   HEADER    -->
-  	<div th:replace="layouts/header :: header" ></div>
-  	<!--   NAV WITH TABS    -->
+	<div th:replace="layouts/header :: header"></div>
+	<!--   NAV WITH TABS    -->
 	<div th:replace="layouts/nav-tabs :: div"></div>
-  	 <div class="container">
-        <div class="show-case-2">
-            <h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Detalles De Las Ordenes De Compra</h1>
-        </div>
-    </div>
-    <!--Formulario de alta -->
-    <div class="row">
-    
-        <div class="col-md-8 d-block m-auto">
-        
-        
-            <form th:action="@{/order-form}" method="POST" th:object="${orderdetails}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
-                <div class="row d-flex justify-content-center">
-                    <div class="form-group col-md-5">
-                      <label for="orden">Cantidad De Ordenes</label>
-                      <input th:field="*{quantityOrdered}" type="number" class="form-control" id="date">
-                    </div>
-                </div>     
-                <div class="row d-flex justify-content-center">
-                    
-                                        
-                    <div class="form-group col-md-5">
-                        <label for="precio">linea de detalle<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
-                        <input th:field="*{orderLineNumber}" type="number" class="form-control" id="linea">
-                    </div>   
-                    
-                    <div class="form-group col-md-5">
-                        <label for="fech">Fecha Requerida<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
-                        <input th:field="*{orders.requiredDate}" type="date" class="form-control" id="fech">
-                    </div>   
-                    
-                    <div class="form-group col-md-5">
-                        <label for="com">Comentario<i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
-                        <input th:field="*{orders.comments}" type="text" class="form-control" id="com">
-                    </div>   
-                    
-                    <div class="form-group col-md-5">
-                        
-                        <div class="col mb-4" th:each="ord : ${orderdetails}">
-						<div class="card">
-							<div class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
-								<h5 class="card-title" th:text="${ord.products.productName}"></h5>
-								<p class="card-text" th:text="${ord.products.productLines.textDescription}"></p>
-								<label for="precio"></label>
-                        	<input th:field="*{products}" th:value="${ord.products}" type="hidden" class="form-control"  id="linea">
+	<div class="container">
+		<div class="show-case-2">
+			<h1
+				class="text-center text-light text-uppercase pt-5 font-weight-bold">Detalles
+				De Las Ordenes De Compra</h1>
+		</div>
+	</div>
+	<!--Formulario de alta -->
+	<div class="row">
+
+		<div class="col-md-8 d-block m-auto">
+
+
+			<form th:action="@{/order-form}" method="POST"
+				th:object="${orderdetails}"
+				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+				<div class="row d-flex justify-content-center">
+					<div class="form-group col-md-5">
+						<label for="orden">Cantidad De Ordenes</label> <input
+							th:field="*{quantityOrdered}" type="number" class="form-control"
+							id="date">
+					</div>
+				</div>
+				<div class="row d-flex justify-content-center">
+
+
+					<div class="form-group col-md-5">
+						<label for="precio">linea de detalle<i
+							class="fas fa-hand-holding-usd text-light ml-2"></i></label> <input
+							th:field="*{orderLineNumber}" type="number" class="form-control"
+							id="linea">
+					</div>
+
+					<div class="form-group col-md-5">
+						<label for="fech">Fecha Requerida<i
+							class="fas fa-hand-holding-usd text-light ml-2"></i></label> <input
+							th:field="*{orders.requiredDate}" type="date"
+							class="form-control" id="fech">
+					</div>
+
+					<div class="form-group col-md-5">
+						<label for="com">Comentario<i
+							class="fas fa-hand-holding-usd text-light ml-2"></i></label> <input
+							th:field="*{orders.comments}" type="text" class="form-control"
+							id="com">
+					</div>
+
+					<div class="form-group col-md-5">
+
+						<div class="col mb-4" th:each="ord : ${orderdetails}">
+							<div class="card">
+								<div
+									class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
+									<h5 class="card-title" th:text="${ord.products.productName}"></h5>
+									<p class="card-text"
+										th:text="${ord.products.productLines.textDescription}"></p>
+									<label for="precio"></label> <input th:field="*{products}"
+										th:value="${ord.products}" type="hidden" class="form-control"
+										id="linea">
+								</div>
 							</div>
+
 						</div>
-                    
-                    	</div> 
 
-        			</div>         
-                      
-                 </div>
+					</div>
 
-                <div class="row ml-5 pl-4">
-                    <button type="submit" class="btn btn-primary">Continuar</button>
-                </div>
-           
-                   </form> 
-              </div>
-        </div>
- 
-    <script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-    <script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
-    <script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+				</div>
+
+				<div class="row ml-5 pl-4">
+					<button type="submit" class="btn btn-primary">Continuar</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+	<script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
 </body>
 </html>
