@@ -30,6 +30,8 @@
 		<div class="col-md-8 d-block m-auto">
 			<form th:action="@{/products-save}" method="POST" th:object="${products}"
 				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+								    	<input type="hidden" th:field="*{productCode}" />			    	
+					
 					
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
