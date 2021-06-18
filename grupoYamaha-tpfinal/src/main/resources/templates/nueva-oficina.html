@@ -17,7 +17,7 @@
 	<div th:replace="layouts/nav-tabs :: div"></div>
   	 <div class="container">
         <div class="show-case-2">
-            <h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Registrá un nuevo vehículo</h1>
+            <h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Registrá una nueva oficina</h1>
         </div>
     </div>
     <!--Formulario de alta -->
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group col-md-5">
                       <label for="telefono">Teléfono</label>
-                      <input th:field="*{phone}" type="text" class="form-control" id="telefono">
+                      <input th:field="*{phone}" type="number" class="form-control" id="telefono">
                     </div>
                 </div> 
                 <div class="row d-flex justify-content-center">
@@ -58,7 +58,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
                         <label for="codigoPostal">Código postal</label>
-                        <input th:field="*{postalCode}" type="text" class="form-control" id="codigoPostal">
+                        <input th:field="*{postalCode}" type="number" class="form-control" id="codigoPostal">
                       </div>
                       <div class="form-group col-md-5">
                         <label for="territorio">Territorio</label>
