@@ -88,7 +88,7 @@ public class ProductsController {
 		}
 		
 		else {
-		ModelAndView model = new ModelAndView("lista-productos");
+		ModelAndView model = new ModelAndView("redirect:/products-list");
 		
 		Optional<ProductLines> productslines = productslinesService.getProductolinesPorId(products.getProductLines().getProductLinesName());
 		
@@ -133,7 +133,7 @@ public class ProductsController {
 	@GetMapping("/products-editar-{id}")
 	public ModelAndView getProductsEditPage(@PathVariable (value = "id") String id) {
 
-		ModelAndView modelView = new ModelAndView("lista-productos");
+		ModelAndView modelView = new ModelAndView("nuevo-producto");
 		
 		Optional<Products> products = productsService.obtenerProductsPorId(id);
 		

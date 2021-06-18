@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
+import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -98,19 +100,29 @@ public class OrderDetailsController {
 		}
 		
 		else {
+			Optional<Products> products = productsService.obtenerProductsPorId(orderdetails.getProducts().getProductCode());
+			products.ifPresent(orderdetails::setProducts);
 			orders = orderdetails.getOrders();
-			System.out.println("bbbbbbbbbbbb: " + orders);
-			modelView = new ModelAndView("lista-ordenes");
+			modelView = new ModelAndView("redirect:/order-list");
 			orders.setOrderDetails(orderdetails);
 
 			 orderdetails.setOrders(null);
+			 products.ifPresent(orderdetails::setProducts);
+			 orderdetails.setPriceEach(orderdetails.getProducts().getBuyPrice());
+			 
+			 
 			 Long id = orderdetailsService.guardarOrderDetails(orderdetails).getOrderNumber();
 			 orders.setOrderNumber(id);
-			 System.out.println("aaaaaaaaaaaaaaaaaaaa: "+orders);
-
+			 LocalDate hoy = LocalDate.now();
+			 orders.setOrderDate(hoy);
+			 Random r = new Random(); 
+			 
+			 orders.setShippedDate(hoy.plusDays(r.nextInt(10)));
+			 orders.setStatus("Procesando");
 			 orderService.guardarOrders(orders);
-		modelView.addObject("orderdetails", orderdetailsService.obtenerOrderDetails());
-		modelView.addObject("order", orderService.obtenerOrders());
+				//modelView.addObject("orders", orderService.obtenerOrders());
+				//modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
+				
 		return modelView;
 		}
 	}
