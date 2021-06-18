@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,39 +20,36 @@ import org.springframework.stereotype.Component;
 public class Orders {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="orders_number")
 	private Long orderNumber; //la profe lo puso Integer
 	
-	@NotNull
 	@Column(name="orders_orderdate", nullable = false)
 	private LocalDate orderDate;
 	
-	@NotNull
 	@Column(name="orders_requiredDate", nullable = false)
 	private LocalDate requiredDate;
 	
 	@Column(name="orders_shippeddate")
 	private LocalDate shippedDate;
 	
-	@NotNull
 	@Column(name="orders_status",length = 15, nullable = false)
 	private String status;
 	
 	@Column(name="orders_comments")
 	private String comments;	
 	
-	@NotNull
-	@ManyToOne
-	@Autowired
-	@JoinColumn(name="cust_number", nullable = false)
-	private Customers customers;
+	//@ManyToOne
+	//@Autowired
+	//@JoinColumn(name="cust_number", nullable = false)
+	//private Customers customers;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Orders(Long orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
-			String status, String comments, Customers customers) {
+			String status, String comments) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderDate = orderDate;
@@ -58,7 +57,7 @@ public class Orders {
 		this.shippedDate = shippedDate;
 		this.status = status;
 		this.comments = comments;
-		this.customers = customers;
+		//this.customers = customers;
 	}
 
 	public Long getOrderNumber() {
@@ -109,19 +108,13 @@ public class Orders {
 		this.comments = comments;
 	}
 
-	public Customers getCustomers() {
-		return customers;
-	}
 
-	public void setCustomers(Customers customers) {
-		this.customers = customers;
-	}
 
 	@Override
 	public String toString() {
 		return "Orders [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
 				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customers="
-				+ customers + "]";
+				+ "]";
 	}
 
 }

@@ -7,7 +7,7 @@ import ar.edu.unju.fi.tpfinal.model.Orders;
 
 public interface IOrdersService {
 
-    public void guardarOrders(Orders orders);
+    public Orders guardarOrders(Orders orders);
 
 	public List<Orders> obtenerOrders();
 

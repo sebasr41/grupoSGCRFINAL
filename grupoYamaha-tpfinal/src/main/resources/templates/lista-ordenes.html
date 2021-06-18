@@ -42,26 +42,25 @@
 						<th>F. de Compra</th>
 						<th>F. Enviada</th>
 						<th>F. Requerida</th>
-						<th>Comentarios</th>
 						<th>Estado</th>
 						<th>Accion</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="orD : ${orderDetails}">
-						<td th:text="${orD.orderNumber}"></td>
-						<td th:text="${orD.products.productName}"></td>
+						<td th:text="${orD.id.productCode.productCode}+'_'+${orD.id.orderNumber.orderNumber}"></td>
+						<td th:text="${orD.id.productCode.productName}"></td>
 						<td th:text=" '$ ' + ${orD.priceEach}"></td>
 						<td th:text="${orD.quantityOrdered}"></td>
 						<td th:text="${orD.orderLineNumber}"></td>
-						<td th:text="${orD.orders.orderDate}"></td>
-						<td th:text="${orD.orders.shippedDate}"></td>
-						<td th:text="${orD.orders.requiredDate}"></td>
-						<td th:text="${orD.orders.comments}"></td>
-						<td th:text="${orD.orders.status}"></td>
+						<td th:text="${orD.id.orderNumber.orderDate}"></td>
+						<td th:text="${orD.id.orderNumber.shippedDate}"></td>
+						<td th:text="${orD.id.orderNumber.requiredDate}"></td>
+						<td th:text="${orD.id.orderNumber.status}"></td>
+						
 						<td>
 							<!-- Edita por medio del id -->
-							<a th:href="@{/orden-cancelar-} + ${orD.orderNumber}" class="btn btn-warning mr-3">Cancelar</a>
+							<a th:href="@{/orden-cancelar-}+ ${orD.id.orderNumber.orderNumber}" class="btn btn-warning mr-3">Cancelar</a>
 						</td>
 					</tr>
 				</tbody>

@@ -34,8 +34,6 @@ public class ProductsController {
 	private Products products;
 	
 
-	@Autowired
-	private OrderDetails orderDetails;
 	
 	@Autowired
 	private Orders orders;
@@ -111,9 +109,6 @@ public class ProductsController {
 	public ModelAndView getComprasPage() {
 		ModelAndView model = new ModelAndView("lista-productos");
 		
-		model.addObject("orders", orders);
-		model.addObject("orderDetails", orderDetails);
-		model.addObject("orderID", orderID);
 		model.addObject("product", products);
 		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("productslines", productslinesService.obtenerProductLines());

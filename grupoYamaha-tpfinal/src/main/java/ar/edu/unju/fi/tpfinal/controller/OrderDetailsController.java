@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
+import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
+import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 import ar.edu.unju.fi.tpfinal.model.Orders;
 import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
@@ -30,7 +33,12 @@ public class OrderDetailsController {
 	
 	@Autowired
 	private IOrdersService orderService;
-
+	
+	@Autowired
+	private OrderDetailsId oID;
+	
+	
+	
 	@Autowired
 	private IProductsService productsService;
 	@Autowired
@@ -39,19 +47,7 @@ public class OrderDetailsController {
 	private OrderDetails orderdetails;
 	@Autowired
 	private Products products;
-	@GetMapping("/orderdetails-{id}")
-	public ModelAndView getOrderDetailsPage(@PathVariable (value = "id") String id, Model model) {  //no pasa por aqui
-	
-		//ModelAndView modelView = new ModelAndView("nueva-orden");
-		ModelAndView modelView = new ModelAndView("lista-productos");
-		Optional<Products> products = productsService.obtenerProductsPorId(id);
-		products.ifPresent(orderdetails::setProducts);
-		System.out.println("sale por aqui??");
-		model.addAttribute("orderdetails", orderdetails);		
 
-		//modelView.addObject("products", products);
-		return modelView;
-}
 	@GetMapping("/orden-cancelar-{id}")
 	public ModelAndView getOrderCancellPage(@PathVariable (value = "id") Long id, Model model) {
 	
@@ -59,12 +55,13 @@ public class OrderDetailsController {
 		
 		Optional<Orders> order =orderService.obtenerOrdersPorId(id);
 		System.out.println(order);
-		order.ifPresent(orderDaux::setOrders);
-		System.out.println("aaaaaaaaaaaaa "+orderDaux);
-		Orders orderGuardar = orderDaux.getOrders();
-		orderGuardar.setStatus("Cancelado");
+		orders = order.get();
+		orders.setStatus("Cancelado");
+		orderService.guardarOrders(orders);
+		//Orders orderGuardar = orderDaux.getOrders();
+		//orderGuardar.setStatus("Cancelado");
 		
-		orderService.guardarOrders(orderGuardar);
+		//orderService.guardarOrders(orderGuardar);
 		
 		modelView.addObject("orders", orderService.obtenerOrders());
 		modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
@@ -84,40 +81,49 @@ public class OrderDetailsController {
 		return model;
 	
 	}
-	@PostMapping("order-form")
-	public ModelAndView OrderDetailsPage(@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
+
+	@PostMapping("/order-form-{id}")
+	public ModelAndView OrderDetailsPage(@PathVariable (value = "id") String id,@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
 		//////// validation
 		ModelAndView modelView;
-		if(resultadoValidacion.hasErrors()) {
-		modelView= new ModelAndView("orderdetails"); 
-		return modelView;
-		}
-		
-		else {
-			Optional<Products> products = productsService.obtenerProductsPorId(orderdetails.getProducts().getProductCode());
-			products.ifPresent(orderdetails::setProducts);
-			orders = orderdetails.getOrders();
-			modelView = new ModelAndView("redirect:/order-list");
-			orders.setOrderDetails(orderdetails);
+		System.out.println("orderDetails llllllllllllllllllllllll:"+orderdetails);
 
-			 orderdetails.setOrders(null);
-			 products.ifPresent(orderdetails::setProducts);
-			 orderdetails.setPriceEach(orderdetails.getProducts().getBuyPrice());
-			 
-			 
-			 Long id = orderdetailsService.guardarOrderDetails(orderdetails).getOrderNumber();
-			 orders.setOrderNumber(id);
+		//if(resultadoValidacion.hasErrors()) {
+		//modelView= new ModelAndView("orderdetails"); 
+		//return modelView;
+		//}
+		
+		//else {
+			
 			 LocalDate hoy = LocalDate.now();
 			 orders.setOrderDate(hoy);
 			 Random r = new Random(); 
 			 
+			 
 			 orders.setShippedDate(hoy.plusDays(r.nextInt(10)));
+			 orders.setRequiredDate(orders.getShippedDate().plusDays(10));
 			 orders.setStatus("Procesando");
-			 orderService.guardarOrders(orders);
+			 
+			Optional<Products> products = productsService.obtenerProductsPorId(id);
+			products.ifPresent(oID::setProductCode);
+			oID.setOrderNumber(orderService.guardarOrders(orders));
+			orderdetails.setId(oID);
+			//orders = orderdetails.getOrders();
+			modelView = new ModelAndView("redirect:/order-list");
+			//orders.setOrderDetails(orderdetails);
+			// orderdetails.setOrders(null);
+			 //products.ifPresent(orderdetails::setProducts);
+			Products precio = products.get();
+			orderdetails.setPriceEach(precio.getBuyPrice());
+			 
+			 
+			orderdetailsService.guardarOrderDetails(orderdetails);
+			 //orders.setOrderNumber(id);
+			
 				//modelView.addObject("orders", orderService.obtenerOrders());
 				//modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
 				
 		return modelView;
 		}
-	}
+	//}
 }

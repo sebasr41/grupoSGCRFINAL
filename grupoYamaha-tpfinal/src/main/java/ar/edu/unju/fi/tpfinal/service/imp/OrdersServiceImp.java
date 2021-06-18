@@ -17,8 +17,8 @@ public class OrdersServiceImp implements IOrdersService {
     private IOrdersRepository ordersRepository;
 
     @Override
-    public void guardarOrders(Orders orders) {
-        ordersRepository.save(orders);
+    public Orders guardarOrders(Orders orders) {
+        return ordersRepository.save(orders);
 
     }
 
