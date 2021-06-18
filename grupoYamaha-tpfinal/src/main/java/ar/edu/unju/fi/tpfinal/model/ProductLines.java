@@ -5,6 +5,7 @@ import java.sql.Blob;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ public class ProductLines {
 	@Column(name="prodL_htmldescription")
 	private String htmlDescription;
 	
+	@Lob
 	@Column(name="prodL_image")
 	private String image;
 	

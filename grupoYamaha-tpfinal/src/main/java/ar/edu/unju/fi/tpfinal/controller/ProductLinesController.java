@@ -42,7 +42,7 @@ public class ProductLinesController {
 		return "nueva-categoria";
     }
 		@PostMapping("/productlines-guardar")
-		public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, @RequestParam("file") MultipartFile image, BindingResult resultadoValidacion) throws IOException{
+		public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, @RequestParam("file") MultipartFile file, BindingResult resultadoValidacion) throws IOException{
 			
 			//////// validation
 			ModelAndView modelView;
@@ -53,22 +53,30 @@ public class ProductLinesController {
 			
 			//else {
 				 modelView = new ModelAndView("lista-categoria");
-				 if (!image.isEmpty()) {
+				 if (!file.isEmpty()) {
+					//linux
 					 String rutaAbsoluta = "/home/mike47k/imagPvisual";	//directorioImagenes.toFile().getAbsolutePath();
+					
+					 
 					 ///grupoYamaha-tpfinal/src/main/resources/static/img
 					 //Path directorioImagenes = Paths.get("src//main//resources//static/img");
 					//String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+					
+					 
+					 
+					 
 					try {
-						byte[] bytesImg = image.getBytes();
-						Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + image.getOriginalFilename());
-						Files.write(rutaCompleta, bytesImg);
+					byte[] bytesImg = file.getBytes();
+					Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + file.getOriginalFilename());
+					Files.write(rutaCompleta, bytesImg);
 	
-						productlines.setImage(image.getOriginalFilename());
+					productlines.setImage(file.getOriginalFilename());
 					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					e.printStackTrace();
+				}
 				}
 				 productolinesService.guardarProductLines(productlines);
+				 System.out.println(productlines.getImage());
 			modelView.addObject("productslines", productolinesService.obtenerProductLines());
 			
 			return modelView;
