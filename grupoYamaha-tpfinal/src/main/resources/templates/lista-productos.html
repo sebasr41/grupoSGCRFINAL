@@ -59,37 +59,28 @@
 		</div>
 
 		<!--Resultados con bucle-->
-
-		<div class="col-md-10 d-block m-auto rounded">
-			<table class="table table-striped table-responsive-xl bg-pv--form text-light">
-				<thead>
-					<tr>
-						<th>Id Auto</th>
-						<th>Categoria</th>
-						<th>C. Descripcion</th>
-						<th>Nombre</th>
-						<th>Cantidad</th>
-						<th>Precio</th>
-						<th>Comprar</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="prod : ${products}">
-						<td th:text="${prod.productCode}"></td>
-						<td th:text="${prod.productLines.productLinesName}"></td>
-						<td th:text="${prod.productLines.textDescription}"></td>
-						<td th:text="${prod.productName}"></td>
-						<td th:text="${prod.quantityInStock}"></td>
-						<td th:text=" '$ ' + ${prod.buyPrice}"></td>
-						<td>
-							<!--Botón de comprar-->
-							<button type="button" class="btn btn-success px-4" data-toggle="modal"
+		<div class="container">
+			<div class="row">
+				<!--Asi se deberia ver-->
+			<div class="col-3   mb-4" th:each="prod : ${products}">
+				<div class="card">
+					<img th:src="*{'imagPvisual/'+prod.productLines.image}" class="card-img-top" width="300" height="300"
+						alt="Imagen de categoria">
+					<div class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
+						<h1 class="card-title" th:text="${prod.productName}"></h1>
+						<h5 class="mt-4 card-text"  th:text="'Categoria: '+${prod.productLines.productLinesName}"></h5>
+						<h5 class="card-text" th:text="'Cantidad: '+${prod.quantityInStock}"></h5>
+						<h5 class="card-text" th:text="'Precio: '+ '$' + ${prod.buyPrice}"></h5>
+						<a th:href="@{/products-editar-} + ${prod.productCode}" class="btn btn-warning px-4"><i
+									class="fas fa-edit text-light"></i></a>
+						<a th:href="@{/products-eliminar-} + ${prod.productCode}" class="btn btn-danger px-4"><i
+									class="fas fa-trash-alt text-light"></i></a>
+						<button type="button" class="btn btn-success px-4" data-toggle="modal"
 								data-target="#myModal" th:attrappend="data-target=${prod.productCode}"><i
 									class="fas fa-shopping-cart text-light"></i>
 							</button>
-
+							
+							
 							<div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${prod.productCode}">
 								<div class="modal-dialog">
 
@@ -166,17 +157,21 @@
 									</div>
 
 								</div>
-							</div>							
-						</td>
-						<td><a th:href="@{/products-editar-} + ${prod.productCode}" class="btn btn-warning px-4"><i
-									class="fas fa-edit text-light"></i></a></td>
-						<td><a th:href="@{/products-eliminar-} + ${prod.productCode}" class="btn btn-danger px-4"><i
-									class="fas fa-trash-alt text-light"></i></a></td>
-					</tr>
-				</tbody>
-			</table>
-
+							</div>	
+							
+							
+					</div>
+				</div>
+				
+			</div>
+			
+		
+		</div>	
 		</div>
+		
+		
+
+		
 	</div>
 
 
