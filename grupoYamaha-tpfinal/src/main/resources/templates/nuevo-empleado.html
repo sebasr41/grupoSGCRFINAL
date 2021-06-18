@@ -23,7 +23,7 @@
     <!--Formulario de alta -->
     <div class="row">
         <div class="col-md-8 d-block m-auto">
-            <form th:action="@{/employees-save}" method="POST" th:object="${employees}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+            <form th:action="@{/empleado-guardar}" method="POST" th:object="${employees}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
                       <label for="nombre">Nombre <i class="fas fa-signature text-light ml-2"></i></label>
@@ -44,11 +44,12 @@
                         <input th:field="*{email}" type="text" class="form-control" id="correo">
                     </div>
                 </div>   
-                <div class="row d-flex justify-content-center">
-                    <div class="form-group col-md-5">
-                        <label for="codigoOficina">Código de oficina</label>
-                        <input th:field="*{officeCode}" type="number" class="form-control" id="codigoOficina">
-                    </div>
+               <div class="form-group col-md-5">
+						<label for="oficina">codigo de oficina</label>
+						<select id="oficina" th:field="*{offices.officeCode}" class="form-control">
+							<option th:each="off : ${offices}" th:value="${off.officeCode}"
+								th:text="${off.officeCode}" th:selected="false"></option>
+						</select>
                     
                     <div class="form-group col-md-5">
                         <label for="puestoTrabajo">Puesto de trabajo</label>
@@ -58,7 +59,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
                         <label for="jefe">Jefe</label>
-                        <input th:field="*{reportsTo}" type="text" class="form-control" id="jefe">
+                        <input th:field="*{employeeNumber}" type="text" class="form-control" id="jefe">
                       </div>
                    
                 </div>    

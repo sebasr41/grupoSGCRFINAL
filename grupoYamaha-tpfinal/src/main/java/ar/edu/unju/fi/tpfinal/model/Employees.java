@@ -2,6 +2,8 @@ package ar.edu.unju.fi.tpfinal.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,35 +19,33 @@ import org.springframework.stereotype.Component;
 public class Employees {
 	
 
-	@NotNull
 	@Id
-	@Column(name = "empl_employeenumber", nullable = false)//le pongo id empl_id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "empl_employeenumber")//le pongo id empl_id
 	private Long employeeNumber;//int clave principal//int clave principal
 	
-	@NotNull
-	@Column(name = "empl_lastname",length = 50, nullable = false)
+	@Column(name = "empl_lastname")
 	private String lastName;
 	
-	@NotNull
-	@Column(name = "empl_firstname",length = 50, nullable = false)
+	
+	@Column(name = "empl_firstname")
 	private String firstName;
 	
-	@NotNull
-	@Column(name = "empl_extension",length = 10, nullable = false)
+	
+	@Column(name = "empl_extension")
 	private String extension;
 	
-	@NotNull
-	@Column(name = "empl_email",length = 100, nullable = false)
+	
+	@Column(name = "empl_email")
 	private String email;
 	
-	@NotNull
-	@Column(name = "empl_jobtitle",length = 50, nullable = false)
+	
+	@Column(name = "empl_jobtitle")
 	private String jobTitle;
 	
-	@NotNull
 	@ManyToOne
 	@Autowired
-	@JoinColumn(name="offic_officeCode", nullable = false)
+	@JoinColumn(name="offic_officeCode")
 	private Offices offices;
 	
 	@Autowired
@@ -71,8 +71,8 @@ public class Employees {
 	 * @param employees
 	 */
 		
-	public Employees(@NotNull Long employeeNumber, @NotNull String lastName, @NotNull String firstName,
-			@NotNull String extension, @NotNull String email, @NotNull String jobTitle, @NotNull Offices offices,
+	public Employees(Long employeeNumber, String lastName, String firstName,
+			String extension,  String email, String jobTitle,  Offices offices,
 			Employees employees) {
 		super();
 		this.employeeNumber = employeeNumber;

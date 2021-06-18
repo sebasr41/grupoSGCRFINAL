@@ -23,7 +23,7 @@
     <!--Formulario de alta -->
     <div class="row">
         <div class="col-md-8 d-block m-auto">
-            <form th:action="@{/employees-save}" method="POST" th:object="${employees}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+            <form th:action="@{/offices-guardar}" method="POST" th:object="${offices}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
                       <label for="ciudad">Ciudad <i class="fas fa-signature text-light ml-2"></i></label>
@@ -47,7 +47,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
                         <label for="provincia">Provincia</label>
-                        <input th:field="*{state}" type="number" class="form-control" id="provincia">
+                        <input th:field="*{state}" type="text" class="form-control" id="provincia">
                     </div>
                     
                     <div class="form-group col-md-5">

@@ -2,6 +2,8 @@ package ar.edu.unju.fi.tpfinal.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -13,39 +15,39 @@ import org.springframework.stereotype.Component;
 @Table(name="OFFICES")
 public class Offices {	
 	
-	@NotNull
 	@Id
-	@Column(name = "offic_officeCode",length = 10, nullable = false)
-	private String officeCode;//varchar clave principal
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "offic_officeCode")
+	private Long officeCode;//varchar clave principal
 	
-	@NotNull
-	@Column(name = "offic_city",length = 50, nullable = false)
+	
+	@Column(name = "offic_city")
 	private String city;
 	
-	@NotNull
-	@Column(name = "offic_phone",length = 50, nullable = false)
+	
+	@Column(name = "offic_phone")
 	private int phone;
 	
-	@NotNull
-	@Column(name = "offic_addressLine1",length = 50, nullable = false)
+	
+	@Column(name = "offic_addressLine1")
 	private String addressLine1;
 	
-	@Column(name = "offic_addressLine2",length = 50)
+	@Column(name = "offic_addressLine2")
 	private String addressLine2;
 	
-	@Column(name = "offic_state",length = 50)
+	@Column(name = "offic_state")
 	private String state;//creo q es string
 	
-	@NotNull
-	@Column(name = "offic_country",length = 50, nullable = false)
+	
+	@Column(name = "offic_country")
 	private String country;
 	
-	@NotNull
-	@Column(name = "offic_postalCode",length = 15, nullable = false)
+	
+	@Column(name = "offic_postalCode")
 	private String postalCode;
 	
-	@NotNull
-	@Column(name = "offic_territory",length = 10, nullable = false)
+	
+	@Column(name = "offic_territory")
 	private String territory;
 	/**
 	 * 
@@ -57,9 +59,9 @@ public class Offices {
 	
 	
 	
-	public Offices(@NotNull String officeCode, @NotNull String city, @NotNull int phone, @NotNull String addressLine1,
-			String addressLine2, String state, @NotNull String country, @NotNull String postalCode,
-			@NotNull String territory) {
+	public Offices(Long officeCode, String city, int phone, String addressLine1,
+			String addressLine2, String state,  String country, String postalCode,
+			 String territory) {
 		super();
 		this.officeCode = officeCode;
 		this.city = city;
@@ -74,13 +76,13 @@ public class Offices {
 
 
 	
-	public String getOfficeCode() {
+	public Long getOfficeCode() {
 		return officeCode;
 	}
 
 
 
-	public void setOfficeCode(String officeCode) {
+	public void setOfficeCode(Long officeCode) {
 		this.officeCode = officeCode;
 	}
 
