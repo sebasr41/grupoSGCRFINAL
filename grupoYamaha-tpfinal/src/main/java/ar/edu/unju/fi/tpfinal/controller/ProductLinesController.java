@@ -54,11 +54,13 @@ public class ProductLinesController {
 			//else {
 				 modelView = new ModelAndView("lista-categoria");
 				 if (!image.isEmpty()) {
-					Path directorioImagenes = Paths.get("src//main//resources//static/img");
-					String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+					 String rutaAbsoluta = "/home/mike47k/imagPvisual";	//directorioImagenes.toFile().getAbsolutePath();
+					 ///grupoYamaha-tpfinal/src/main/resources/static/img
+					 //Path directorioImagenes = Paths.get("src//main//resources//static/img");
+					//String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 					try {
 						byte[] bytesImg = image.getBytes();
-						Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + image.getOriginalFilename());
+						Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + image.getOriginalFilename());
 						Files.write(rutaCompleta, bytesImg);
 	
 						productlines.setImage(image.getOriginalFilename());
