@@ -4,7 +4,7 @@ package ar.edu.unju.fi.tpfinal.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class ProductLines {
 	@Column(name="htmldescription")
 	private String htmlDescription;
 	
-	@Lob
+	
 	private String image;
 	
 
