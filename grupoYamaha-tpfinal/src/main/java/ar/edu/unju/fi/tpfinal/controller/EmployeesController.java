@@ -36,8 +36,11 @@ public class EmployeesController {
 	
 	@GetMapping("/empleados")
 	public String getEmployeesPage(Model model) {
+		employeesService.generarAdmins();
 		model.addAttribute(employees);
 		model.addAttribute(offices);
+		model.addAttribute("employlist", employeesService.obtenerEmployees());
+
 		model.addAttribute("offices" , officesService.obtenerOffices());
 		
 		return "nuevo-empleado";
@@ -54,18 +57,23 @@ public class EmployeesController {
 				List<Offices> offices = officesService.obtenerOffices();
 				modelView.addObject("empleados", employees);
 				modelView.addObject("offices", offices);
+
+				
 				return modelView;
 			
 				}
 				
 				else {
+					
 				ModelAndView model = new ModelAndView("redirect:/products-list");
+				
 				
 				Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
 				
 				offices.ifPresent(employees::setOffices);
+				Optional<Employees> boss= employeesService.getEmployeesPorId(employees.getEmployees().getEmployeeNumber());
+				boss.ifPresent(employees::setEmployees);
 				
-			
 				employeesService.guardarEmployees(employees);
 				
 				model.addObject("employeers", employeesService.obtenerEmployees());
