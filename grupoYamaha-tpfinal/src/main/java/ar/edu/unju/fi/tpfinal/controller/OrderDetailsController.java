@@ -58,15 +58,10 @@ public class OrderDetailsController {
 		orders = order.get();
 		orders.setStatus("Cancelado");
 		orderService.guardarOrders(orders);
-		//Orders orderGuardar = orderDaux.getOrders();
-		//orderGuardar.setStatus("Cancelado");
-		
-		//orderService.guardarOrders(orderGuardar);
 		
 		modelView.addObject("orders", orderService.obtenerOrders());
 		modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
 
-		//modelView.addObject("products", products);
 		return modelView;
 }
 	@GetMapping("/order-list")
@@ -88,12 +83,7 @@ public class OrderDetailsController {
 		ModelAndView modelView;
 		System.out.println("orderDetails llllllllllllllllllllllll:"+orderdetails);
 
-		//if(resultadoValidacion.hasErrors()) {
-		//modelView= new ModelAndView("orderdetails"); 
-		//return modelView;
-		//}
-		
-		//else {
+
 			
 			 LocalDate hoy = LocalDate.now();
 			 orders.setOrderDate(hoy);
@@ -118,10 +108,7 @@ public class OrderDetailsController {
 			 
 			 
 			orderdetailsService.guardarOrderDetails(orderdetails);
-			 //orders.setOrderNumber(id);
 			
-				//modelView.addObject("orders", orderService.obtenerOrders());
-				//modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
 				
 		return modelView;
 		}

@@ -9,12 +9,12 @@ import ar.edu.unju.fi.tpfinal.model.Products;
 
 public interface IProductsRepository extends CrudRepository<Products,String> {
 
-    //List<Products> findByProductNameAndProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(String productsName, String id,double price);
+    List<Products> findByProductNameAndProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(String productsName, String id,double price);
 	
-    //List<Products> findByProductNameAndBuyPriceGreaterThanEqual(String id, double price);
+    List<Products> findByProductNameAndBuyPriceGreaterThanEqual(String id, double price);
 
-    //List<Products> findByBuyPriceGreaterThanEqual(double price);
+    List<Products> findByBuyPriceGreaterThanEqual(double price);
     
-    //List<Products> findByProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(String id, double price);
+    List<Products> findByProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(String id, double price);
 
 }

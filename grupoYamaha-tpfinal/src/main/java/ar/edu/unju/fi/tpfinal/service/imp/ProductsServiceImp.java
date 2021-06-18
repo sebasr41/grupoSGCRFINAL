@@ -49,16 +49,16 @@ public class ProductsServiceImp implements IProductsService{
 		 List<Products> products = new ArrayList<Products>();
 				
 		        if(!productsName.isEmpty() && !id.isEmpty() && price >=0) {
-			//		products = productsRepository.findByProductNameAndProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(productsName, id, price);
-			//	}else {
-				//	if(!productsName.isEmpty()  && price >=0) {
-					//	products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
-					//}
-			        //if(!id.isEmpty()  && price >=0) {
-					//	products = productsRepository.findByProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(id, price);
-					//}else if(productsName.isEmpty()&& id.isEmpty() && price >=0) {
-						//products= productsRepository.findByBuyPriceGreaterThanEqual(price);
-					//}
+					products = productsRepository.findByProductNameAndProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(productsName, id, price);
+				}else {
+					if(!productsName.isEmpty()  && price >=0) {
+						products = productsRepository.findByProductNameAndBuyPriceGreaterThanEqual(productsName,price);
+					}
+			        if(!id.isEmpty()  && price >=0) {
+						products = productsRepository.findByProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(id, price);
+					}else if(productsName.isEmpty()&& id.isEmpty() && price >=0) {
+						products= productsRepository.findByBuyPriceGreaterThanEqual(price);
+					}
 				}
 		        
 			return products;

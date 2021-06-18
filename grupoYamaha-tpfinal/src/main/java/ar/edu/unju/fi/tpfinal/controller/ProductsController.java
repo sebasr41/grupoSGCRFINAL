@@ -147,7 +147,7 @@ public class ProductsController {
 		model.addAttribute("product", products);
 	    model.addAttribute("products", productsService.buscarProducts(products.getProductName(), products.getProductLines().getProductLinesName(), products.getBuyPrice()));
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
-
-	    return "lista-productos";
+        model.addAttribute("orderdetails" , orderdetails);
+        return "lista-productos";
 	}
 }
