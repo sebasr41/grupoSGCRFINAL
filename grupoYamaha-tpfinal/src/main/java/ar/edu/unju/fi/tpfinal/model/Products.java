@@ -1,25 +1,22 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sun.istack.NotNull;
+
 import ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Component
 @Entity
@@ -28,14 +25,14 @@ public class Products {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
-    @GenericGenerator(
-        name = "prod_seq", 
-        strategy = "ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator", 
-        parameters = {
+    @GenericGenerator(name = "prod_seq",
+    strategy = "ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator",
+    parameters = {
             @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
             @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "S10_"),
             @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-	private String productCode;//es varchar
+
+private String productCode;//es varchar
 	
 	
 	@Column(name = "produc_name")
@@ -59,44 +56,18 @@ public class Products {
 	@Column(name = "produc_msrp")
 	private double MSRP;
 	
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
-	private List<OrderDetails> orderDetails;
-
 	
 	@ManyToOne
 	@Autowired
 	private ProductLines productLines;
-	/**
-	 * 
-	 */
+	
 	public Products() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
-	/**
-	 * @param productCode
-	 * @param productName
-	 * @param productLine
-	 * @param productScale
-	 * @param productVendor
-	 * @param productDescription
-	 * @param quantityInStock
-	 * @param buyPrice
-	 * @param mSRP
-	 * @param productLines
-	 */
 	
-	
-	/**
-	 * @return the productCode
-	 */
-	public String getProductCode() {
-		return productCode;
-	}
+
 	public Products(String productCode, String productName, String productScale, String productVendor,
-			String productDescription, int quantityInStock, double buyPrice, double mSRP, List<OrderDetails> orderDetails,
-			ProductLines productLines) {
+			String productDescription, int quantityInStock, double buyPrice, double mSRP, ProductLines productLines) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
@@ -106,14 +77,25 @@ public class Products {
 		this.quantityInStock = quantityInStock;
 		this.buyPrice = buyPrice;
 		MSRP = mSRP;
-		this.orderDetails = orderDetails;
 		this.productLines = productLines;
 	}
+
+
+
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+
 
 
 	public String getProductName() {
 		return productName;
 	}
+
 
 
 	public void setProductName(String productName) {
@@ -126,9 +108,11 @@ public class Products {
 	}
 
 
+
 	public void setProductScale(String productScale) {
 		this.productScale = productScale;
 	}
+
 
 
 	public String getProductVendor() {
@@ -136,9 +120,11 @@ public class Products {
 	}
 
 
+
 	public void setProductVendor(String productVendor) {
 		this.productVendor = productVendor;
 	}
+
 
 
 	public String getProductDescription() {
@@ -146,9 +132,11 @@ public class Products {
 	}
 
 
+
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
+
 
 
 	public int getQuantityInStock() {
@@ -156,9 +144,11 @@ public class Products {
 	}
 
 
+
 	public void setQuantityInStock(int quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
+
 
 
 	public double getBuyPrice() {
@@ -166,9 +156,11 @@ public class Products {
 	}
 
 
+
 	public void setBuyPrice(double buyPrice) {
 		this.buyPrice = buyPrice;
 	}
+
 
 
 	public double getMSRP() {
@@ -176,18 +168,9 @@ public class Products {
 	}
 
 
+
 	public void setMSRP(double mSRP) {
 		MSRP = mSRP;
-	}
-
-
-	public List<OrderDetails> getOrderDetails() {
-		return orderDetails;
-	}
-
-
-	public void setOrderDetails(List<OrderDetails> orderDetails) {
-		this.orderDetails = orderDetails;
 	}
 
 
@@ -195,15 +178,10 @@ public class Products {
 		return productLines;
 	}
 
-
 	public void setProductLines(ProductLines productLines) {
 		this.productLines = productLines;
 	}
 
-
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
 
 
 	@Override
@@ -211,7 +189,10 @@ public class Products {
 		return "Products [productCode=" + productCode + ", productName=" + productName + ", productScale="
 				+ productScale + ", productVendor=" + productVendor + ", productDescription=" + productDescription
 				+ ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP=" + MSRP
-				+ ", orderDetails=" + orderDetails + ", productLines=" + productLines + "]";
+				+ ", productLines=" + productLines + "]";
 	}
+
+	
+
 
 }

@@ -30,10 +30,6 @@ public class OrderDetailsController {
 	
 	@Autowired
 	private IOrdersService orderService;
-	
-
-	@Autowired
-	private OrderDetails orderDaux;
 
 	@Autowired
 	private IProductsService productsService;
@@ -106,9 +102,17 @@ public class OrderDetailsController {
 
 			 orderdetails.setOrders(null);
 			 products.ifPresent(orderdetails::setProducts);
+			 orderdetails.setPriceEach(orderdetails.getProducts().getBuyPrice());
+			 
+			 
 			 Long id = orderdetailsService.guardarOrderDetails(orderdetails).getOrderNumber();
 			 orders.setOrderNumber(id);
-
+			 LocalDate hoy = LocalDate.now();
+			 orders.setOrderDate(hoy);
+			 Random r = new Random(); 
+			 
+			 orders.setShippedDate(hoy.plusDays(r.nextInt(10)));
+			 orders.setStatus("Procesando");
 			 orderService.guardarOrders(orders);
 				//modelView.addObject("orders", orderService.obtenerOrders());
 				//modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());

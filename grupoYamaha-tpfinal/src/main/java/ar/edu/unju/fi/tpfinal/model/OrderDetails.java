@@ -1,117 +1,83 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sun.istack.NotNull;
+
 @Component
 @Entity
 @Table(name="ORDERDETAILS")
-public class OrderDetails {
+public class OrderDetails implements Serializable{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long orderNumber;	
+	private static final long serialVersionUID = 1L;
 
-	@Column(name = "Orderdetails_quantityOrdered")
+	@EmbeddedId //Indica que es integrada como clave primaria
+	private OrderDetailsId id;
+	
+	
 	private int quantityOrdered;
 	
-	@Column(name = "Orderdetails_priceeach")
+
 	private double priceEach;
 	
-	@Column(name = "Orderdetails_orderlinenumber")
+	
+
 	private int orderLineNumber;//smallint
 	
-	@Autowired
-	@ManyToOne
-	private Products products;
-
-
-	@OneToOne(mappedBy = "orderDetails",cascade = CascadeType.ALL)
-	private Orders orders;
-	/**
-	 * 
-	 */
+	
+	 
 	public OrderDetails() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-
-
-	public OrderDetails(Long orderNumber, int quantityOrdered, double priceEach, int orderLineNumber, Products products, Orders orders) {
-		this.orderNumber = orderNumber;
-		this.quantityOrdered = quantityOrdered;
-		this.priceEach = priceEach;
-		this.orderLineNumber = orderLineNumber;
-		this.products = products;
-		this.orders = orders;
+	public OrderDetailsId getId() {
+		return id;
 	}
-	
-
-	public Long getOrderNumber() {
-		return this.orderNumber;
+	public void setId(OrderDetailsId id) {
+		this.id = id;
 	}
-
-	public void setOrderNumber(Long orderNumber) {
-		this.orderNumber = orderNumber;
-	}
-
-
-
 	public int getQuantityOrdered() {
-		return this.quantityOrdered;
+		return quantityOrdered;
 	}
-
 	public void setQuantityOrdered(int quantityOrdered) {
 		this.quantityOrdered = quantityOrdered;
 	}
-
 	public double getPriceEach() {
-		return this.priceEach;
+		return priceEach;
 	}
-
 	public void setPriceEach(double priceEach) {
 		this.priceEach = priceEach;
 	}
-
 	public int getOrderLineNumber() {
-		return this.orderLineNumber;
+		return orderLineNumber;
 	}
-
 	public void setOrderLineNumber(int orderLineNumber) {
 		this.orderLineNumber = orderLineNumber;
 	}
-
-	public Products getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Products products) {
-		this.products = products;
-	}
-
-	public Orders getOrders() {
-		return this.orders;
-	}
-
-	public void setOrders(Orders orders) {
-		this.orders = orders;
-	}
-
-
 	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public OrderDetails(OrderDetailsId id, int quantityOrdered, double priceEach, int orderLineNumber) {
+		super();
+		this.id = id;
+		this.quantityOrdered = quantityOrdered;
+		this.priceEach = priceEach;
+		this.orderLineNumber = orderLineNumber;
 
+	}
+	@Override
+	public String toString() {
+		return "OrderDetails [id=" + id + ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach
+				+ ", orderLineNumber=" + orderLineNumber + "]";
+	}
+	
 }
