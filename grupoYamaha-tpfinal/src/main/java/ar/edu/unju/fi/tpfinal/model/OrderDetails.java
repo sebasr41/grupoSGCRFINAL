@@ -7,11 +7,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
-import com.sun.istack.NotNull;
+
 
 @Component
 @Entity
@@ -23,17 +24,17 @@ public class OrderDetails implements Serializable{
 	@EmbeddedId //Indica que es integrada como clave primaria
 	private OrderDetailsId id;
 	
-	
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese la cantidad del producto")
+	@Column(name = "orderDet_quantityOrdered")
 	private int quantityOrdered;
 	
-
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio del producto")
+	@Column(name = "orderDet_priceEach", scale = 2)
 	private double priceEach;
 	
-	
-
+	@NotNull(message = "La casilla no debe quedar vacia")
+	@Column(name = "orderDet_orderLineNumber")
 	private int orderLineNumber;//smallint
-	
-	
 	 
 	public OrderDetails() {
 		// TODO Auto-generated constructor stub
@@ -41,6 +42,7 @@ public class OrderDetails implements Serializable{
 	public OrderDetailsId getId() {
 		return id;
 	}
+	
 	public void setId(OrderDetailsId id) {
 		this.id = id;
 	}

@@ -55,11 +55,11 @@ public class Products {
 	private int quantityInStock;//smallint
 	
 	@NotNull(message = "La casilla no debe quedar vacia, ingrese PRECIO del producto")
-	@Column(name = "produc_buyprice")
+	@Column(name = "produc_buyprice",scale = 2)
 	private double buyPrice;
 	
 	@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio sugerido por el fabricante (MSRP)")
-	@Column(name = "produc_msrp")
+	@Column(name = "produc_msrp", scale = 2)
 	private double MSRP;
 	
 	
