@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.repository.IProductsRepository;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
