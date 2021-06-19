@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -21,11 +21,6 @@ public class Payments implements Serializable{
 	private PaymentsId id;
 	
 	@NotNull
-	@Id
-	@Column(name="pay_checknumber", nullable = false)//varchar clave principal
-	private String checkNumber;
-	
-	@NotNull
 	@Column(name="pay_paymentdate", nullable = false)
 	private LocalDate paymentDate;
 	
@@ -38,56 +33,81 @@ public class Payments implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Payments(PaymentsId id, @NotNull String checkNumber, @NotNull LocalDate paymentDate,
-			@NotNull double amount) {
+	
+	/**
+	 * @param id
+	 * @param paymentDate
+	 * @param amount
+	 */
+	public Payments(PaymentsId id, @NotNull LocalDate paymentDate, @NotNull double amount) {
 		super();
 		this.id = id;
-		this.checkNumber = checkNumber;
 		this.paymentDate = paymentDate;
 		this.amount = amount;
 	}
 
+
+	/**
+	 * @return the id
+	 */
 	public PaymentsId getId() {
 		return id;
 	}
 
+
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(PaymentsId id) {
 		this.id = id;
 	}
 
-	public String getCheckNumber() {
-		return checkNumber;
-	}
 
-	public void setCheckNumber(String checkNumber) {
-		this.checkNumber = checkNumber;
-	}
-
+	/**
+	 * @return the paymentDate
+	 */
 	public LocalDate getPaymentDate() {
 		return paymentDate;
 	}
 
+
+	/**
+	 * @param paymentDate the paymentDate to set
+	 */
 	public void setPaymentDate(LocalDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
+
+	/**
+	 * @return the amount
+	 */
 	public double getAmount() {
 		return amount;
 	}
 
+
+	/**
+	 * @param amount the amount to set
+	 */
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
+
+	/**
+	 * @return the serialversionuid
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Payments [id=" + id + ", checkNumber=" + checkNumber + ", paymentDate=" + paymentDate + ", amount="
-				+ amount + "]";
+		return "Payments [id=" + id + ", paymentDate=" + paymentDate + ", amount=" + amount + "]";
 	}
+
 
 	
 	
