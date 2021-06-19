@@ -39,10 +39,10 @@ public class Orders {
 	@Column(name="orders_comments")
 	private String comments;	
 	
-	//@ManyToOne
-	//@Autowired
-	//@JoinColumn(name="cust_number", nullable = false)
-	//private Customers customers;
+	@ManyToOne
+	@Autowired
+	@JoinColumn(name="cust_number", nullable = false)
+	private Customers customers;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub

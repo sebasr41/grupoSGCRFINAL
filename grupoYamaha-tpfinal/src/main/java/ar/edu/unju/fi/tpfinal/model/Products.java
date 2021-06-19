@@ -5,14 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.sun.istack.NotNull;
 
 import ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,28 +30,35 @@ public class Products {
             @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
             @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "S10_"),
             @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-
-private String productCode;//es varchar
-	
-	
+	private String productCode;//es varchar
+	@Size(max=70, message = "El text debe ser inferior o igual a 70 caracteres")
+	@NotNull(message = "La casilla no debe quedar vacia, Ingrese nombre de producto")
 	@Column(name = "produc_name")
 	private String productName;
 	
+	@Size(max=10, message="El texto debe ser inferior o igual a 10 caracteres")
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese escala de producto")
 	@Column(name = "produc_scale")
 	private String productScale;
 	
+	@Size(max=50, message="El texto debe ser inferior o igual a 50 caracteres")
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese Empresa proveniente del producto")
 	@Column(name = "produc_vendedor")
 	private String productVendor;
 	
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese una descripción del producto")
 	@Column(name = "produc_description")
 	private String productDescription;//text
 	
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese STOCK producto")
 	@Column(name = "produc_quantityinStock")
 	private int quantityInStock;//smallint
 	
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese PRECIO del producto")
 	@Column(name = "produc_buyprice")
 	private double buyPrice;
 	
+	@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio sugerido por el fabricante (MSRP)")
 	@Column(name = "produc_msrp")
 	private double MSRP;
 	

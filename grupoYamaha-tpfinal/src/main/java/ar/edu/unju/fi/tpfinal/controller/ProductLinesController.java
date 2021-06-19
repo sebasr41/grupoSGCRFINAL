@@ -50,8 +50,8 @@ public class ProductLinesController {
 			//modelView= new ModelAndView("nueva-categoria"); 
 			//return modelView;
 			//}
-			
-			//else {
+			//ModelAndView modelView;
+					//else {
 				 modelView = new ModelAndView("lista-categoria");
 				 if (!image.isEmpty()) {
 					Path directorioImagenes = Paths.get("src//main//resources//static/img");
@@ -70,8 +70,9 @@ public class ProductLinesController {
 			modelView.addObject("productslines", productolinesService.obtenerProductLines());
 			
 			return modelView;
+			}
 			//}
-		}
+		
 		@GetMapping("/productLines-list")
 		public ModelAndView getComprasPage() {
 			ModelAndView model = new ModelAndView("lista-categoria");

@@ -1,15 +1,15 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-import java.sql.Blob;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
-import com.sun.istack.NotNull;
+
 
 @Component
 @Entity
@@ -17,10 +17,11 @@ import com.sun.istack.NotNull;
 public class ProductLines {
 	
 	@Id
-
-	@Column(name="prodL_line")
+	@NotNull(message = "La celda no debe quedar vacia, igrese un Nombre de la categoria, inferior a 50 caracteres")
+	@Column(name="prodL_line",length = 50)
 	private String productLinesName; 
 	
+	@Size(max = 4000, message = "Ingrese un texto debe inferiro a 4000 caracteres")
 	@Column(name="prodL_textdescription")
 	private String textDescription;
 	
