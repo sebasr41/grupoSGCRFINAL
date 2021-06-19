@@ -42,7 +42,7 @@
 					</tr>
 				</thead>
 				<tbody>	
-					<tr th:each="cus : ${customer}">
+					<tr th:each="cus : ${customers}">
 						<td th:text="${cus.customerNumber}"></td>
 						<td th:text="${cus.addressLine1}"></td>
 						<td th:text="${cus.addressLine1}"></td>
@@ -54,11 +54,9 @@
 						<td th:text="${cus.customerName}"></td>
 						<td th:text="${cus.phone}"></td>
 						<td th:text="${cus.postalCode}"></td>
-						<td th:text="${cus.country}"></td>
+						<td th:text="${cus.coutry}"></td>
 						<td th:text="${cus.customerNumber}"></td>
-						<td th:text="${cus.checkNumber}"></td>
-						<td th:text="${cus.employenumber}"></td>
-						<td th:text="${cus.amount}"></td>
+						<td th:text="${cus.employees.employeeNumber}"></td>
 					</tr>
 				</tbody>
 			</table>

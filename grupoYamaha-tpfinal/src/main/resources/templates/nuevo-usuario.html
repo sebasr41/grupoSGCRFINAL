@@ -63,7 +63,7 @@
 						<input th:field="*{phone}" type="text" class="form-control" id="phone">
 					   <div class="form-text alert-danger col-md-12 ro  unded-bottom " th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
 					</div>
-				</div>
+				
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="addressLine1">Direccion Linea 1ntacto <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
@@ -88,7 +88,7 @@
 				</div>
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="postalCode">Estado <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="postalCode">Codigo Postal <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{postalCode}" type="number" class="form-control" id="postalCode">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
 					</div>
@@ -96,7 +96,7 @@
 				
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="coutry">Estado <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="coutry">Pais <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{coutry}" type="text" class="form-control" id="coutry">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
 					</div>
@@ -109,6 +109,13 @@
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('creditLimit')}" th:errors="*{creditLimit}"></div>
 					</div>
 				</div>
+				
+				<label for="producto">Nombre de la categoria</label>
+						<select id="producto" th:field="*{employees.employeeNumber}" class="form-control">
+							<option th:each="emp : ${employs}" th:value="${emp.employeeNumber}"
+								th:text="${emp.firstName}+ ' - '+ ${emp.jobTitle}" th:selected="false"></option>
+						</select>
+				
 				
 								<div class="row ml-5 pl-4">
 					<button type="submit" class="btn btn-primary">Guardar</button>
