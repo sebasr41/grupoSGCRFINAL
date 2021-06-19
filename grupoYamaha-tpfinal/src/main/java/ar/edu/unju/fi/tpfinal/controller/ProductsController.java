@@ -32,9 +32,7 @@ import ar.edu.unju.fi.tpfinal.service.IProductsService;
 public class ProductsController {
 	@Autowired
 	private Products products;
-	
 
-	
 	@Autowired
 	private Orders orders;
 	
@@ -57,7 +55,6 @@ public class ProductsController {
 	@Autowired
 	private OrderDetails orderdetails;
 	
-	
 	@GetMapping("/products")
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);	
@@ -66,11 +63,9 @@ public class ProductsController {
 			model.addAttribute("bandera", false);
 		}else {
 			model.addAttribute("bandera", true);
-
 		}
 		return "nuevo-producto";
 	}
-
 	
 	@PostMapping("/products-save")
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products")Products products, BindingResult resultadoValidacion) {
