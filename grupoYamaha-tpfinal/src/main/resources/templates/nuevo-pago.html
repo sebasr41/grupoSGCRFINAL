@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,65 +11,67 @@
 	<link rel="shortcut icon" href="img/favicon.png" />
 	<title>CUSTOMERS</title>
 </head>
-<body class="body-gam">
-	<!--   HEADER    -->
-	<div th:replace="layouts/header :: header"></div>
-	
-	<!--   NAV WITH TABS    -->
-	<div th:replace="layouts/nav-tabs :: div"></div>
-	
-	<div class="container">
-		<div class="show-case-2">
-			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">PAGOS</h1>
+
+	<body class="body-gam">
+		<!--   HEADER    -->
+		<div th:replace="layouts/header :: header"></div>
+		
+		<!--   NAV WITH TABS    -->
+		<div th:replace="layouts/nav-tabs :: div"></div>
+		
+		<div class="container">
+			<div class="show-case-2">
+				<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">PAGOS</h1>
+			</div>
 		</div>
-	</div>
-	<!--Formulario de pago-->
-
-	<div class="row">
-		<div class="col-md-8 d-block m-auto">
-			<form th:action="@{/productlines-guardar}" method="POST" type="text"
-				th:object="${payments}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
-
-				<div class="row d-flex justify-content-center">
-					<div class="form-group col-md-5">
-						<label for="customerNumber">Numero de cliente<i
-								class="far fa-keyboard text-light ml-2"></i></label>
-						<textarea th:field="*{customerNumber}" class="form-control" id="customerNumber"
-							rows="3"></textarea>
+		<!--Formulario de pago-->
+					<div class="row">
+						<div class="col-md-8 d-block m-auto">
+							<form th:action="@{/pago-guardar}" method="POST" type="text"
+								th:object="${payments}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+				
+								<div class="row d-flex justify-content-center">
+									<div class="form-group col-md-5">
+										<label for="customerNumber">Numero de cliente<i
+												class="far fa-keyboard text-light ml-2"></i></label>
+										<textarea th:field="*{customerNumber}" class="form-control" id="customerNumber"
+											rows="3"></textarea>
+									</div>
+									<div class="form-group col-md-5">
+										<label for="checkNumber">Verifquel número de cliente <i
+												class="far fa-keyboard text-light ml-2"></i></label>
+										<textarea th:field="*{checkNumber}" class="form-control" id="checkNumber"
+											rows="3"></textarea>
+									</div>
+				
+								</div>
+								<div class="row d-flex justify-content-center">
+				
+									<div class="form-group col-md-5">
+										<label for="paymentDate">Fecha de Pago</label>
+										<input th:field="*{paymentDate}" type="text" class="form-control" id="paymentDate">
+										<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}"></div>
+									</div>
+									<div class="form-group col-md-5">
+										<label for="paymentDate">Monto</label>
+										<input th:field="*{amount}" type="text" class="form-control" id="paymentDate">
+										<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+									</div>
+								</div>
+								<div class="row ml-5 pl-4">
+									<button type="submit" class="btn btn-primary">Guardar</button>
+								</div>
+							</form>
+						</div>
 					</div>
-					<div class="form-group col-md-5">
-						<label for="checkNumber">Verifquel número de cliente <i
-								class="far fa-keyboard text-light ml-2"></i></label>
-						<textarea th:field="*{checkNumber}" class="form-control" id="checkNumber"
-							rows="3"></textarea>
-					</div>
 
-				</div>
-				<div class="row d-flex justify-content-center">
-
-					<div class="form-group col-md-5">
-						<label for="paymentDate">Fecha de Pago</label>
-						<input th:field="*{paymentDate}" type="text" class="form-control" id="paymentDate">
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}"></div>
-					</div>
-					<div class="form-group col-md-5">
-						<label for="paymentDate">Monto</label>
-						<input th:field="*{amount}" type="text" class="form-control" id="paymentDate">
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
-					</div>
-				</div>
-				<div class="row ml-5 pl-4">
-					<button type="submit" class="btn btn-primary">Guardar</button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-
-
-	<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
-	<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
-	<script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
-
-</body>
+	
+		<!--   FOOTER    -->
+		<div th:replace="layouts/footer :: footer"></div>
+		
+		<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+		<script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+	
+	</body>
 </html>

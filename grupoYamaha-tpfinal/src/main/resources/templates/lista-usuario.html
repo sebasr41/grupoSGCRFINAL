@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +22,54 @@
 			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Lista de usuarios registrado</h1>
 		</div>
 	</div>
+<div class="col-md-10 d-block m-auto rounded">
+			<table class="table table-striped table-responsive-xl bg-pv--form text-light" style="margin-top: -3rem;">
+				<thead>
+					<tr>
+						<th>Numero de cuenta</th>
+						<th>Direccion 1</th>
+						<th>Direccion 2</th>		
+						<th>Ciudad </th>
+						<th>Nombre de contaco </th>		
+						<th>Apellido de contacto</th>
+						<th>Pais </th>
+						<th>Limite de credito</th>		
+						<th>Nombre de cliente</th>
+						<th>Telefono </th>
+						<th>Codigo Postal </th>		
+						<th>Estado</th>
+						<th>Numero de empleado</th>
+					</tr>
+				</thead>
+				<tbody>	
+					<tr th:each="cus : ${customer}">
+						<td th:text="${cus.customerNumber}"></td>
+						<td th:text="${cus.addressLine1}"></td>
+						<td th:text="${cus.addressLine1}"></td>
+						<td th:text="${cus.city}"></td>
+						<td th:text="${cus.contactFirstName}"></td>
+						<td th:text="${cus.contactLastName}"></td>
+						<td th:text="${cus.state}"></td>
+						<td th:text="${cus.creditLimit}"></td>
+						<td th:text="${cus.customerName}"></td>
+						<td th:text="${cus.phone}"></td>
+						<td th:text="${cus.postalCode}"></td>
+						<td th:text="${cus.country}"></td>
+						<td th:text="${cus.customerNumber}"></td>
+						<td th:text="${cus.checkNumber}"></td>
+						<td th:text="${cus.employenumber}"></td>
+						<td th:text="${cus.amount}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>	
+	<!--   FOOTER    -->
+	<div th:replace="layouts/footer :: footer"></div>
+	
+
+
+
+
 
 	<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
 	<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>

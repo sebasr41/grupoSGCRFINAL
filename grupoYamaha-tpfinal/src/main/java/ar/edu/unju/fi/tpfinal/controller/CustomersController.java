@@ -31,8 +31,6 @@ import ar.edu.unju.fi.tpfinal.service.imp.CustomersServiceImp;
 @Controller
 public class CustomersController {
 	
-
-
 @Autowired
 private Customers customers;
 

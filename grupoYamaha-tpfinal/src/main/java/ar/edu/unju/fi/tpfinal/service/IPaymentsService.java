@@ -5,17 +5,16 @@ import java.util.Optional;
 
 
 import ar.edu.unju.fi.tpfinal.model.Payments;
-import ar.edu.unju.fi.tpfinal.model.PaymentsId;
+
 
 public interface IPaymentsService {
 
-	public void guardarPayments(Payments payments);
-
-	public void eliminarPayments(PaymentsId id);
+	public Payments guardarPayments(Payments payments);
 
 	public List<Payments> obtenerPayments();
 
-	public Optional<Payments> getPaymentsPorId(PaymentsId id);
-
+	public Optional<Payments> obtenerPaymentsPorId(String id);
+	
+	public void eliminarPayments(String id);
 
 }
