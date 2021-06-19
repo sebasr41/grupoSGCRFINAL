@@ -10,11 +10,11 @@ public interface IPaymentsService {
 
 	public void guardarPayments(Payments payments);
 
-	public void eliminarPayments(Long id);
+	public void eliminarPayments(String id);
 
 	public List<Payments> obtenerPayments();
 
-	public Optional<Payments> getPaymentsPorId(Long id);
+	public Optional<Payments> getPaymentsPorId(String id);
 
 
 }
