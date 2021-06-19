@@ -48,6 +48,7 @@ public class OfficesController {
 		}
 		
 		else {
+			System.out.println(offices);
 			 modelView = new ModelAndView("lista-oficina");
 		officesService.guardarOffices(offices);
 		modelView.addObject("productos", officesService.obtenerOffices());

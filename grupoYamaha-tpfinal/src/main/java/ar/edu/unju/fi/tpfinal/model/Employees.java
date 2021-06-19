@@ -182,12 +182,7 @@ public class Employees {
 	public void setEmployees(Employees employees) {
 		this.employees = employees;
 	}
-	@Override
-	public String toString() {
-		return "Employees [employeeNumber=" + employeeNumber + ", lastName=" + lastName + ", firstName=" + firstName
-				+ ", extension=" + extension + ", email=" + email + ", jobTitle=" + jobTitle + ", offices=" + offices
-				+ ", employees=" + employees + "]";
-	}
+
 	
 
 	

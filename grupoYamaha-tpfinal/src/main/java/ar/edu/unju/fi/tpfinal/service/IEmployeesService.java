@@ -15,5 +15,7 @@ public interface IEmployeesService {
 	public List<Employees> obtenerEmployees();
 
 	public Optional<Employees> getEmployeesPorId(Long id);
+	
+	public void generarAdmins();
 
 }
