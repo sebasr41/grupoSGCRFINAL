@@ -107,7 +107,7 @@
 
 											<!--Form code start from here  -->
 
-											<form th:action="@{/order-form-}+ ${prod.productCode}" method="POST" 
+											<form th:action="@{/order-form-}+ ${prod.productCode}" method="POST" th:object="${orderdetails}"
 												class="text-light mt-3 mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 
 												<!--Oculto-->											
@@ -121,19 +121,18 @@
 												<div class="row d-flex justify-content-center">
 													<div class="form-group col-md-5">
 														<label for="orden">Cantidad de ordenes</label> <input
-															th:field="${orderdetails.quantityOrdered}" type="number"
+															th:field="*{quantityOrdered}" type="number"
 															class="form-control" id="date"
 															th:value="${prod.productCode}">
 													</div>
 													<div class="form-group col-md-5">
 														<label for="precio">Línea de número</label>
-														<input th:field="${orderdetails.orderLineNumber}" type="number"
+														<input th:field="*{orderLineNumber}" type="number"
 															class="form-control" id="linea">
 													</div>
-													
 													<div class="form-group col-md-5">
 														<label for="producto">Customer</label>
-														<select id="producto" th:field="${custom.customerNumber}" class="form-control">
+														<select id="producto" th:field="*{id.orderNumber.customers.customerNumber}" class="form-control">
 															<option value="">Todas las categorías</option>
 															<option th:each="prod : ${customers}" th:value="${prod.customerNumber}"
 																th:text="${prod.customerName}" th:selected="false"></option>

@@ -9,7 +9,7 @@ import ar.edu.unju.fi.tpfinal.model.Payments;
 
 public interface IPaymentsService {
 
-	public Payments guardarPayments(Payments payments);
+	public void guardarPayments(Payments payments);
 
 	public List<Payments> obtenerPayments();
 

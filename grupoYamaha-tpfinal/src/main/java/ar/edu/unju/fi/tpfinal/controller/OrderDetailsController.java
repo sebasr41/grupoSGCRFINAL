@@ -21,10 +21,13 @@ import ar.edu.unju.fi.tpfinal.model.Customers;
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
 import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 import ar.edu.unju.fi.tpfinal.model.Orders;
+import ar.edu.unju.fi.tpfinal.model.Payments;
+import ar.edu.unju.fi.tpfinal.model.PaymentsId;
 import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
+import ar.edu.unju.fi.tpfinal.service.IPaymentsService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 @Controller
 public class OrderDetailsController {
@@ -39,14 +42,15 @@ public class OrderDetailsController {
 	@Autowired
 	private OrderDetailsId oID;
 	
+	@Autowired
+	private ICustomersService customerService;
+	
+	//@Autowired
+	//private IPaymentsService paymentService;
 	
 	
 	@Autowired
 	private IProductsService productsService;
-	
-	@Autowired
-	private ICustomersService customerService;
-	
 	@Autowired
 	private Orders orders;
 	@Autowired
@@ -84,34 +88,40 @@ public class OrderDetailsController {
 	}
 
 	@PostMapping("/order-form-{id}")
-	public ModelAndView OrderDetailsPage(@PathVariable (value = "id") String id, @ModelAttribute("orderdetails") OrderDetails orderdetails, @ModelAttribute("custom") Customers customerF, BindingResult resultadoValidacion){
+	public ModelAndView OrderDetailsPage(@PathVariable (value = "id") String id,@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
 		//////// validation
 		ModelAndView modelView;
 		System.out.println("orderDetails llllllllllllllllllllllll:"+orderdetails);
 
-
+			
 			
 			 LocalDate hoy = LocalDate.now();
 			 orders.setOrderDate(hoy);
 			 Random r = new Random(); 
 			 
-			 Optional<Customers> customer= customerService.getCustomersPorId(customerF.getCustomerNumber());
-			 customer.ifPresent(orders::setCustomers);
+			 Optional<Customers> custom = customerService.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
+			 PaymentsId payid=null;
+			 payid.setCustomerNumber(custom.get());
+			 Payments pay = null;
+			 
+			 
+			 custom.ifPresent(orders::setCustomers);
 			 orders.setShippedDate(hoy.plusDays(r.nextInt(10)));
 			 orders.setRequiredDate(orders.getShippedDate().plusDays(10));
 			 orders.setStatus("Procesando");
-			 System.out.println("lllllllllll"+orders);
+			 
 			Optional<Products> products = productsService.obtenerProductsPorId(id);
 			products.ifPresent(oID::setProductCode);
 			oID.setOrderNumber(orderService.guardarOrders(orders));
 			orderdetails.setId(oID);
-			//orders = orderdetails.getOrders();
 			modelView = new ModelAndView("redirect:/order-list");
-			//orders.setOrderDetails(orderdetails);
-			// orderdetails.setOrders(null);
-			 //products.ifPresent(orderdetails::setProducts);
+			
 			Products precio = products.get();
 			orderdetails.setPriceEach(precio.getBuyPrice());
+			pay.setAmount(orderdetails.getQuantityOrdered()* orderdetails.getPriceEach());
+			pay.setPaymentDate(hoy.plusDays(r.nextInt(7)));
+			pay.setId(payid);
+			//paymentService.guardarPayments(pay);
 			 
 			 
 			orderdetailsService.guardarOrderDetails(orderdetails);

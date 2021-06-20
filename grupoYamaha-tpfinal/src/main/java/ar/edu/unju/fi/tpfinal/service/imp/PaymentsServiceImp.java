@@ -17,9 +17,9 @@ public class PaymentsServiceImp implements IPaymentsService{
 	private IPaymentsRepository paymentsRepository;
 
 	@Override
-	public Payments guardarPayments(Payments payments) {
+	public void guardarPayments(Payments payments) {
 		// TODO Auto-generated method stub
-		return paymentsRepository.save(payments);
+		 paymentsRepository.save(payments);
 	}
 
 	@Override
