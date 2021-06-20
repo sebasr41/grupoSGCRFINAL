@@ -14,50 +14,46 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.stereotype.Component;
 
 import ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator;
 
-
+@Component
 @Entity
 @Table(name="PAYMENTS")
 public class Payments implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+	@Id
 	@EmbeddedId //Indica que es integrada como clave primaria
 	private PaymentsId id;
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pay_seq")
-    @GenericGenerator(name = "pay_seq",
-    strategy = "ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator",
-    parameters = {
-            @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
-            @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "SGRC_"),
-            @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%04d") })
-	@Column(name="pay_checknumber", nullable = false)//varchar clave principal
-	private String checkNumber;
 	
 	
-	@Column(name="pay_paymentdate", nullable = false)
+	
+	@Column(name="pay_paymentdate")
 	private LocalDate paymentDate;
 	
-	@Column(name="pay_amount",scale = 2, nullable = false)
+	@Column(name="pay_amount")
 	private double amount;
 		
 	public Payments() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
-	public Payments(PaymentsId id, @NotNull String checkNumber, @NotNull LocalDate paymentDate,
-			@NotNull double amount) {
+	public Payments(PaymentsId id, LocalDate paymentDate, double amount) {
 		super();
 		this.id = id;
-		this.checkNumber = checkNumber;
 		this.paymentDate = paymentDate;
 		this.amount = amount;
 	}
+
+
+
+
 
 	public PaymentsId getId() {
 		return id;
@@ -67,13 +63,7 @@ public class Payments implements Serializable{
 		this.id = id;
 	}
 
-	public String getCheckNumber() {
-		return checkNumber;
-	}
 
-	public void setCheckNumber(String checkNumber) {
-		this.checkNumber = checkNumber;
-	}
 
 	public LocalDate getPaymentDate() {
 		return paymentDate;
@@ -97,7 +87,7 @@ public class Payments implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Payments [id=" + id + ", checkNumber=" + checkNumber + ", paymentDate=" + paymentDate + ", amount="
+		return "Payments [id=" + id + ", paymentDate=" + paymentDate + ", amount="
 				+ amount + "]";
 	}
 

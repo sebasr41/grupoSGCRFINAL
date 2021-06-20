@@ -27,7 +27,7 @@ import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
-import ar.edu.unju.fi.tpfinal.service.IPaymentsService;
+import ar.edu.unju.fi.tpfinal.service.IPaymenService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 @Controller
 public class OrderDetailsController {
@@ -45,8 +45,8 @@ public class OrderDetailsController {
 	@Autowired
 	private ICustomersService customerService;
 	
-	//@Autowired
-	//private IPaymentsService paymentService;
+	@Autowired
+	private IPaymenService paymentService;
 	
 	
 	@Autowired
@@ -100,9 +100,8 @@ public class OrderDetailsController {
 			 Random r = new Random(); 
 			 
 			 Optional<Customers> custom = customerService.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
-			 PaymentsId payid=null;
-			 payid.setCustomerNumber(custom.get());
-			 Payments pay = null;
+			 PaymentsId payid = new PaymentsId(custom.get());
+			 
 			 
 			 
 			 custom.ifPresent(orders::setCustomers);
@@ -118,10 +117,9 @@ public class OrderDetailsController {
 			
 			Products precio = products.get();
 			orderdetails.setPriceEach(precio.getBuyPrice());
-			pay.setAmount(orderdetails.getQuantityOrdered()* orderdetails.getPriceEach());
-			pay.setPaymentDate(hoy.plusDays(r.nextInt(7)));
-			pay.setId(payid);
-			//paymentService.guardarPayments(pay);
+			Payments pay = new Payments(payid,hoy.plusDays(r.nextInt(7)), orderdetails.getQuantityOrdered()* orderdetails.getPriceEach());
+			
+			paymentService.guardarPayment(pay);
 			 
 			 
 			orderdetailsService.guardarOrderDetails(orderdetails);
