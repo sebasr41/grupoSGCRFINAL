@@ -25,13 +25,6 @@ public class PaymentsId implements Serializable{
 	@JoinColumn(name = "customer_number")
 	private Customers customerNumber;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pay_seq")
-    @GenericGenerator(name = "pay_seq",
-    strategy = "ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator",
-    parameters = {
-            @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
-            @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "SGRC_"),
-            @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%04d") })
 	@Column(name="pay_checknumber")//varchar clave principal
 	private String checkNumber;
 	
@@ -39,10 +32,14 @@ public class PaymentsId implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public PaymentsId(Customers customerNumber) {
+	
+
+	public PaymentsId(Customers customerNumber, String checkNumber) {
 		super();
 		this.customerNumber = customerNumber;
+		this.checkNumber = checkNumber;
 	}
+
 
 
 	public Customers getCustomerNumber() {

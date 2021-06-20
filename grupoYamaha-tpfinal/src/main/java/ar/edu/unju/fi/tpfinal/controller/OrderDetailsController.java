@@ -100,7 +100,7 @@ public class OrderDetailsController {
 			 Random r = new Random(); 
 			 
 			 Optional<Customers> custom = customerService.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
-			 PaymentsId payid = new PaymentsId(custom.get());
+			 PaymentsId payid = new PaymentsId(custom.get(),"ASD");
 			 
 			 
 			 

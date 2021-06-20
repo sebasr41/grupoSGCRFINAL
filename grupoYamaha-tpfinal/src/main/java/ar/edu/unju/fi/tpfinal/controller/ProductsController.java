@@ -27,6 +27,7 @@ import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
+import ar.edu.unju.fi.tpfinal.service.IPaymenService;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 
@@ -43,6 +44,9 @@ public class ProductsController {
 
 	@Autowired
 	private IOrdersService orderService;
+	
+	@Autowired
+	private IPaymenService paymentService;
 	
 	@Autowired
 	private Customers custom;
@@ -119,6 +123,8 @@ public class ProductsController {
 		model.addObject("orderdetails", orderdetails);
 		model.addObject("customers", customerService.obtenerCustomers());
 		model.addObject("custom", custom);
+		
+		
 		
 		
 		
