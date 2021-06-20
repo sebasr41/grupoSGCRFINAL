@@ -2,6 +2,8 @@ package ar.edu.unju.fi.tpfinal.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,35 +18,35 @@ import org.springframework.stereotype.Component;
 @Table(name="CUSTOMERS")
 public class Customers {
 	
-	@NotNull
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cust_numero", nullable = false)//le pongo id
 	private Long customerNumber;//int clave principal
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_customername",length = 50, nullable = false)
 	private String customerName;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_contactlastname",length = 50, nullable = false)
 	private String contactLastName;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_contactfirstname",length = 50, nullable = false)
 	private String contactFirstName;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_phone",length = 50, nullable = false)
 	private String phone;//es varchar es la variable
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_addressLine1",length = 50, nullable = false)
 	private String addressLine1;
 	
 	@Column(name = "cust_addressLine2",length = 50)
 	private String addressLine2;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_city",length = 50, nullable = false)
 	private String city;
 	
@@ -54,7 +56,7 @@ public class Customers {
 	@Column(name = "cust_postalCode",length = 15)
 	private String postalCode;
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "cust_coutry",length = 50, nullable = false)
 	private String coutry;
 	

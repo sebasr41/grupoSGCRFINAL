@@ -20,11 +20,11 @@ public class Payments implements Serializable{
 	@EmbeddedId //Indica que es integrada como clave primaria
 	private PaymentsId id;
 	
-	@NotNull
+	
 	@Column(name="pay_paymentdate", nullable = false)
 	private LocalDate paymentDate;
 	
-	@NotNull
+	
 	@Column(name="pay_amount",scale = 2, nullable = false)
 	private double amount;
 		
@@ -39,7 +39,7 @@ public class Payments implements Serializable{
 	 * @param paymentDate
 	 * @param amount
 	 */
-	public Payments(PaymentsId id, @NotNull LocalDate paymentDate, @NotNull double amount) {
+	public Payments(PaymentsId id,  LocalDate paymentDate,  double amount) {
 		super();
 		this.id = id;
 		this.paymentDate = paymentDate;

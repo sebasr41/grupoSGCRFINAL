@@ -24,15 +24,15 @@ public class OrderDetails implements Serializable{
 	@EmbeddedId //Indica que es integrada como clave primaria
 	private OrderDetailsId id;
 	
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese la cantidad del producto")
+	//@NotNull(message = "La casilla no debe quedar vacia, ingrese la cantidad del producto")
 	@Column(name = "orderDet_quantityOrdered")
 	private int quantityOrdered;
 	
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio del producto")
+	//@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio del producto")
 	@Column(name = "orderDet_priceEach", scale = 2)
 	private double priceEach;
 	
-	@NotNull(message = "La casilla no debe quedar vacia")
+	//@NotNull(message = "La casilla no debe quedar vacia")
 	@Column(name = "orderDet_orderLineNumber")
 	private int orderLineNumber;//smallint
 	 

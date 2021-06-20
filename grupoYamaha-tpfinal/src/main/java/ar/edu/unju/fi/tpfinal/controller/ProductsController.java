@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.tpfinal.model.Customers;
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
 import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 import ar.edu.unju.fi.tpfinal.model.Orders;
 import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
@@ -43,10 +45,16 @@ public class ProductsController {
 	private IOrdersService orderService;
 	
 	@Autowired
+	private Customers custom;
+	
+	@Autowired
 	private IOrderDetailsService orderDetailsService;
 
 	@Autowired
 	private IProductLinesService productslinesService;
+	
+	@Autowired
+	private ICustomersService customerService;
 	
 	
 	@Autowired
@@ -109,6 +117,11 @@ public class ProductsController {
 		model.addObject("productslines", productslinesService.obtenerProductLines());
 		//New
 		model.addObject("orderdetails", orderdetails);
+		model.addObject("customers", customerService.obtenerCustomers());
+		model.addObject("custom", custom);
+		
+		
+		
 		
 		return model;
 	

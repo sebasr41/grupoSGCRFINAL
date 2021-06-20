@@ -49,7 +49,7 @@ public class Orders {
 	}
 
 	public Orders(Long orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
-			String status, String comments) {
+			String status, String comments,Customers customers) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderDate = orderDate;
@@ -57,7 +57,7 @@ public class Orders {
 		this.shippedDate = shippedDate;
 		this.status = status;
 		this.comments = comments;
-		//this.customers = customers;
+		this.customers = customers;
 	}
 
 	public Long getOrderNumber() {
@@ -110,11 +110,20 @@ public class Orders {
 
 
 
+	public Customers getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(Customers customers) {
+		this.customers = customers;
+	}
+
 	@Override
 	public String toString() {
 		return "Orders [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
 				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customers="
-				+ "]";
+				+ customers + "]";
 	}
 
+	
 }
