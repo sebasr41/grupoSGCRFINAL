@@ -10,7 +10,7 @@
 	<link th:rel="stylesheet" th:href="@{css/styles.css}">
 	<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
 	<link rel="shortcut icon" href="img/favicon.png" />
-	<title>Lista de Customers</title>
+	<title>Lista de clientes</title>
 </head>
 
 <body class="body-gam">
@@ -19,6 +19,11 @@
 
 	<!--   NAV WITH TABS    -->
 	<div th:replace="layouts/nav-tabs :: div"></div>
+	
+	<div class="alert alert-success alert-dismissable" th:if="${success != null}">
+			<label th:text="${success}"></label>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
 
 	<div class="container mb-5">
 		<div class="show-case-2">
@@ -42,6 +47,8 @@
 					<th>Código Postal </th>
 					<th>País </th>					
 					<th>Número de empleado</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,6 +66,12 @@
 					<td th:text="${cus.postalCode}"></td>
 					<td th:text="${cus.coutry}"></td>					
 					<td th:text="${cus.employees.employeeNumber}"></td>
+					<td>
+					<a th:href="@{/customer-editar-} + ${cus.customerNumber}" class="btn btn-warning px-4"><i class="fas fa-edit text-light"></i></a>
+					</td>
+					<td>
+					<a th:href="@{/customer-eliminar-} + ${cus.customerNumber}" class="btn btn-danger px-4"><i class="fas fa-trash-alt text-light"></i></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

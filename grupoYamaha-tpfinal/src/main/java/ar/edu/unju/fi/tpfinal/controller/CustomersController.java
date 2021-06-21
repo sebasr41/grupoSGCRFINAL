@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Customers;
 import ar.edu.unju.fi.tpfinal.model.Employees;
@@ -75,6 +77,23 @@ public class CustomersController {
 
 		return model;
 
+	}
+	
+	@GetMapping("/customer-editar-{id}")
+	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
+		ModelAndView modelView = new ModelAndView("nuevo-usuario");
+		Optional<Customers> customers = customersService.getCustomersPorId(id);
+		modelView.addObject("customers", customers);
+		
+		return modelView;
+	}
+	
+	@GetMapping("/customer-eliminar-{id}")
+	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
+		ModelAndView modelView = new ModelAndView("redirect:/customer-list");
+		customersService.eliminarCustomers(id);
+		attribute.addFlashAttribute("success", "El cliente ha sido eliminado con éxito");
+		return modelView;
 	}
 
 }
