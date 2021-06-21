@@ -3,6 +3,7 @@ package ar.edu.unju.fi.tpfinal.controller;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -86,7 +87,12 @@ public class OrderDetailsController {
 		return model;
 	
 	}
-
+	
+	public static String generateString() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid;
+    }
+	
 	@PostMapping("/order-form-{id}")
 	public ModelAndView OrderDetailsPage(@PathVariable (value = "id") String id,@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion){
 		//////// validation
@@ -100,7 +106,7 @@ public class OrderDetailsController {
 			 Random r = new Random(); 
 			 
 			 Optional<Customers> custom = customerService.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
-			 PaymentsId payid = new PaymentsId(custom.get(),"ASD");
+			 PaymentsId payid = new PaymentsId(custom.get(),generateString());
 			 
 			 
 			 
