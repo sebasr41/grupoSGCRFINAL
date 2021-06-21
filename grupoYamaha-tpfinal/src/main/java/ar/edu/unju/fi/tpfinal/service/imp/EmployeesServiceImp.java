@@ -60,30 +60,30 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ1.setEmail("cristianmichel33@gmail.com");
 			employ1.setFirstName("Cristian");
 			employ1.setLastName("Michel");
-			employ1.setJobTitle("The Boss");
+			employ1.setJobTitle("Boss");
 			employ1.setEmployees(null);
 			employeesRepository.save(employ1);
 			
-			employ2.setEmail("roxanayvbenicio@gmail.com");
-			employ2.setFirstName("Roxana");
-			employ2.setLastName("Benicio");
-			employ2.setJobTitle("Admin");
-			employ2.setEmployees(employ1);
-			employeesRepository.save(employ2);
+			employ4.setEmail("roxanayvbenicio@gmail.com");
+			employ4.setFirstName("Roxana");
+			employ4.setLastName("Benicio");
+			employ4.setJobTitle("Admin");
+			employ4.setEmployees(employ1);
+			employeesRepository.save(employ4);
 			
 			employ3.setEmail("gabi@gmail.com");
 			employ3.setFirstName("Gabriel");
 			employ3.setLastName("Mamani");
-			employ3.setJobTitle("Admin");
+			employ3.setJobTitle("Marketing Director");
 			employ3.setEmployees(employ1);
 			employeesRepository.save(employ3);
 			
-			employ4.setEmail("seba@gmail.com");
-			employ4.setFirstName("Seba");
-			employ4.setLastName("Rojas");
-			employ4.setJobTitle("Jefe");
-			employ4.setEmployees(employ3);
-			employeesRepository.save(employ4);
+			employ2.setEmail("SebasR432@gmail.com");
+			employ2.setFirstName("Seba");
+			employ2.setLastName("Rojas");
+			employ2.setJobTitle("Deputy Chief");
+			employ2.setEmployees(employ1);
+			employeesRepository.save(employ2);
 			
 			employ5.setEmail("fulano33@gmail.com");
 			employ5.setFirstName("Anastasio");

@@ -55,7 +55,7 @@ public class CustomersController {
 		}
 
 		else {
-			ModelAndView model = new ModelAndView("redirect:/customer-list");
+			ModelAndView model = new ModelAndView("customer-list");
 
 			Optional<Employees> employees = employeesService
 					.getEmployeesPorId(customers.getEmployees().getEmployeeNumber());
