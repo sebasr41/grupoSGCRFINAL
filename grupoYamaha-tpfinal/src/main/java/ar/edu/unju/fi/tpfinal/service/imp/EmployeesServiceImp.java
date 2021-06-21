@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpfinal.model.Employees;
+import ar.edu.unju.fi.tpfinal.model.Offices;
 import ar.edu.unju.fi.tpfinal.repository.IEmployeesRepository;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
+import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 
 @Service
 
@@ -16,6 +18,9 @@ public class EmployeesServiceImp  implements IEmployeesService{
 
 	@Autowired
 	private IEmployeesRepository employeesRepository;
+	
+	@Autowired
+	private IOfficesService officeService;
 	
 	
 	
@@ -51,6 +56,11 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			List<Employees> employs = (List<Employees>) employeesRepository.findAll();
 		
 		if(employs.isEmpty()) {
+			
+			Offices oficina = new Offices();
+			oficina.setCity("S.S Jujuy");
+			oficina = officeService.guardarOffices(oficina);
+			
 			Employees employ1 = new Employees();
 			Employees employ2 = new Employees();
 			Employees employ3 = new Employees();
@@ -61,7 +71,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ1.setFirstName("Cristian");
 			employ1.setLastName("Michel");
 			employ1.setJobTitle("Boss");
-			employ1.setEmployees(null);
+			employ1.setOffices(oficina);
 			employeesRepository.save(employ1);
 			
 			employ4.setEmail("roxanayvbenicio@gmail.com");
@@ -69,6 +79,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ4.setLastName("Benicio");
 			employ4.setJobTitle("Admin");
 			employ4.setEmployees(employ1);
+			employ4.setOffices(oficina);
 			employeesRepository.save(employ4);
 			
 			employ3.setEmail("gabi@gmail.com");
@@ -76,6 +87,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ3.setLastName("Mamani");
 			employ3.setJobTitle("Marketing Director");
 			employ3.setEmployees(employ1);
+			employ3.setOffices(oficina);
 			employeesRepository.save(employ3);
 			
 			employ2.setEmail("SebasR432@gmail.com");
@@ -83,6 +95,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ2.setLastName("Rojas");
 			employ2.setJobTitle("Deputy Chief");
 			employ2.setEmployees(employ1);
+			employ2.setOffices(oficina);
 			employeesRepository.save(employ2);
 			
 			employ5.setEmail("fulano33@gmail.com");
@@ -90,6 +103,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ5.setLastName("Pancrasio");
 			employ5.setJobTitle("SubAdmin");
 			employ5.setEmployees(employ2);
+			employ5.setOffices(oficina);
 			employeesRepository.save(employ5);
 			
 			
@@ -101,5 +115,6 @@ public class EmployeesServiceImp  implements IEmployeesService{
 		
 		
 	}
+
 
 }

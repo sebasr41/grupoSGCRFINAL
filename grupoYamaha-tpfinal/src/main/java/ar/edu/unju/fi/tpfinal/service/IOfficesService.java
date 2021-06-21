@@ -7,7 +7,7 @@ import ar.edu.unju.fi.tpfinal.model.Offices;
 
 public interface IOfficesService {
 
-	public void guardarOffices(Offices offices);
+	public Offices guardarOffices(Offices offices);
 
 	public void eliminarOffices(Long id);
 

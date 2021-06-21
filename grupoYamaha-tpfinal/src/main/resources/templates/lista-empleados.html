@@ -33,7 +33,7 @@
 		<div class="col-md-10 d-block m-auto rounded">
 			<table class="table table-striped table-responsive-xl bg-pv--form text-light" style="margin-top: -3rem;">
 				<thead>
-					<tr>
+				<tr>
 						<th>Id</th>
 						<th>Apellido</th>
 						<th>Nombre</th>				
@@ -45,14 +45,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="emp : ${employees}">
+					<tr th:each="emp : ${employeeslist}">
 						<td th:text="${emp.employeeNumber}"></td>
 						<td th:text="${emp.lastName}"></td>
 						<td th:text="${emp.firstName}"></td>
 						<td th:text="${emp.extension}"></td>
 						<td th:text="${emp.email}"></td>
 						<td th:text="${emp.offices.officeCode}"></td>
-						<td th:text="${emp.employees.employeeNumber}"></td>
+						<td th:text="${emp?.employees?.employeeNumber}"></td>
 						<td th:text="${emp.jobTitle}"></td>						
 					</tr>
 				</tbody>

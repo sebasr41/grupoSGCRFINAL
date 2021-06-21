@@ -14,9 +14,9 @@ public class OfficesServiceImp implements IOfficesService {
     @Autowired
     private IOfficesRepository officesRepository;
 	@Override
-	public void guardarOffices(Offices offices) {
+	public Offices guardarOffices(Offices offices) {
 		// TODO Auto-generated method stub
-		officesRepository.save(offices);
+		return officesRepository.save(offices);
 	}
 
 	@Override
@@ -36,5 +36,4 @@ public class OfficesServiceImp implements IOfficesService {
 		Optional<Offices> offices = officesRepository.findById(id);
 		return offices;
 	}
-
 }

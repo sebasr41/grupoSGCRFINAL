@@ -73,9 +73,7 @@ public class EmployeesController {
 
 			employeesService.guardarEmployees(employees);
 
-			model.addObject("employeers", employeesService.obtenerEmployees());
-			model.addObject("employees", employees);
-			model.addObject("offices", officesService.obtenerOffices());
+			model.addObject("employees", employeesService.obtenerEmployees());
 
 			return model;
 
@@ -84,10 +82,9 @@ public class EmployeesController {
 	@GetMapping("/employees-list")
 	public ModelAndView getCustomerPage() {
 		ModelAndView model = new ModelAndView("lista-empleados");
-		model.addObject("employees", employeesService.obtenerEmployees());
-		model.addObject("employees", employees);
-		model.addObject("offices", officesService.obtenerOffices());
+		model.addObject("employeeslist", employeesService.obtenerEmployees());
 		return model;
 
+	
 	}
 }
