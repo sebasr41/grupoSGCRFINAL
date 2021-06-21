@@ -17,5 +17,7 @@ public interface IEmployeesService {
 	public Optional<Employees> getEmployeesPorId(Long id);
 	
 	public void generarAdmins();
+	
+	public List<Employees> obtenerEmployeesPorOfficeCode(Long officeCode);
 
 }

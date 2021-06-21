@@ -21,6 +21,10 @@
 	<!--   NAV WITH TABS    -->
 	<div th:replace="layouts/nav-tabs :: div"></div>
 
+<div class="alert alert-warning alert-dismissable" th:if="${warning != null}">
+			<label th:text="${warning}"></label>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
 	<div class="container">
 		<div class="show-case-2">
 			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Lista de oficinas</h1>
@@ -43,6 +47,8 @@
 						<th>País</th>
 						<th>Código postal</th>
 						<th>Territorio</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,6 +62,41 @@
 						<td th:text="${ofi.country}"></td>
 						<td th:text="${ofi.postalCode}"></td>
 						<td th:text="${ofi.territory}"></td>
+						<td><a th:href="@{/office-editar-} + ${ofi.officeCode}" class="btn btn-warning px-4"><i
+									class="fas fa-edit text-light"></i></a></td>
+						<td>
+
+							<!--Button trigger modal -->
+							<button type="button" class="btn btn-danger px-4" data-toggle="modal"
+								data-target="#myModal" th:attrappend="data-target='del'+${ofi.officeCode}">
+								<i class="fas fa-trash-alt text-light"></i>
+							</button>
+							<!-- Modal -->
+							<div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel"
+								aria-hidden="true" th:attrappend="id='del'+${ofi.officeCode}" id="myModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header body-gam">
+											<h5 class="modal-title" id="exampleModalLabel" th:text="'Advertencia'"></h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true" class="text-light">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body bg-pv--form">
+											<p th:text="'¿Seguro que desea eliminar el registro?'"></p>
+										</div>
+										<div class="modal-footer body-gam">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cancelar</button>
+											<a class="btn btn-primary"
+												th:href="@{/office-eliminar-} + ${ofi.officeCode}"
+												th:text="'Eliminar'" title="Eliminar registro"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</td>
 					</tr>
 				</tbody>
 			</table>
