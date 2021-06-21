@@ -116,5 +116,11 @@ public class EmployeesServiceImp  implements IEmployeesService{
 		
 	}
 
+	@Override
+	public List<Employees> obtenerEmployeesPorOfficeCode(Long officeCode) {
+		List<Employees> empleados = employeesRepository.findByOfficesOfficeCode(officeCode);
+		return empleados;
+	}
+
 
 }
