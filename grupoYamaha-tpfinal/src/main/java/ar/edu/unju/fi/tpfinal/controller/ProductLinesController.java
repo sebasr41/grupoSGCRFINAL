@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 
 @Controller
@@ -31,6 +32,8 @@ public class ProductLinesController {
 
 	@Autowired
 	private IProductLinesService productolinesService;
+	@Autowired
+	private Products products;
 
 	@GetMapping("/productlines")
 	public String getProductLinesPage(Model model) {
@@ -73,7 +76,7 @@ public class ProductLinesController {
 			productolinesService.guardarProductLines(productlines);
 			System.out.println(productlines.getImage());
 			modelView.addObject("productslines", productolinesService.obtenerProductLines());
-
+			modelView.addObject("product", products);
 			return modelView;
 		}
 	}
@@ -83,7 +86,7 @@ public class ProductLinesController {
 		ModelAndView model = new ModelAndView("lista-categoria");
 
 		model.addObject("productslines", productolinesService.obtenerProductLines());
-
+		model.addObject("product", products);
 		return model;
 
 	}
