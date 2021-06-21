@@ -117,6 +117,7 @@ public class OrderDetailsController {
 			 
 			Optional<Products> products = productsService.obtenerProductsPorId(id);
 			products.ifPresent(oID::setProductCode);
+			orders.setOrderNumber(null);
 			oID.setOrderNumber(orderService.guardarOrders(orders));
 			orderdetails.setId(oID);
 			modelView = new ModelAndView("redirect:/order-list");
@@ -127,7 +128,7 @@ public class OrderDetailsController {
 			
 			paymentService.guardarPayment(pay);
 			 
-			 
+			
 			orderdetailsService.guardarOrderDetails(orderdetails);
 			
 				
