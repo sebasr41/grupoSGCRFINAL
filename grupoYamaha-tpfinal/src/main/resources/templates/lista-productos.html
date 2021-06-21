@@ -208,12 +208,12 @@
 
 							<!--Button trigger modal -->
 							<button type="button" class="btn btn-danger px-4" data-toggle="modal"
-								data-target="#exampleModal">
+								data-target="#myModal" th:attrappend="data-target=${prod.productName}">
 								<i class="fas fa-trash-alt text-light"></i>
 							</button>
 							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-								aria-hidden="true">
+							<div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel"
+								aria-hidden="true" th:attrappend="id=${prod.productName}" id="myModal">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header body-gam">

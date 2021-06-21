@@ -101,9 +101,10 @@ public class ProductsController {
 	}
 
 	@GetMapping("/products-eliminar-{id}")
-	public ModelAndView getProductsEliminarPage(@PathVariable(value = "id") String id) {
+	public ModelAndView getProductsEliminarPage(@PathVariable(value = "id") String id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/products-list");
 		productsService.eliminarProducts(id);
+		attribute.addFlashAttribute("warning", "Vehículo eliminado con exito");
 		return modelView;
 	}
 
