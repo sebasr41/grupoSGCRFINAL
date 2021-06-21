@@ -20,18 +20,38 @@
 
 	<!--   NAV WITH TABS    -->
 	<div th:replace="layouts/nav-tabs :: div"></div>
+	
+		<!--MENSAJES-->
+		<div class="alert alert-success alert-dismissable" th:if="${success != null}">
+			<label th:text="${success}"></label>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		<div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+			<label th:text="${error}"></label>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		<div class="alert alert-warning alert-dismissable" th:if="${warning != null}">
+			<label th:text="${warning}"></label>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		<div class="alert alert-info alert-dismissable" th:if="${info != null}">
+			<label th:text="${info}"></label>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
 
 	<div class="container">
 		<div class="show-case-2">
 			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Nuestros vehículos</h1>
 		</div>
 	</div>
+
+	
 	<!--Formulario de busqueda -->
 	<div class="row">
 		<div class="col-md-8 d-block m-auto">
 
 			<form class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow" th:action="@{/products-busqueda}"
-				th:object="${product}"  th:method="POST">
+				th:object="${product}" th:method="POST">
 				<div class="row d-flex justify-content-center">
 
 					<div class="form-group col-md-5">
@@ -65,8 +85,8 @@
 				<thead>
 					<tr>
 						<th>Id Auto</th>
-						<th>Categoria</th>
-						<th>C. Descripcion</th>
+						<th>Categoría</th>
+						<th>C. Descripción</th>
 						<th>Nombre</th>
 						<th>Cantidad</th>
 						<th>Precio</th>
@@ -107,16 +127,16 @@
 
 											<!--Form code start from here  -->
 
-											<form th:action="@{/order-form-}+ ${prod.productCode}" method="POST" th:object="${orderdetails}"
+											<form th:action="@{/order-form-}+ ${prod.productCode}" method="POST"
+												th:object="${orderdetails}"
 												class="text-light mt-3 mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 
-												<!--Oculto-->											
-													<select id="producto" 
-														class="form-control d-none">
-														<option th:value="${prod}"
-															th:text="${prod.productCode}" th:selected="false">
-														</option>
-													</select>													
+												<!--Oculto-->
+												<select id="producto" class="form-control d-none">
+													<option th:value="${prod}" th:text="${prod.productCode}"
+														th:selected="false">
+													</option>
+												</select>
 												<!--Oculto-->
 												<div class="row d-flex justify-content-center">
 													<div class="form-group col-md-5">
@@ -131,30 +151,36 @@
 															class="form-control" id="linea">
 													</div>
 													<div class="form-group col-md-5">
-														<label for="producto">Customer</label>
-														<select id="producto" th:field="*{id.orderNumber.customers.customerNumber}" class="form-control">
-															<option value="">Todas las categorías</option>
-															<option th:each="prod : ${customers}" th:value="${prod.customerNumber}"
-																th:text="${prod.customerName}" th:selected="false"></option>
+														<label for="producto">Nombre del cliente</label>
+														<select id="producto"
+															th:field="*{id.orderNumber.customers.customerNumber}"
+															class="form-control">
+															<option value="">Seleccione</option>
+															<option th:each="cus : ${customers}"
+																th:value="${cus.customerNumber}"
+																th:text="${cus.customerName}" th:selected="false">
+															</option>
 														</select>
 													</div>
 
 												</div>
 												<div class="row d-flex justify-content-center">
 
-						
+
 												</div>
-												
+
 												<div class="row mt-3">
 													<div class="form-group col-md-12">
 														<div class="col mb-4">
 															<div class="card">
 																<div
 																	class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
-																	<h5 class="card-title" th:text="${prod.productName}">
+																	<h5 class="card-title"
+																		th:text=" 'Nombre: ' + ${prod.productName}">
 																	</h5>
 																	<p class="card-text"
-																		th:text="${prod.productDescription}"></p>
+																		th:text=" 'Descripción: ' + ${prod.productDescription}">
+																	</p>
 																</div>
 															</div>
 														</div>
@@ -164,22 +190,53 @@
 												<div class="row d-flex justify-content-between">
 													<button type="submit" class="btn btn-primary ml-5">Ordenar</button>
 													<button type="button" class="btn btn-light mr-5"
-													data-dismiss="modal">Cancelar</button>
+														data-dismiss="modal">Cancelar</button>
 												</div>
 											</form>
 
 
-										</div>									
+										</div>
 
 									</div>
 
 								</div>
-							</div>							
+							</div>
 						</td>
 						<td><a th:href="@{/products-editar-} + ${prod.productCode}" class="btn btn-warning px-4"><i
 									class="fas fa-edit text-light"></i></a></td>
-						<td><a th:href="@{/products-eliminar-} + ${prod.productCode}" class="btn btn-danger px-4"><i
-									class="fas fa-trash-alt text-light"></i></a></td>
+						<td>
+
+							<!--Button trigger modal -->
+							<button type="button" class="btn btn-danger px-4" data-toggle="modal"
+								data-target="#exampleModal">
+								<i class="fas fa-trash-alt text-light"></i>
+							</button>
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header body-gam">
+											<h5 class="modal-title" id="exampleModalLabel" th:text="'Advertencia'"></h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true" class="text-light">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body bg-pv--form">
+											<p th:text="'¿Seguro que desea eliminar el registro?'"></p>
+										</div>
+										<div class="modal-footer body-gam">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cancelar</button>
+											<a class="btn btn-primary"
+												th:href="@{/products-eliminar-} + ${prod.productCode}"
+												th:text="'Eliminar'" title="Eliminar registro"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</td>
 					</tr>
 				</tbody>
 			</table>

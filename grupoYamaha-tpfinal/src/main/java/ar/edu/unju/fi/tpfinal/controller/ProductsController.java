@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Customers;
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
@@ -53,7 +54,7 @@ public class ProductsController {
 
 	@PostMapping("/products-save")
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products") Products products,
-			BindingResult resultadoValidacion) {
+			BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-producto");
@@ -77,7 +78,8 @@ public class ProductsController {
 			model.addObject("products", productsService.obtenerProducts());
 			model.addObject("product", products);
 			model.addObject("productslines", productslinesService.obtenerProductLines());
-
+			attribute.addFlashAttribute("success", "Vehículo guardado con exito");
+			
 			return model;
 		}
 

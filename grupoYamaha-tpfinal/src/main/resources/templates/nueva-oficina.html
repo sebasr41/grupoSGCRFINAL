@@ -34,31 +34,38 @@
 						<input th:field="*{city}" type="text" class="form-control" id="ciudad">
 					</div>
 					<div class="form-group col-md-5">
-						<label for="telefono">Teléfono</label>
+						<label for="telefono">Teléfono <i class="fas fa-phone ml-2 text-light"></i></label>
 						<input th:field="*{phone}" type="number" class="form-control" id="telefono">
 					</div>
 				</div>
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="dirrecion1">Dirección 1 <i
-								class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="dirrecion1">Dirección 1 <i class="fas fa-map-marked-alt ml-2 text-light"></i></label>
 						<input th:field="*{addressLine1}" type="text" class="form-control" id="dirrecion1">
 					</div>
 					<div class="form-group col-md-5">
-						<label for="dirrecion2">Dirección 2 <i
-								class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+						<label for="dirrecion2">Dirección 2 <i class="fas fa-map-marked-alt ml-2 text-light"></i></label>
 						<input th:field="*{addressLine2}" type="text" class="form-control" id="dirrecion2">
 					</div>
-				</div>
+				</div>							
+				
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="provincia">Provincia</label>
-						<input th:field="*{state}" type="text" class="form-control" id="provincia">
+						<label for="pais">País <i class="fas fa-flag ml-2 text-light"></i></label>						
+						<select class="form-control" id="pais" th:field="*{country}">
+		                    <option value="" selected>Seleccione</option>
+		                    <option value="Argentina">Argentina</option>
+		                    <option value="Chile">Chile</option>
+		                    <option value="Bolivia">Bolivia</option>
+		                    <option value="Uruguay">Uruguay</option>
+		                    <option value="Brasil">Brasil</option>
+		                    <option value="Paraguay">Paraguay</option>
+	                	</select>
 					</div>
 
-					<div class="form-group col-md-5">
-						<label for="pais">País</label>
-						<input th:field="*{country}" type="text" class="form-control" id="pais">
+					<div class="form-group col-md-5">						
+						<label for="provincia">Provincia</label>	
+						<input th:field="*{state}" type="text" class="form-control" id="provincia">
 					</div>
 				</div>
 				<div class="row d-flex justify-content-center">
