@@ -14,6 +14,8 @@ public interface IOrderDetailsService {
 	public Optional<OrderDetails> obtenerOrderDetailsPorId(Long id);
 	
 	public void eliminarOrderDetails(Long id);
+	
+	public List<OrderDetails> obtenerOrderDetailsporProductCode(String productCode);
 
     
 }

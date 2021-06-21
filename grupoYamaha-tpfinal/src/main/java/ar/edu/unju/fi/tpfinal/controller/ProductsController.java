@@ -21,6 +21,7 @@ import ar.edu.unju.fi.tpfinal.model.OrderDetails;
 import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
+import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 
@@ -31,6 +32,9 @@ public class ProductsController {
 
 	@Autowired
 	private Customers custom;
+	
+	@Autowired
+	private IOrderDetailsService orderdetailsService;
 
 	@Autowired
 	private IProductLinesService productslinesService;
@@ -103,8 +107,18 @@ public class ProductsController {
 	@GetMapping("/products-eliminar-{id}")
 	public ModelAndView getProductsEliminarPage(@PathVariable(value = "id") String id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/products-list");
-		productsService.eliminarProducts(id);
-		attribute.addFlashAttribute("warning", "Vehículo eliminado con exito");
+		
+		if (orderdetailsService.obtenerOrderDetailsporProductCode(id).isEmpty()) {
+			productsService.eliminarProducts(id);
+			attribute.addFlashAttribute("warning", "Vehículo eliminado con exito");
+				
+		}else {
+			attribute.addFlashAttribute("warning", "No se puede eliminar, el vehículo ya tiene ordenes ");
+		}
+		
+		
+		
+		
 		return modelView;
 	}
 

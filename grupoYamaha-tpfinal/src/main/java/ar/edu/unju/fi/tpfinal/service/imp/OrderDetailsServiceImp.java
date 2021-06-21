@@ -43,5 +43,13 @@ public class OrderDetailsServiceImp implements IOrderDetailsService {
     
         orderDetailsRepository.deleteById(id);
     }
+
+	@Override
+	public List<OrderDetails> obtenerOrderDetailsporProductCode(String productCode) {
+		
+		List<OrderDetails> orderdetails = orderDetailsRepository.findByIdProductCodeProductCode(productCode);
+		
+		return orderdetails;
+	}
     
 }
