@@ -37,13 +37,21 @@ public class OfficesController {
 		return modelView;
 		}
 		else {
-			 modelView = new ModelAndView("lista-oficinas");
+			 modelView = new ModelAndView("lista-oficina");
 		officesService.guardarOffices(offices);
-		modelView.addObject("productos", officesService.obtenerOffices());
-		
+		modelView.addObject("offices", officesService.obtenerOffices());
 		return modelView;
 		
 		}
+		
+		}
+	@GetMapping("/offices-list")
+	public ModelAndView getOfficesPage() {
+		ModelAndView model = new ModelAndView("lista-oficina");
+		model.addObject("offices", officesService.obtenerOffices());
+	
+		return model;
+
 }
 	
 }

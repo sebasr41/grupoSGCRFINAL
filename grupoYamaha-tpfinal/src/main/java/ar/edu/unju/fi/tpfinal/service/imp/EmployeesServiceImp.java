@@ -81,7 +81,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ4.setEmail("seba@gmail.com");
 			employ4.setFirstName("Seba");
 			employ4.setLastName("Rojas");
-			employ4.setJobTitle("SubAdmin");
+			employ4.setJobTitle("Jefe");
 			employ4.setEmployees(employ3);
 			employeesRepository.save(employ4);
 			
