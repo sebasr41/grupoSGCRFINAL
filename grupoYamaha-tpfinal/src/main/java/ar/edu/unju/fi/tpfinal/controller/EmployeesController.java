@@ -16,8 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Employees;
 import ar.edu.unju.fi.tpfinal.model.Offices;
-import ar.edu.unju.fi.tpfinal.model.ProductLines;
-import ar.edu.unju.fi.tpfinal.model.Products;
+
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 
@@ -57,8 +56,7 @@ public class EmployeesController {
 				List<Offices> offices = officesService.obtenerOffices();
 				modelView.addObject("empleados", employees);
 				modelView.addObject("offices", offices);
-
-				
+			
 				return modelView;
 			
 				}
@@ -66,8 +64,7 @@ public class EmployeesController {
 				else {
 					
 				ModelAndView model = new ModelAndView("redirect:/products-list");
-				
-				
+							
 				Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
 				
 				offices.ifPresent(employees::setOffices);
