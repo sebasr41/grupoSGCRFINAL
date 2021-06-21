@@ -23,8 +23,8 @@ import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 @Controller
 
 public class EmployeesController {
-	
-	@Autowired 
+
+	@Autowired
 	private Employees employees;
 	@Autowired
 	private Offices offices;
@@ -32,7 +32,7 @@ public class EmployeesController {
 	private IEmployeesService employeesService;
 	@Autowired
 	private IOfficesService officesService;
-	
+
 	@GetMapping("/empleados")
 	public String getEmployeesPage(Model model) {
 		employeesService.generarAdmins();
@@ -40,47 +40,45 @@ public class EmployeesController {
 		model.addAttribute(offices);
 		model.addAttribute("employlist", employeesService.obtenerEmployees());
 
-		model.addAttribute("offices" , officesService.obtenerOffices());
-		
+		model.addAttribute("offices", officesService.obtenerOffices());
+
 		return "nuevo-empleado";
 	}
-	
-	
-	@PostMapping("/empleado-guardar")
-	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("employees") Employees employees, BindingResult resultadoValidacion){
-		
-		//
-		ModelAndView modelView;
-		if(resultadoValidacion.hasErrors()) {
-			modelView= new ModelAndView("nuevo-empleado"); 
-				List<Offices> offices = officesService.obtenerOffices();
-				modelView.addObject("empleados", employees);
-				modelView.addObject("offices", offices);
-			
-				return modelView;
-			
-				}
-				
-				else {
-					
-				ModelAndView model = new ModelAndView("redirect:/products-list");
-							
-				Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
-				
-				offices.ifPresent(employees::setOffices);
-				Optional<Employees> boss= employeesService.getEmployeesPorId(employees.getEmployees().getEmployeeNumber());
-				boss.ifPresent(employees::setEmployees);
-				
-				employeesService.guardarEmployees(employees);
-				
-				model.addObject("employeers", employeesService.obtenerEmployees());
-				model.addObject("employees",employees);
-				model.addObject("offices", officesService.obtenerOffices());
 
-				
-				return model;
-	
-				
-				}
+	@PostMapping("/empleado-guardar")
+	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("employees") Employees employees,
+			BindingResult resultadoValidacion) {
+
+		//validaciones  si hay error retorna el form
+		ModelAndView modelView;
+		if (resultadoValidacion.hasErrors()) {
+			modelView = new ModelAndView("nuevo-empleado");
+			List<Offices> offices = officesService.obtenerOffices();
+			modelView.addObject("empleados", employees);
+			modelView.addObject("offices", offices);
+
+			return modelView;
+
 		}
+
+		else {
+
+			ModelAndView model = new ModelAndView("redirect:/products-list");
+			Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
+		
+
+			offices.ifPresent(employees::setOffices);
+			Optional<Employees> boss = employeesService.getEmployeesPorId(employees.getEmployees().getEmployeeNumber());
+			boss.ifPresent(employees::setEmployees);
+
+			employeesService.guardarEmployees(employees);
+
+			model.addObject("employeers", employeesService.obtenerEmployees());
+			model.addObject("employees", employees);
+			model.addObject("offices", officesService.obtenerOffices());
+
+			return model;
+
+		}
+	}
 }

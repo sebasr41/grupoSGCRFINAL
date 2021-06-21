@@ -20,8 +20,6 @@ import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 public class OfficesController {
 	@Autowired
 	private Offices offices;
-	
-
 	@Autowired
 	private IOfficesService officesService;
 
@@ -48,7 +46,4 @@ public class OfficesController {
 		}
 }
 	
-
-	
-
 }

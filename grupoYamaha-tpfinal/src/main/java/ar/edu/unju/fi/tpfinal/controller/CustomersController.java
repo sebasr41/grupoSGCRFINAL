@@ -19,64 +19,62 @@ import ar.edu.unju.fi.tpfinal.model.Employees;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 
-
 @Controller
 public class CustomersController {
-	
+
 	@Autowired
 	private ICustomersService customersService;
-	
+
 	@Autowired
 	private IEmployeesService employeesService;
-	
-     @Autowired
-     private Customers customers;
 
+	@Autowired
+	private Customers customers;
 
-     @Autowired
-     private IEmployeesService employservice;
+	@Autowired
+	private IEmployeesService employservice;
 
+	@GetMapping("/crearusuario")
+	public String getCustomersPage(Model model) {
+		model.addAttribute("customers", customers);
+		model.addAttribute("employs", employservice.obtenerEmployees());
+		return "nuevo-usuario";
+	}
 
-@GetMapping("/crearusuario")
-public String getCustomersPage(Model model){
-	model.addAttribute("customers",customers);
-	model.addAttribute("employs",  employservice.obtenerEmployees());
-	return "nuevo-usuario";
-}
+	@PostMapping("/usuario-guardar")
+	public ModelAndView getGuardarCustomersPage(@Valid @ModelAttribute("customers") Customers customers,
+			BindingResult resultadoValidacion) {
+		ModelAndView modelView;
+		if (resultadoValidacion.hasErrors()) {
+			modelView = new ModelAndView("nuevo-usuario");
 
-@PostMapping("/usuario-guardar")
-public ModelAndView getGuardarCustomersPage(@Valid @ModelAttribute("customers")Customers customers, BindingResult resultadoValidacion) {
-	ModelAndView modelView;
-	if(resultadoValidacion.hasErrors()) {
-	modelView= new ModelAndView("nuevo-usuario"); 
-	
-	modelView.addObject("customers",customers);
-	modelView.addObject("employs",  employservice.obtenerEmployees());
-	return modelView;
+			modelView.addObject("customers", customers);
+			modelView.addObject("employs", employservice.obtenerEmployees());
+			return modelView;
+
+		}
+
+		else {
+			ModelAndView model = new ModelAndView("redirect:/customer-list");
+
+			Optional<Employees> employees = employeesService
+					.getEmployeesPorId(customers.getEmployees().getEmployeeNumber());
+			employees.ifPresent(customers::setEmployees);
+
+			customersService.guardarCustomers(customers);
+
+			return model;
+		}
 
 	}
-	
-	else {
-	ModelAndView model = new ModelAndView("redirect:/customer-list");
-	
-	Optional<Employees> employees = employeesService.getEmployeesPorId(customers.getEmployees().getEmployeeNumber());
-	employees.ifPresent(customers::setEmployees);
-		
-	customersService.guardarCustomers(customers);
-		
-	return model;
-	}		
-	
-}
 
-@GetMapping("/customer-list")
-public ModelAndView getComprasPage() {
-	ModelAndView model = new ModelAndView("lista-usuario");
-	model.addObject("customers", customersService.obtenerCustomers());
-		
-	return model;
+	@GetMapping("/customer-list")
+	public ModelAndView getComprasPage() {
+		ModelAndView model = new ModelAndView("lista-usuario");
+		model.addObject("customers", customersService.obtenerCustomers());
 
-}
+		return model;
 
+	}
 
 }
