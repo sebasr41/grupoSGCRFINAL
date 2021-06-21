@@ -53,7 +53,6 @@ public class OrderDetailsController {
 	@Autowired
 	private Orders orders;
 
-	@Autowired
 
 	@GetMapping("/orden-cancelar-{id}")
 	public ModelAndView getOrderCancellPage(@PathVariable(value = "id") Long id, Model model) {
