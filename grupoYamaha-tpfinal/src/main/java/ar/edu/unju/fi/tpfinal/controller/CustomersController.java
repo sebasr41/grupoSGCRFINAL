@@ -55,7 +55,7 @@ public class CustomersController {
 		}
 
 		else {
-			ModelAndView model = new ModelAndView("customer-list");
+			ModelAndView model = new ModelAndView("lista-usuario");
 
 			Optional<Employees> employees = employeesService
 					.getEmployeesPorId(customers.getEmployees().getEmployeeNumber());
