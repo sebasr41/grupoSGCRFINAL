@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
+import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 
 public interface IOrderDetailsService {
     	
@@ -11,9 +12,11 @@ public interface IOrderDetailsService {
 	
 	public List<OrderDetails> obtenerOrderDetails();
 	
-	public Optional<OrderDetails> obtenerOrderDetailsPorId(Long id);
+	public Optional<OrderDetails> obtenerOrderDetailsPorId(OrderDetailsId id);
 	
-	public void eliminarOrderDetails(Long id);
+	public void eliminarOrderDetails(OrderDetailsId OrderDetailsId);
+	
+	
 
     
 }
