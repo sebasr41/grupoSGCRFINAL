@@ -41,6 +41,48 @@ public class ProductLinesController {
 		model.addAttribute("productlines",productlines);
 		return "nueva-categoria";
     }
+	@PostMapping("/productlines-guardar")
+	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, @RequestParam("file") MultipartFile file, BindingResult resultadoValidacion) throws IOException{
+		
+		//////// validation
+		ModelAndView modelView;
+		//if(resultadoValidacion.hasErrors()) {
+		//modelView= new ModelAndView("nueva-categoria"); 
+		//return modelView;
+		//}
+		
+		//else {
+			 modelView = new ModelAndView("lista-categoria");
+			 if (!file.isEmpty()) {
+				//linux
+				 String rutaAbsoluta = "/home/mike47k/imagPvisual";	//directorioImagenes.toFile().getAbsolutePath();
+				
+				 
+				 ///grupoYamaha-tpfinal/src/main/resources/static/img
+				 //Path directorioImagenes = Paths.get("src//main//resources//static/img");
+				//String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+				
+				 
+				 
+				 
+				try {
+				byte[] bytesImg = file.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + file.getOriginalFilename());
+				Files.write(rutaCompleta, bytesImg);
+
+				productlines.setImage(file.getOriginalFilename());
+				} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
+			 productolinesService.guardarProductLines(productlines);
+			 System.out.println(productlines.getImage());
+		modelView.addObject("productslines", productolinesService.obtenerProductLines());
+		
+		return modelView;
+		//}
+	}
+    /*
 		@PostMapping("/productlines-guardar")
 		public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines, @RequestParam("file") MultipartFile image, BindingResult resultadoValidacion) throws IOException{
 			
@@ -83,7 +125,7 @@ public class ProductLinesController {
 			
 			return model;
 		
-		}
+		}*/
 		@GetMapping("/productolines-eliminar-{id}")
 		public ModelAndView getProductolinesEliminarPage(@PathVariable (value = "id")String id) {
 			//									redirect recarga la lista de cuentas
