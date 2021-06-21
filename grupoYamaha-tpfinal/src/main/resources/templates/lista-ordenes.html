@@ -30,11 +30,11 @@
 	<div class="row">
 		<!--Resultados-->
 		<!--Con bucle-->
-		<div class="col-md-10 d-block m-auto rounded">
+		<div class="col-md-10 d-block m-auto rounded" style="font-size: .9rem;">
 			<table class="table table-striped table-responsive-xl bg-pv--form text-light" style="margin-top: -3rem;">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>Id Prod</th>
 						<th>Producto</th>
 						<th>Precio</th>
 						<th>Cantidad</th>
@@ -42,13 +42,14 @@
 						<th>F. de Compra</th>
 						<th>F. Enviada</th>
 						<th>F. Requerida</th>
+						<th>Id Orden</th>
 						<th>Estado</th>
-						<th>Accion</th>
+						<th>Acción</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="font-size: .73rem;">
 					<tr th:each="orD : ${orderDetails}">
-						<td th:text="${orD.id.productCode.productCode}+'_'+${orD.id.orderNumber.orderNumber}"></td>
+						<td th:text="${orD.id.productCode.productCode}"></td>
 						<td th:text="${orD.id.productCode.productName}"></td>
 						<td th:text=" '$ ' + ${orD.priceEach}"></td>
 						<td th:text="${orD.quantityOrdered}"></td>
@@ -56,11 +57,12 @@
 						<td th:text="${orD.id.orderNumber.orderDate}"></td>
 						<td th:text="${orD.id.orderNumber.shippedDate}"></td>
 						<td th:text="${orD.id.orderNumber.requiredDate}"></td>
+						<td th:text="${orD.id.orderNumber.orderNumber}"></td>
 						<td th:text="${orD.id.orderNumber.status}"></td>
 						
 						<td>
 							<!-- Edita por medio del id -->
-							<a th:href="@{/orden-cancelar-}+ ${orD.id.orderNumber.orderNumber}" class="btn btn-warning mr-3">Cancelar</a>
+							<a th:href="@{/orden-cancelar-}+ ${orD.id.orderNumber.orderNumber}" style="font-size: .73rem;" class="btn btn-warning mr-3">Cancelar</a>
 						</td>
 					</tr>
 				</tbody>

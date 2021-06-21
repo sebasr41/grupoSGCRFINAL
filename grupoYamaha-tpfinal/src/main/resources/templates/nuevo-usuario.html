@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,18 +10,19 @@
 	<link th:rel="stylesheet" th:href="@{css/styles.css}">
 	<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
 	<link rel="shortcut icon" href="img/favicon.png" />
-	<title>CUSTOMERS</title>
+	<title>nuevo cliente</title>
 </head>
+
 <body class="body-gam">
 	<!--   HEADER    -->
 	<div th:replace="layouts/header :: header"></div>
-	
+
 	<!--   NAV WITH TABS    -->
 	<div th:replace="layouts/nav-tabs :: div"></div>
-	
+
 	<div class="container">
 		<div class="show-case-2">
-			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Registrá un nuevo vehículo</h1>
+			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Registrá un nuevo cliente</h1>
 		</div>
 	</div>
 	<!--Formulario de alta de Usuario-->
@@ -28,79 +30,71 @@
 		<div class="col-md-8 d-block m-auto">
 			<form th:action="@{/usuario-guardar}" method="POST" th:object="${customers}"
 				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
-									
-				<div class="row d-flex justify-content-center">
-					<div class="form-group col-md-5">
-						<label for="customerNumber">Numero de Cliente <i class="fas fa-signature text-light ml-2"></i></label>
-						<input th:field="*{customerNumber}" type="text" class="form-control" id="customerNumber">
-				      <div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('customerNumber')}" th:errors="*{customerNumber}"></div>
-					</div>
 
-				</div>
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="customerName">Nombre de Cliente <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="customerName">Nombre de cliente <i
+								class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{customerName}" type="text" class="form-control" id="customerName">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></div>
 					</div>
-				</div>	
-				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="contactFirstName">Apellido de Contacto <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="contactFirstName">Apellido de contacto <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{contactLastName}" type="text" class="form-control" id="contactLastName">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('contactLastName')}" th:errors="*{contactLastName}"></div>
 					</div>
-				</div>
+				</div>					
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="stock">Nombre de Contacto <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="stock">Nombre de contacto <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{contactFirstName}" type="text" class="form-control" id="contactFirstName">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('contactFirstName')}" th:errors="*{contactFirstName}"></div>
 					</div>
-				</div>
 					<div class="form-group col-md-5">
-						<label for="phone">Phone <i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+						<label for="phone">Teléfono <i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
 						<input th:field="*{phone}" type="text" class="form-control" id="phone">
 					   <div class="form-text alert-danger col-md-12 ro  unded-bottom " th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
 					</div>
+				</div>
 				
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
-						<label for="addressLine1">Direccion Linea 1ntacto <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<label for="addressLine1">Dirección de línea contacto - 1 <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{addressLine1}" type="text" class="form-control" id="addressLine1">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></div>
 					</div>
+					<div class="form-group col-md-5">
+						<label for="addressLine2">Dirección de línea contacto - 2  <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+						<input th:field="*{addressLine2}" type="text" class="form-control" id="addressLine2">
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></div>
+					</div>
 				</div>
-				
+								
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="city">Ciudad <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{city}" type="text" class="form-control" id="city">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
 					</div>
-				</div>
-				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="state">Estado <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{city}" type="text" class="form-control" id="citystate">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
-					</div>
-				</div>
+					</div>		
+				</div>				
+				
 				<div class="row d-flex justify-content-center">
-					<div class="form-group col-md-5">
+				<div class="form-group col-md-5">
 						<label for="postalCode">Codigo Postal <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{postalCode}" type="number" class="form-control" id="postalCode">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
 					</div>
-				</div>
-				
-				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="coutry">Pais <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{coutry}" type="text" class="form-control" id="coutry">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
 					</div>
-				</div>
+				</div>							
 				
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
@@ -108,16 +102,16 @@
 						<input th:field="*{creditLimit}" type="text" class="form-control" id="creditLimit">
 						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('creditLimit')}" th:errors="*{creditLimit}"></div>
 					</div>
-				</div>
-				
-				<label for="producto">Nombre de la categoria</label>
+				<div class="form-group col-md-5">
+				<label for="producto">Nombre del empleado</label>
 						<select id="producto" th:field="*{employees.employeeNumber}" class="form-control">
 							<option th:each="emp : ${employs}" th:value="${emp.employeeNumber}"
 								th:text="${emp.firstName}+ ' - '+ ${emp.jobTitle}" th:selected="false"></option>
 						</select>
+				</div>
+				</div>
 				
-				
-								<div class="row ml-5 pl-4">
+				<div class="row ml-5 pl-4">
 					<button type="submit" class="btn btn-primary">Guardar</button>
 				</div>
 			</form>
