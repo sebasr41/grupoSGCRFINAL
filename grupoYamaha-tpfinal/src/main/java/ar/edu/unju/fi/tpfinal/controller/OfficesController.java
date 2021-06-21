@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
 
-import java.util.List;
+
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,8 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Offices;
-import ar.edu.unju.fi.tpfinal.model.ProductLines;
-import ar.edu.unju.fi.tpfinal.model.Products;
+
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 

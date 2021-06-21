@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.tpfinal.model.OrderDetails;
 import ar.edu.unju.fi.tpfinal.model.Orders;
 import ar.edu.unju.fi.tpfinal.repository.IOrdersRepository;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
@@ -39,5 +40,12 @@ public class OrdersServiceImp implements IOrdersService {
         ordersRepository.deleteById(id);
         
     }
+
+	@Override
+	public List<Orders> obtenerOrdersPorcustomerNumber(Long customerNumber) {
+        List<Orders> orders = ordersRepository.findByCustomersCustomerNumber(customerNumber);
+		
+		return orders;
+	}
     
 }

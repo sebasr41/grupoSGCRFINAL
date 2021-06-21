@@ -20,6 +20,7 @@ import ar.edu.unju.fi.tpfinal.model.Employees;
 
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
+import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 
 @Controller
 public class CustomersController {
@@ -35,6 +36,8 @@ public class CustomersController {
 
 	@Autowired
 	private IEmployeesService employservice;
+	@Autowired
+	private IOrdersService ordersService;
 
 	@GetMapping("/crearusuario")
 	public String getCustomersPage(Model model) {
@@ -91,9 +94,16 @@ public class CustomersController {
 	@GetMapping("/customer-eliminar-{id}")
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/customer-list");
-		customersService.eliminarCustomers(id);
-		attribute.addFlashAttribute("success", "El cliente ha sido eliminado con éxito");
-		return modelView;
+		if (ordersService.obtenerOrdersPorcustomerNumber(id).isEmpty()) {
+			employeesService.eliminarEmployees(id);
+			attribute.addFlashAttribute("warning", "Cliente eliminado con exito");
+				
+		}else {
+			attribute.addFlashAttribute("warning", "No se puede eliminar, el cliente tiene una orden de compra cargada ");
+		}
+	
+	return modelView;
+		
 	}
 
 }
