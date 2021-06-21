@@ -63,7 +63,7 @@ public class EmployeesController {
 
 		else {
 
-			ModelAndView model = new ModelAndView("redirect:/products-list");
+			ModelAndView model = new ModelAndView("lista-empleados");
 			Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
 		
 

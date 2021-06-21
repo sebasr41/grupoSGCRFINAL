@@ -73,7 +73,7 @@ public class OrderDetailsController {
 	}
 
 	@GetMapping("/order-list")
-	public ModelAndView getComprasPage() {
+	public ModelAndView getOrderPage() {
 		ModelAndView model = new ModelAndView("lista-ordenes");
 
 		model.addObject("orders", orderService.obtenerOrders());

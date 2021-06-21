@@ -33,7 +33,7 @@ public class ProductLinesController {
 	private IProductLinesService productolinesService;
 
 	@GetMapping("/productlines")
-	public String getProductoPage(Model model) {
+	public String getProductLinesPage(Model model) {
 		productlines.setImage("");
 		model.addAttribute("productlines", productlines);
 		return "nueva-categoria";
@@ -79,7 +79,7 @@ public class ProductLinesController {
 	}
 
 	@GetMapping("/productLines-list")
-	public ModelAndView getComprasPage() {
+	public ModelAndView getProductLinesPage() {
 		ModelAndView model = new ModelAndView("lista-categoria");
 
 		model.addObject("productslines", productolinesService.obtenerProductLines());

@@ -69,7 +69,7 @@ public class CustomersController {
 	}
 
 	@GetMapping("/customer-list")
-	public ModelAndView getComprasPage() {
+	public ModelAndView getCustomerPage() {
 		ModelAndView model = new ModelAndView("lista-usuario");
 		model.addObject("customers", customersService.obtenerCustomers());
 
