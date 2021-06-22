@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.15.3/css/all.css}"
+		integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	<link th:rel="stylesheet" th:href="@{css/styles.css}">
+	<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link rel="shortcut icon" href="img/favicon.png" />
+	<title>Login</title>
+</head>
+
+<body class="body-gam">
+
+	<div class="row my-3 mt-5">
+		<div class="col-12 col-md-4 mb-3 d-block m-auto rounded border px-4 py-4 bg-pv--form text-light">
+			<h2 class="h2 pb-3 text-center">Ingreso</h2>
+			<form th:action="@{/login}" th:method="POST">
+
+				<div class="form-group">
+					<label for="usuario">Usuario</label>
+					<input class="form-control" type="text" id="usuario" name="username">
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input class="form-control" type="password" id="password" name="password">
+
+				</div>
+
+				<input class="btn btn-primary" type="submit" value="Ingresar">
+			</form>
+
+			<div class="form-text alert-danger col-md-12 rounded-bottom mt-3 px-2 py-2" th:if="${param.error}">
+				<span>
+				 Credenciales incorrectas
+				</span>				
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+				</div>
+		</div>
+
+
+	</div>
+
+
+
+	<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+	<script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

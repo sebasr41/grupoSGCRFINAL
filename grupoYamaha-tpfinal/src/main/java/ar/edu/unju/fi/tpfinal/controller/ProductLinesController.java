@@ -54,7 +54,7 @@ public class ProductLinesController {
 		}
 
 		else {
-			modelView = new ModelAndView("lista-categoria");
+			
 			if (!file.isEmpty()) {
 				// linux
 				String rutaAbsoluta = "/home/mike47k/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
@@ -75,6 +75,7 @@ public class ProductLinesController {
 			}
 			productolinesService.guardarProductLines(productlines);
 			System.out.println(productlines.getImage());
+			modelView = new ModelAndView("lista-categoria");
 			modelView.addObject("productslines", productolinesService.obtenerProductLines());
 			modelView.addObject("product", products);
 			return modelView;
