@@ -122,5 +122,11 @@ public class EmployeesServiceImp  implements IEmployeesService{
 		return empleados;
 	}
 
+	@Override
+	public List<Employees> obtenerEmployeesPorEmployeesNumber(Long employeesNumber) {
+		List<Employees> empleados = employeesRepository.findByEmployeesEmployeeNumber(employeesNumber);
+		return empleados;
+	}
+
 
 }

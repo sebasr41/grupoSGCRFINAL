@@ -69,7 +69,7 @@ public class EmployeesController {
 
 		else {
 
-			ModelAndView model = new ModelAndView("lista-empleados");
+			ModelAndView model = new ModelAndView("redirect:/employees-list");
 			Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
 		
 
@@ -99,7 +99,11 @@ public class EmployeesController {
 		ModelAndView modelView = new ModelAndView("nuevo-empleado");
 		Optional<Employees> employees = employeesService.getEmployeesPorId(id);
 		modelView.addObject("employees", employees);
-		
+		modelView.addObject(offices);
+		modelView.addObject("employlist", employeesService.obtenerEmployees());
+
+		modelView.addObject("offices", officesService.obtenerOffices());
+
 		return modelView;
 	}
 	
@@ -107,8 +111,15 @@ public class EmployeesController {
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/employees-list");
 		if (customersService.obtenerCustomersPorEmployeeNumber(id).isEmpty()) {
-			employeesService.eliminarEmployees(id);
-			attribute.addFlashAttribute("warning", "Empleado eliminado con exito");
+			
+			if (employeesService.obtenerEmployeesPorEmployeesNumber(id).isEmpty()) {
+				employeesService.eliminarEmployees(id);
+				attribute.addFlashAttribute("warning", "Empleado eliminado con exito");
+			}else {
+				attribute.addFlashAttribute("warning", "No se puede eliminar, el empleado tiene Empleado/s a cargo");
+			}
+			
+			
 				
 		}else {
 			attribute.addFlashAttribute("warning", "No se puede eliminar, el empleado ya realizó una venta");
