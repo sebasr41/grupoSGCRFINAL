@@ -10,5 +10,6 @@ import ar.edu.unju.fi.tpfinal.model.Offices;
 public interface IEmployeesRepository extends CrudRepository < Employees, Long>{
 	
 	List<Employees> findByOfficesOfficeCode(Long officeCode);
+	List<Employees> findByEmployeesEmployeeNumber(Long employeeNumber);
 
 }
