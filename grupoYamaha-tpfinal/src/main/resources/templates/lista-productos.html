@@ -128,7 +128,7 @@
 											<!--Form code start from here  -->
 
 											<form th:action="@{/order-form-}+ ${prod.productCode}" method="POST"
-												th:object="${orderdetails}"
+												th:object="${orderdetails}" th:if="${bandera}"
 												class="text-light mt-3 mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 
 												<!--Oculto-->
@@ -193,6 +193,10 @@
 														data-dismiss="modal">Cancelar</button>
 												</div>
 											</form>
+											<div class="col-12 col-sm-12 col-md-8 mb-3" th:unless="${bandera}">
+											   	<h3 class="h3">Primero debe registrar un Cliente <i class="fas fa-exclamation-triangle text-danger mx-2"></i></h3>
+											   	<a class="btn btn-primary my-2" role="button" href="/crearusuario">Ir al formulario de Cliente </a>	
+											</div>
 
 
 										</div>

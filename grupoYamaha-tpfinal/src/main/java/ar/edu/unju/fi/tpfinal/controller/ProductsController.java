@@ -52,6 +52,7 @@ public class ProductsController {
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
+		
 
 		return "nuevo-producto";
 	}
@@ -99,6 +100,11 @@ public class ProductsController {
 		model.addObject("orderdetails", orderdetails);
 		model.addObject("customers", customerService.obtenerCustomers());
 		model.addObject("custom", custom);
+		if (customerService.obtenerCustomers().isEmpty()) {
+			model.addObject("bandera", false);
+		}else {
+			model.addObject("bandera", true);
+		}
 
 		return model;
 
