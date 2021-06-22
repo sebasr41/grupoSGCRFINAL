@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/miestilo.css}">
+</head>
+<body>
+
+<div class="container">
+	<header th:replace="layout/header :: header"></header>
+	<div class="row">
+		<section class="col-sm-6 col-md-9 bg-light">
+			<h3>LOGIN DE USUARIO</h3>
+				<form class="form"  th:action="@{/login}" method="post">
+					<div class="form-group">
+						<label for="nomsuario">Username</label> 
+						<input type="text" class="form-control"	id="nomsuario" name="nomsuario"> 
+					</div>
+					<div class="form-group">
+						<label for="contrasenia">Password</label> 
+						<input type="password" class="form-control" id="contrasenia" name="contrasenia">
+					</div>
+					<button type="submit" class="btn btn-primary">Ingresar</button>
+				</form>
+				<div th:if="${param.error}" class="alert alert-danger" >El Usuario o Contraseña son errones</div>
+		</section>
+		<aside th:replace="layout/publicidad :: publicidad"></aside>
+	</div>	
+	<footer th:replace="layout/footer :: footer"></footer>
+</div>
+ 
+<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1/dist/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

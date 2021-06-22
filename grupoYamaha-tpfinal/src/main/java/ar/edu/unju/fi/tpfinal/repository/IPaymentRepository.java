@@ -7,4 +7,5 @@ import ar.edu.unju.fi.tpfinal.model.PaymentsId;
 
 public interface IPaymentRepository extends CrudRepository<Payments, PaymentsId>{
 
+	
 }

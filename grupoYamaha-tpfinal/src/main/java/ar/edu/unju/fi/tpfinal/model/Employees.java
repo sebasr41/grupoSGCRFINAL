@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,6 +42,16 @@ public class Employees {
 	@Column(name = "empl_jobtitle")
 	private String jobTitle;
 	
+	@Column(name = "empl_nomusuario")
+	private String nomusuario;
+	
+	@Column(name = "empl_password")
+	private String password;
+	
+	@Column(name = "empl_rol")
+	private String rol;
+	
+	
 	@ManyToOne
 	@Autowired
 	@JoinColumn(name="offic_officeCode")
@@ -59,21 +68,25 @@ public class Employees {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	
 	/**
 	 * @param employeeNumber
 	 * @param lastName
 	 * @param firstName
 	 * @param extension
 	 * @param email
-	 * @param officeCode
 	 * @param jobTitle
+	 * @param nomusuario
+	 * @param password
+	 * @param rol
 	 * @param offices
 	 * @param employees
 	 */
-		
-	public Employees(Long employeeNumber, String lastName, String firstName,
-			String extension,  String email, String jobTitle,  Offices offices,
-			Employees employees) {
+	public Employees(Long employeeNumber, String lastName, String firstName, String extension, String email,
+			String jobTitle, String nomusuario, String password, String rol, Offices offices, Employees employees) {
 		super();
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
@@ -81,64 +94,106 @@ public class Employees {
 		this.extension = extension;
 		this.email = email;
 		this.jobTitle = jobTitle;
+		this.nomusuario = nomusuario;
+		this.password = password;
+		this.rol = rol;
 		this.offices = offices;
 		this.employees = employees;
 	}
-	
+
+
+
+
 	/**
 	 * @return the employeeNumber
 	 */
 	public Long getEmployeeNumber() {
 		return employeeNumber;
 	}
+
+
+
+
 	/**
 	 * @param employeeNumber the employeeNumber to set
 	 */
 	public void setEmployeeNumber(Long employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
+
+
+
+
 	/**
 	 * @return the lastName
 	 */
 	public String getLastName() {
 		return lastName;
 	}
+
+
+
+
 	/**
 	 * @param lastName the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+
+
+
 	/**
 	 * @return the firstName
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
+
+
+
+
 	/**
 	 * @param firstName the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+
+
+
 	/**
 	 * @return the extension
 	 */
 	public String getExtension() {
 		return extension;
 	}
+
+
+
+
 	/**
 	 * @param extension the extension to set
 	 */
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
+
+
+
+
 	/**
 	 * @return the email
 	 */
 	public String getEmail() {
 		return email;
 	}
+
+
+
+
 	/**
 	 * @param email the email to set
 	 */
@@ -146,36 +201,119 @@ public class Employees {
 		this.email = email;
 	}
 
+
+
+
 	/**
 	 * @return the jobTitle
 	 */
 	public String getJobTitle() {
 		return jobTitle;
 	}
+
+
+
+
 	/**
 	 * @param jobTitle the jobTitle to set
 	 */
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
+
+
+
+
+	/**
+	 * @return the nomusuario
+	 */
+	public String getNomusuario() {
+		return nomusuario;
+	}
+
+
+
+
+	/**
+	 * @param nomusuario the nomusuario to set
+	 */
+	public void setNomusuario(String nomusuario) {
+		this.nomusuario = nomusuario;
+	}
+
+
+
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
+	/**
+	 * @return the rol
+	 */
+	public String getRol() {
+		return rol;
+	}
+
+
+
+
+	/**
+	 * @param rol the rol to set
+	 */
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+
+
+
 	/**
 	 * @return the offices
 	 */
 	public Offices getOffices() {
 		return offices;
 	}
+
+
+
+
 	/**
 	 * @param offices the offices to set
 	 */
 	public void setOffices(Offices offices) {
 		this.offices = offices;
 	}
+
+
+
+
 	/**
 	 * @return the employees
 	 */
 	public Employees getEmployees() {
 		return employees;
 	}
+
+
+
+
 	/**
 	 * @param employees the employees to set
 	 */
@@ -183,8 +321,15 @@ public class Employees {
 		this.employees = employees;
 	}
 
-	
 
-	
+
+
+	@Override
+	public String toString() {
+		return "Employees [employeeNumber=" + employeeNumber + ", lastName=" + lastName + ", firstName=" + firstName
+				+ ", extension=" + extension + ", email=" + email + ", jobTitle=" + jobTitle + ", nomusuario="
+				+ nomusuario + ", password=" + password + ", rol=" + rol + ", offices=" + offices + ", employees="
+				+ employees + "]";
+	}
 	
 }

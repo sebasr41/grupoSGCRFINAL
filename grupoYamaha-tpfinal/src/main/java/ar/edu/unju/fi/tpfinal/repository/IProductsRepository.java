@@ -16,4 +16,5 @@ public interface IProductsRepository extends CrudRepository<Products,String> {
     
     List<Products> findByProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(String id, double price);
 
+    
 }

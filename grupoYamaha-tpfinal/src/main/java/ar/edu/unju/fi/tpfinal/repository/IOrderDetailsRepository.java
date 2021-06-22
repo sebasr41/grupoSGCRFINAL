@@ -7,4 +7,5 @@ import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 
 public interface IOrderDetailsRepository extends CrudRepository<OrderDetails, OrderDetailsId> {
     
+
 }

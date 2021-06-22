@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import ar.edu.unju.fi.tpfinal.model.Employees;
-;
+
 
 public interface IEmployeesService {
+
+	public Employees findByNomsuario(String nomusuario);
+
+	
 	public void guardarEmployees(Employees employees);
 
 	

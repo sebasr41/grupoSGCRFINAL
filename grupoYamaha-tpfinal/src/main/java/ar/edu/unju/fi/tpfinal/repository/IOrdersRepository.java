@@ -6,4 +6,5 @@ import ar.edu.unju.fi.tpfinal.model.Orders;
 
 public interface IOrdersRepository extends CrudRepository< Orders, Long> {
     
+	
 }

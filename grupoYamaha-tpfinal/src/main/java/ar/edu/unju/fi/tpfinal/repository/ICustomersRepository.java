@@ -6,4 +6,5 @@ import ar.edu.unju.fi.tpfinal.model.Customers;
 
 public interface ICustomersRepository extends CrudRepository<Customers, Long>{
 
+	
 }

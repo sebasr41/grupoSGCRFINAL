@@ -33,7 +33,22 @@
                       <label for="apellido">Apellido</label>
                       <input th:field="*{lastName}" type="text" class="form-control" id="apellido">
                     </div>
-                </div> 
+                </div>
+                  
+                <div class="row d-flex justify-content-center">
+                    <div class="form-group col-md-5">
+                        <label for="extension">Usuario <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
+                        <input th:field="*{extension}" type="text" class="form-control" id="stock">
+                      </div>
+                    <div class="form-group col-md-5">
+                        <label for="correo">Contraseña <i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+                        <input th:field="*{email}" type="text" class="form-control" id="correo">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="correo">Rol <i class="fas fa-hand-holding-usd text-light ml-2"></i></label>
+                        <input th:field="*{email}" type="text" class="form-control" id="correo">
+                    </div>
+                </div>
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-md-5">
                         <label for="extension">Extensión <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
@@ -66,6 +81,7 @@
 					</div>
                    
                 </div>    
+                
                 
                 <div class="row ml-5 pl-4">
                     <button type="submit" class="btn btn-primary">Guardar</button>

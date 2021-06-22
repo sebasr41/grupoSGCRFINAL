@@ -6,4 +6,5 @@ import ar.edu.unju.fi.tpfinal.model.Offices;
 
 public interface IOfficesRepository extends CrudRepository< Offices, Long> {
 
+	
 }

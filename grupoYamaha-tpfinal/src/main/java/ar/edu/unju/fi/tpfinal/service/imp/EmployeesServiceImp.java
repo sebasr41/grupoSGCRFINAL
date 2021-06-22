@@ -11,7 +11,6 @@ import ar.edu.unju.fi.tpfinal.repository.IEmployeesRepository;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 
 @Service
-
 public class EmployeesServiceImp  implements IEmployeesService{
 
 	@Autowired
@@ -90,16 +89,19 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ5.setLastName("Pancrasio");
 			employ5.setJobTitle("SubAdmin");
 			employ5.setEmployees(employ2);
-			employeesRepository.save(employ5);
-			
-			
-			
-			
-			
-			
+			employeesRepository.save(employ5);			
 		}
-		
-		
 	}
 
+
+	/*
+	 * Codigo paara el metodo de security
+	 */
+
+	@Override
+	public Employees findByNomsuario(String nomusuario) {
+		// TODO Auto-generated method stub
+		Employees em = employeesRepository.findByNomusuario(nomusuario);
+		return em;
+	}
 }
