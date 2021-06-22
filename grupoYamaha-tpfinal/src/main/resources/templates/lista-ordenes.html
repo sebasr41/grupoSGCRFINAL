@@ -65,14 +65,13 @@
 						</td>
 						<td>
 						
-						<!--
+						
 						
 							
 							<button type="button" class="btn btn-primary px-4" data-toggle="modal"
-								data-target="#myModal" th:attrappend="data-target=${orD.id.productCode.productCode}"><i
-									class="fas fa-shopping-cart text-light"></i>
+								data-target="#myModal" th:attrappend="data-target=${orD.id.orderNumber.orderNumber}"><i class="text-light far fa-comment-dots"></i>
 							</button>
-							<div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${orD.id.productCode.productCode}">
+							<div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${orD.id.orderNumber.orderNumber}">
 								<div class="modal-dialog">
 
 									
@@ -89,8 +88,8 @@
 
 											
 
-											<form th:action="@{/order-add-comments-}+${orD.id.productCode.productCode}" method="POST"
-												th:object="${orders}"
+											<form th:action="@{/order-add-comments-}+${orD.id.orderNumber.orderNumber}" method="POST"
+												th:object="${ordersF}"
 												class="text-light mt-3 mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 																													
 												<div class="row d-flex justify-content-center">
@@ -118,7 +117,7 @@
 						</td>
 						
 						
-						-->
+						
 					</tr>
 				</tbody>
 			</table>

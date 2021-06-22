@@ -75,27 +75,23 @@ public class OrderDetailsController {
 	@GetMapping("/order-list")
 	public ModelAndView getOrderPage() {
 		ModelAndView model = new ModelAndView("lista-ordenes");
-
+		model.addObject("ordersF",orders);
 		model.addObject("orders", orderService.obtenerOrders());
 		model.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
 
 		return model;
 
 	}
-	/***
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+
 	@PostMapping("/order-add-comments-{id}")
-	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("orders") Orders orders) {
+	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("ordersF") Orders orders) {
 		ModelAndView modelView = new ModelAndView("redirect:/order-list");
 		Optional<Orders> order = orderService.obtenerOrdersPorId(id);
-		orders = order.get();
+		Orders aux = order.get();
+		aux.setComments(orders.getComments());
 		
-		
-		
+		orderService.guardarOrders(aux);
+        modelView.addObject("ordersF",orders);
 		modelView.addObject("orders", orderService.obtenerOrders());
 		modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
 		
@@ -103,7 +99,7 @@ public class OrderDetailsController {
 	}
 
 
-	 */
+	 
 
 
 	public static String generateString() {
