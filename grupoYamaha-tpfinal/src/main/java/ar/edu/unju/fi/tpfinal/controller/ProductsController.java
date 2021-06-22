@@ -52,7 +52,13 @@ public class ProductsController {
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);
 		model.addAttribute("productslines", productslinesService.obtenerProductLines());
-		
+		if(productslinesService.obtenerProductLines().isEmpty()) {
+			model.addAttribute("bandera", false);
+		}else {
+			model.addAttribute("bandera", true);
+
+		}
+
 
 		return "nuevo-producto";
 	}
@@ -66,6 +72,7 @@ public class ProductsController {
 			List<ProductLines> productslines = productslinesService.obtenerProductLines();
 			modelView.addObject("products", products);
 			modelView.addObject("productslines", productslines);
+			modelView.addObject("bandera", true);
 			return modelView;
 
 		}
@@ -138,6 +145,7 @@ public class ProductsController {
 		List<ProductLines> productslines = productslinesService.obtenerProductLines();
 		modelView.addObject("products", products);
 		modelView.addObject("productslines", productslines);
+		modelView.addObject("bandera", true);
 
 		return modelView;
 	}
