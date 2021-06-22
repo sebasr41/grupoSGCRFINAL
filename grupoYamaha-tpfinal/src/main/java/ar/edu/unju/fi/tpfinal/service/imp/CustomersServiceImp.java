@@ -41,4 +41,10 @@ public class CustomersServiceImp implements ICustomersService{
 		return customers;
 	}
 
+	@Override
+	public List<Customers> obtenerCustomersPorEmployeeNumber(Long employeeNumber) {
+		List<Customers> customers = customersRepository.findByEmployeesEmployeeNumber(employeeNumber);
+		return customers;
+	}
+
 }

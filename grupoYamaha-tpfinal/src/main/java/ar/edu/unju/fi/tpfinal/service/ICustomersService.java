@@ -15,6 +15,8 @@ public interface ICustomersService {
 	public List<Customers> obtenerCustomers();
 
 	public Optional<Customers> getCustomersPorId(Long id);
+	
+	public List<Customers> obtenerCustomersPorEmployeeNumber(Long employeeNumber);
 
 	
 }

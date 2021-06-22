@@ -11,12 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ar.edu.unju.fi.tpfinal.model.Customers;
 import ar.edu.unju.fi.tpfinal.model.Employees;
 import ar.edu.unju.fi.tpfinal.model.Offices;
-
+import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 
@@ -32,6 +35,9 @@ public class EmployeesController {
 	private IEmployeesService employeesService;
 	@Autowired
 	private IOfficesService officesService;
+	
+	@Autowired
+	private ICustomersService customersService;
 
 	@GetMapping("/empleados")
 	public String getEmployeesPage(Model model) {
@@ -86,5 +92,29 @@ public class EmployeesController {
 		return model;
 
 	
+	}
+	
+	@GetMapping("/employee-editar-{id}")
+	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
+		ModelAndView modelView = new ModelAndView("nuevo-empleado");
+		Optional<Employees> employees = employeesService.getEmployeesPorId(id);
+		modelView.addObject("employees", employees);
+		
+		return modelView;
+	}
+	
+	@GetMapping("/employee-eliminar-{id}")
+	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
+		ModelAndView modelView = new ModelAndView("redirect:/employees-list");
+		if (customersService.obtenerCustomersPorEmployeeNumber(id).isEmpty()) {
+			employeesService.eliminarEmployees(id);
+			attribute.addFlashAttribute("warning", "Empleado eliminado con exito");
+				
+		}else {
+			attribute.addFlashAttribute("warning", "No se puede eliminar, el empleado ya realizó una venta");
+		}
+	
+	return modelView;
+		
 	}
 }
