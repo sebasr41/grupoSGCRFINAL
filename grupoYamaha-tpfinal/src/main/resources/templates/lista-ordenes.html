@@ -45,6 +45,7 @@
 						<th>Id Orden</th>
 						<th>Estado</th>
 						<th>Acción</th>
+						<th>Comentar</th>
 					</tr>
 				</thead>
 				<tbody style="font-size: .73rem;">
@@ -58,12 +59,66 @@
 						<td th:text="${orD.id.orderNumber.shippedDate}"></td>
 						<td th:text="${orD.id.orderNumber.requiredDate}"></td>
 						<td th:text="${orD.id.orderNumber.orderNumber}"></td>
-						<td th:text="${orD.id.orderNumber.status}"></td>
-						
+						<td th:text="${orD.id.orderNumber.status}"></td>						
 						<td>
-							<!-- Edita por medio del id -->
 							<a th:href="@{/orden-cancelar-}+ ${orD.id.orderNumber.orderNumber}" style="font-size: .73rem;" class="btn btn-warning mr-3">Cancelar</a>
 						</td>
+						<td>
+						
+						<!--
+						
+							
+							<button type="button" class="btn btn-primary px-4" data-toggle="modal"
+								data-target="#myModal" th:attrappend="data-target=${orD.id.productCode.productCode}"><i
+									class="fas fa-shopping-cart text-light"></i>
+							</button>
+							<div class="modal fade" id="myModal" role="dialog" th:attrappend="id=${orD.id.productCode.productCode}">
+								<div class="modal-dialog">
+
+									
+									<div class="modal-content">
+										<div class="modal-header bg-pv--form">
+											<h5 class="modal-title">Agregá un comentario</h5>
+											<button type="button" class="close text-light" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+
+										<div class="modal-body body-gam ">
+
+											
+
+											<form th:action="@{/order-add-comments-}+${orD.id.productCode.productCode}" method="POST"
+												th:object="${orders}"
+												class="text-light mt-3 mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+																													
+												<div class="row d-flex justify-content-center">
+													<div class="form-group col-md-5">
+														<label for="comentario">Comentario</label>
+														<input th:field="*{comments}" type="text"
+															class="form-control" id="comentario">
+													</div>											
+												</div>											
+
+												<div class="row d-flex justify-content-between">
+													<button type="submit" class="btn btn-primary ml-5">Guardar</button>
+													<button type="button" class="btn btn-light mr-5"
+														data-dismiss="modal">Cancelar</button>
+												</div>
+											</form>
+
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</td>
+						
+						
+						-->
 					</tr>
 				</tbody>
 			</table>

@@ -70,7 +70,8 @@ public class OrderDetailsController {
 
 		return modelView;
 	}
-
+	
+	
 	@GetMapping("/order-list")
 	public ModelAndView getOrderPage() {
 		ModelAndView model = new ModelAndView("lista-ordenes");
@@ -81,6 +82,29 @@ public class OrderDetailsController {
 		return model;
 
 	}
+	/***
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	@PostMapping("/order-add-comments-{id}")
+	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("orders") Orders orders) {
+		ModelAndView modelView = new ModelAndView("redirect:/order-list");
+		Optional<Orders> order = orderService.obtenerOrdersPorId(id);
+		orders = order.get();
+		
+		
+		
+		modelView.addObject("orders", orderService.obtenerOrders());
+		modelView.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
+		
+		return modelView;
+	}
+
+
+	 */
+
 
 	public static String generateString() {
 		String uuid = UUID.randomUUID().toString();
@@ -123,6 +147,17 @@ public class OrderDetailsController {
 		orderdetailsService.guardarOrderDetails(orderdetails);
 
 		return modelView;
+
+	}
+	
+	@GetMapping("/payments-list")
+	public ModelAndView getPaymentsPage() {
+		
+		ModelAndView model = new ModelAndView("lista-pagos");
+
+		model.addObject("paymentList", paymentService.obtenerPayments());
+
+		return model;
 
 	}
 }
