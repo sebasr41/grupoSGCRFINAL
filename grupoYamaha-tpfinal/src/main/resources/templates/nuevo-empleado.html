@@ -68,7 +68,6 @@
 							<option th:each="off : ${offices}" th:value="${off.officeCode}" th:text="${off.officeCode}"
 								th:selected="false"></option>
 						</select>
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('off.officeCode')}" th:errors="*{off.officeCode}"></div>
 					</div>
 
 					<div class="form-group col-md-5">
@@ -85,7 +84,6 @@
 							<option th:each="prod : ${employlist}" th:value="${prod.employeeNumber}"
 								th:text="${prod.firstName}+ ' - '+ ${prod.jobTitle}" th:selected="false"></option>
 						</select>
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('employees.employeeNumber')}" th:errors="*{employees.employeeNumber}"></div>
 					</div>
 
 				</div>

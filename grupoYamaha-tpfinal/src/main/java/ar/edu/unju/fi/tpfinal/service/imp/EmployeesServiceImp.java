@@ -59,6 +59,13 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			
 			Offices oficina = new Offices();
 			oficina.setCity("S.S Jujuy");
+			oficina.setAddressLine1("Italo Palanca");
+			oficina.setAddressLine2("SUITE 300");
+			oficina.setCountry("Argentina");
+			oficina.setPhone(388412345);
+			oficina.setPostalCode("4600");
+			oficina.setState("Jujuy");
+			oficina.setTerritory("LAS");
 			oficina = officeService.guardarOffices(oficina);
 			
 			Employees employ1 = new Employees();
@@ -72,12 +79,15 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ1.setLastName("Michel");
 			employ1.setJobTitle("Boss");
 			employ1.setOffices(oficina);
+			employ1.setExtension("x1000");
+			
 			employeesRepository.save(employ1);
 			
 			employ4.setEmail("roxanayvbenicio@gmail.com");
 			employ4.setFirstName("Roxana");
 			employ4.setLastName("Benicio");
 			employ4.setJobTitle("Admin");
+			employ4.setExtension("x1000");
 			employ4.setEmployees(employ1);
 			employ4.setOffices(oficina);
 			employeesRepository.save(employ4);
@@ -86,6 +96,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ3.setFirstName("Gabriel");
 			employ3.setLastName("Mamani");
 			employ3.setJobTitle("Marketing Director");
+			employ3.setExtension("x1000");
 			employ3.setEmployees(employ1);
 			employ3.setOffices(oficina);
 			employeesRepository.save(employ3);
@@ -94,6 +105,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ2.setFirstName("Seba");
 			employ2.setLastName("Rojas");
 			employ2.setJobTitle("Deputy Chief");
+			employ2.setExtension("x1000");
 			employ2.setEmployees(employ1);
 			employ2.setOffices(oficina);
 			employeesRepository.save(employ2);
@@ -102,6 +114,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ5.setFirstName("Anastasio");
 			employ5.setLastName("Pancrasio");
 			employ5.setJobTitle("SubAdmin");
+			employ5.setExtension("x1000");
 			employ5.setEmployees(employ2);
 			employ5.setOffices(oficina);
 			employeesRepository.save(employ5);

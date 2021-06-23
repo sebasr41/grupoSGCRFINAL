@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 public class ProductLines {
 	
 	@Id
-	@Size(max = 1)
 	@NotNull
 	@Column(name="prodL_line")
 	private String productLinesName; 

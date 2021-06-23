@@ -45,11 +45,13 @@ public class ProductLinesController {
 	@PostMapping("/productlines-guardar")
 	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines,
 			@RequestParam("file") MultipartFile file, BindingResult resultadoValidacion) throws IOException {
-
 		//////// validation
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
+
+
 			modelView = new ModelAndView("nueva-categoria");
+			modelView.addObject("productlines", productlines);
 			return modelView;
 		}
 

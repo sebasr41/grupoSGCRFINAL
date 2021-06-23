@@ -72,7 +72,6 @@ public class ProductsController {
 			List<ProductLines> productslines = productslinesService.obtenerProductLines();
 			modelView.addObject("products", products);
 			modelView.addObject("productslines", productslines);
-			modelView.addObject("bandera", true);
 			return modelView;
 
 		}

@@ -144,18 +144,21 @@
 															th:field="*{quantityOrdered}" type="number"
 															class="form-control" id="date"
 															th:value="${prod.productCode}">
+														<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('quantityOrdered')}" th:errors="*{quantityOrdered}"></div>
+															
 													</div>
 													<div class="form-group col-md-5">
 														<label for="precio">Línea de número</label>
 														<input th:field="*{orderLineNumber}" type="number"
 															class="form-control" id="linea">
+														<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('orderLineNumber')}" th:errors="*{orderLineNumber}"></div>
+														
 													</div>
 													<div class="form-group col-md-5">
 														<label for="producto">Nombre del cliente</label>
 														<select id="producto"
 															th:field="*{id.orderNumber.customers.customerNumber}"
 															class="form-control">
-															<option value="">Seleccione</option>
 															<option th:each="cus : ${customers}"
 																th:value="${cus.customerNumber}"
 																th:text="${cus.customerName}" th:selected="false">

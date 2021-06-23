@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Customers;
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
@@ -23,6 +25,7 @@ import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 import ar.edu.unju.fi.tpfinal.model.Orders;
 import ar.edu.unju.fi.tpfinal.model.Payments;
 import ar.edu.unju.fi.tpfinal.model.PaymentsId;
+import ar.edu.unju.fi.tpfinal.model.ProductLines;
 import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
@@ -41,6 +44,7 @@ public class OrderDetailsController {
 
 	@Autowired
 	private OrderDetailsId oID;
+	
 
 	@Autowired
 	private ICustomersService customerService;
@@ -109,8 +113,26 @@ public class OrderDetailsController {
 
 	@PostMapping("/order-form-{id}")
 	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id,
-			@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion) {
+			@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		ModelAndView modelView;
+		System.out.println("aaaaaaaaaaaaa"+ resultadoValidacion.getErrorCount());
+		
+		if (resultadoValidacion.getErrorCount() >1) {
+			ModelAndView model = new ModelAndView("redirect:/products-list");
+			System.out.println("sssssssssssssssssssss"+ orderdetails);
+			
+			attribute.addFlashAttribute("warning", "No lleno los datos");
+			return model;
+
+		}
+
+		else {
+			
+			
+		}
+		
+		
+		
 		LocalDate hoy = LocalDate.now();
 		orders.setOrderDate(hoy);
 		// dia random hasta el dia especificado en este caso se uso 10 dias despues//
