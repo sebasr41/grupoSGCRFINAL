@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,7 +58,7 @@ public class OrderDetailsController {
 	@Autowired
 	private Orders orders;
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/orden-cancelar-{id}")
 	public ModelAndView getOrderCancellPage(@PathVariable(value = "id") Long id, Model model) {
 
@@ -75,7 +76,7 @@ public class OrderDetailsController {
 		return modelView;
 	}
 	
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/order-list")
 	public ModelAndView getOrderPage() {
 		ModelAndView model = new ModelAndView("lista-ordenes");
@@ -86,7 +87,7 @@ public class OrderDetailsController {
 		return model;
 
 	}
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/order-add-comments-{id}")
 	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("ordersF") Orders orders) {
 		ModelAndView modelView = new ModelAndView("redirect:/order-list");
@@ -110,7 +111,8 @@ public class OrderDetailsController {
 		String uuid = UUID.randomUUID().toString();
 		return uuid;
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/order-form-{id}")
 	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id,
 			@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
@@ -168,6 +170,7 @@ public class OrderDetailsController {
 
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/payments-list")
 	public ModelAndView getPaymentsPage() {
 		

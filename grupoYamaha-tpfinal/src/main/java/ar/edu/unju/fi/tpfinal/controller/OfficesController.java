@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,13 +34,16 @@ public class OfficesController {
 	
 	@Autowired
 	private IEmployeesService employeesService;
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/offices")
 	public String getOfficesPage(Model model) {
 		model.addAttribute(offices);
 		
 		return "nueva-oficina";
 	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/offices-guardar")
 	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("offices") Offices offices, BindingResult resultadoValidacion){
 		ModelAndView modelView;
@@ -56,6 +60,7 @@ public class OfficesController {
 		}
 		
 		}
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/offices-list")
 	public ModelAndView getOfficesPage() {
 		ModelAndView model = new ModelAndView("lista-oficina");
@@ -64,7 +69,7 @@ public class OfficesController {
 		return model;
 
 }
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/office-eliminar-{id}")
 	public ModelAndView getOfficezEliminarPage(@PathVariable(value = "id") long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/offices-list");
@@ -82,6 +87,7 @@ public class OfficesController {
 		return modelView;
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/office-editar-{id}")
 	public ModelAndView getOfficeEditPage(@PathVariable(value = "id") long id) {
 

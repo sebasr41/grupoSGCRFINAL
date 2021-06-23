@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,14 +39,16 @@ public class CustomersController {
 	private IEmployeesService employservice;
 	@Autowired
 	private IOrdersService ordersService;
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/crearusuario")
 	public String getCustomersPage(Model model) {
 		model.addAttribute("customers", customers);
 		model.addAttribute("employs", employservice.obtenerEmployees());
 		return "nuevo-usuario";
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/usuario-guardar")
 	public ModelAndView getGuardarCustomersPage(@Valid @ModelAttribute("customers") Customers customers,
 			BindingResult resultadoValidacion) {
@@ -72,7 +75,8 @@ public class CustomersController {
 		}
 
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/customer-list")
 	public ModelAndView getCustomerPage() {
 		ModelAndView model = new ModelAndView("lista-usuario");
@@ -82,6 +86,7 @@ public class CustomersController {
 
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/customer-editar-{id}")
 	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
 		ModelAndView modelView = new ModelAndView("nuevo-usuario");
@@ -91,6 +96,7 @@ public class CustomersController {
 		return modelView;
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/customer-eliminar-{id}")
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/customer-list");
