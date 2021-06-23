@@ -17,11 +17,10 @@ import org.springframework.stereotype.Component;
 public class ProductLines {
 	
 	@Id
-	@NotNull
+	
 	@Column(name="prodL_line")
 	private String productLinesName; 
 	
-	@Size(max = 4000, message = "Ingrese un texto debe inferiro a 4000 caracteres")
 	@Column(name="prodL_textdescription")
 	private String textDescription;
 	
