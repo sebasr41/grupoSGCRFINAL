@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
@@ -10,7 +11,7 @@
 	<link th:rel="stylesheet" th:href="@{css/styles.css}">
 	<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
 	<link rel="shortcut icon" href="img/favicon.png" />
-	<title>Lista ordenes</title>
+	<title>Lista de ordenes</title>
 </head>
 
 <body class="body-gam">
@@ -18,51 +19,112 @@
 	<!--   HEADER    -->
 	<div th:replace="layouts/header :: header"></div>
 
+	<!--   NAV WITH TABS    -->
+	<div th:replace="layouts/nav-tabs :: div"></div>
+
 	<div class="container">
 		<div class="show-case-2">
-			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Nuestros vehículos</h1>
+			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Lista de ordenes</h1>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<!--Resultados-->
 		<!--Con bucle-->
-		<div class="col-md-10 d-block m-auto rounded">
-			<table class="table table-striped table-responsive-xl bg-pv--form text-light">
+		<div class="col-md-10 d-block m-auto rounded" style="font-size: .9rem;">
+			<table class="table table-striped table-responsive-xl bg-pv--form text-light" style="margin-top: -3rem;">
 				<thead>
 					<tr>
-						<th>Id</th>
-						<th>P. Cod.</th>
-						<th>P. Nom.</th>
-						<th>P. Prec.</th>
-						<th>P. Marca.</th>
-						<th>P. Stock</th>
+						<th>Id Prod</th>
+						<th>Producto</th>
+						<th>Precio</th>
 						<th>Cantidad</th>
-						<th>Total</th>
-						<th>Acciones</th>
+						<th>Linea de Orden</th>
+						<th>F. de Compra</th>
+						<th>F. Enviada</th>
+						<th>F. Requerida</th>
+						<th>Id Orden</th>
+						<th>Estado</th>
+						<th>Acción</th>
+						<th>Comentar</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr th:each="comp : ${compra}">
-						<td th:text="${comp.id}"></td>
-						<td th:text="${comp.producto.id}"></td>
-						<td th:text="${comp.producto.nombre}"></td>
-						<td th:text=" '$ ' + ${comp.producto.precio}"></td>
-						<td th:text="${comp.producto.marca}"></td>
-						<td th:text="${comp.producto.stock}"></td>
-						<td th:text="${comp.cantidad}"></td>
-						<td th:text=" '$ ' + ${comp.getTotal}"></td>
+				<tbody style="font-size: .73rem;">
+					<tr th:each="orD : ${orderDetails}">
+						<td th:text="${orD.id.productCode.productCode}"></td>
+						<td th:text="${orD.id.productCode.productName}"></td>
+						<td th:text=" '$ ' + ${orD.priceEach}"></td>
+						<td th:text="${orD.quantityOrdered}"></td>
+						<td th:text="${orD.orderLineNumber}"></td>
+						<td th:text="${orD.id.orderNumber.orderDate}"></td>
+						<td th:text="${orD.id.orderNumber.shippedDate}"></td>
+						<td th:text="${orD.id.orderNumber.requiredDate}"></td>
+						<td th:text="${orD.id.orderNumber.orderNumber}"></td>
+						<td th:text="${orD.id.orderNumber.status}"></td>
 						<td>
-							<!-- Edita por medio del id -->
-							<a th:href="@{/compra-editar-} + ${comp.id}" class="btn btn-warning mr-3">Editar</a>
-							<a th:href="@{/compra-eliminar-} + ${comp.id}" class="btn btn-danger">Eliminar</a>
+							<a th:href="@{/orden-cancelar-}+ ${orD.id.orderNumber.orderNumber}"
+								style="font-size: .73rem;" class="btn btn-warning mr-3">Cancelar</a>
 						</td>
+						<td>
+							<!--Botón para agregar un comentario-->
+							<button style="font-size: .73rem;" type="button" class="btn btn-primary px-4" data-toggle="modal"
+								data-target="#myModal" th:attrappend="data-target=${orD.id.orderNumber.orderNumber}"><i
+									class="text-light far fa-comment-dots"></i>
+							</button>
+							<div class="modal fade" id="myModal" role="dialog"
+								th:attrappend="id=${orD.id.orderNumber.orderNumber}">
+								<div class="modal-dialog">
+
+
+									<div class="modal-content">
+										<div class="modal-header bg-pv--form">
+											<h5 class="modal-title">Agregá un comentario</h5>
+											<button type="button" class="close text-light" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+
+										<div class="modal-body body-gam ">
+
+												<!--Formulario para agregar un comentario -->
+
+											<form th:action="@{/order-add-comments-}+${orD.id.orderNumber.orderNumber}"
+												method="POST" th:object="${ordersF}"
+												class="text-light mt-3 mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
+												
+												
+												<div class="form-group col-md-12">
+													<label class="h5" for="comentario">Comentario <i
+															class="far fa-keyboard text-light ml-2"></i></label>
+													<textarea th:field="*{comments}" class="form-control" id="comentario"
+														rows="3"></textarea>
+												</div>												
+
+												<div class="row d-flex justify-content-between">
+													<button type="submit" class="btn btn-primary ml-5">Guardar</button>
+													<button type="button" class="btn btn-light mr-5"
+														data-dismiss="modal">Cancelar</button>
+												</div>
+											</form>
+
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</td>
+
+
+
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+
 	<footer id="footer" class="pb-4 pt-4 mt-5 footer-gam">
 		<div class="container text-light">
 			<div class="row text-center">

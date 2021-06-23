@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
@@ -20,7 +21,7 @@
 	<div th:replace="layouts/nav-tabs :: div"></div>
 	<div class="container">
 		<div class="show-case-2">
-			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Agregá un nuevo vehículo</h1>
+			<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Agregá una nueva categoría</h1>
 		</div>
 	</div>
 	<!--Formulario de alta -->
@@ -28,19 +29,21 @@
 		<div class="col-md-8 d-block m-auto">
 			<form th:action="@{/productlines-guardar}" method="POST" enctype="multipart/form-data"
 				th:object="${productlines}" class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
-
-				<div class="row d-flex justify-content-center">
+             		<div class="row d-flex justify-content-center">
+			
 					<div class="form-group col-md-5">
-						<label for="exampleFormControlTextarea1">Text descripción <i
-								class="far fa-keyboard text-light ml-2"></i></label>
-						<textarea th:field="*{htmlDescription}" class="form-control" id="exampleFormControlTextarea1"
-							rows="3"></textarea>
-					</div>
-					<div class="form-group col-md-5">
-						<label for="exampleFormControlTextarea1">Html descripción <i
+						<label for="exampleFormControlTextarea1">Descripción <i
 								class="far fa-keyboard text-light ml-2"></i></label>
 						<textarea th:field="*{textDescription}" class="form-control" id="exampleFormControlTextarea1"
-							rows="3"></textarea>
+							rows="3" required></textarea>
+							<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('textDescription')}" th:errors="*{textDescription}"></div>
+					</div>
+					<div class="form-group col-md-5">
+						<label for="exampleFormControlTextarea1">Html descripción (url) <i
+								class="far fa-keyboard text-light ml-2"></i></label>
+						<textarea th:field="*{htmlDescription}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3" required></textarea>
+							<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('htmlDescription')}" th:errors="*{htmlDescription}"></div>
 					</div>
 
 				</div>
@@ -48,7 +51,8 @@
 
 					<div class="form-group col-md-5">
 						<label for="nombreCategoria">Nombre de la categoría</label>
-						<input th:field="*{productLinesName}" type="text" class="form-control" id="nombreCategoria">
+						<input th:field="*{productLinesName}" type="text" class="form-control" id="nombreCategoria" required>
+						
 					</div>
 
 					<div class="form-group col-md-5">
@@ -66,6 +70,9 @@
 		</div>
 	</div>
 
+<!--   FOOTER    -->
+	<div th:replace="layouts/footer :: footer"></div>
+	
 	<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
 	<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
 	<script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
