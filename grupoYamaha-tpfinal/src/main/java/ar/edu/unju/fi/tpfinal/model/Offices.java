@@ -32,7 +32,7 @@ public class Offices {
 	private String city;
 	
 	@Min(value = 1,message = "debe ingresar un valor inferior o igual a 1 carcteres" )
-	@Max(value = 50,message = "debe ingresar un valor inferior o igual a 50 carcteres" )
+	@Max(value = 1000000000,message = "debe ingresar un valor inferior o igual a 50 carcteres" )
 	@Column(name = "offic_phone")
 	private int phone;
     
