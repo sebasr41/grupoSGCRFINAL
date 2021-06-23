@@ -48,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .permitAll()  
         .antMatchers("/usuario-registro")
         .permitAll()  
+        .antMatchers("/usuario-registrar")
+        .permitAll() 
         .anyRequest().authenticated() //Cualquier otro tiene que estar autenticado
         .and()
         .formLogin()

@@ -8,6 +8,7 @@ import ar.edu.unju.fi.tpfinal.enums.RolNombre;
 import ar.edu.unju.fi.tpfinal.model.Rol;
 import ar.edu.unju.fi.tpfinal.repository.RolRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,10 @@ public class RolService {
 
     public void save(Rol rol){
         rolRepository.save(rol);
+    }
+    
+    public List<Rol> verificar(){
+        return rolRepository.findAll();
     }
 
     public Optional<Rol> getByRolNombre(RolNombre rolNombre){

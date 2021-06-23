@@ -61,6 +61,7 @@ public class UsuarioController {
         Set<Rol> roles = new HashSet<>();
         roles.add(rolUser);
         usuario.setRoles(roles);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa"+usuario);
         usuarioService.save(usuario);
         mv.setViewName("/login");
         mv.addObject("registroOK", "Cuenta creada, " + usuario.getNombreUsuario() + ", ya puedes iniciar sesión");

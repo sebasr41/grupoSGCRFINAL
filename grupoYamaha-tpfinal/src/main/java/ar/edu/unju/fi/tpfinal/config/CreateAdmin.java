@@ -29,7 +29,23 @@ public class CreateAdmin implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /***
+    	/**  if (!rolService.verificar().isEmpty()) {
+			if (usuarioService.lista().isEmpty()) {
+				Usuario usuario = new Usuario();
+		    	String passwordEncoded = passwordEncoder.encode("admin");
+		    	usuario.setNombreUsuario("admin");
+		    	usuario.setPassword(passwordEncoded);
+		    	Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();
+		    	Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
+		    	Set<Rol> roles = new HashSet<>();
+		    	roles.add(rolAdmin);
+		    	roles.add(rolUser);
+		    	usuario.setRoles(roles);
+		    	usuarioService.save(usuario);
+			}
+		}
+    	
+    	
     	Usuario usuario = new Usuario();
     	String passwordEncoded = passwordEncoder.encode("admin");
     	usuario.setNombreUsuario("admin");
@@ -41,7 +57,6 @@ public class CreateAdmin implements CommandLineRunner {
     	roles.add(rolUser);
     	usuario.setRoles(roles);
     	usuarioService.save(usuario);
-         * 
-         */
+        */
     }
 }
