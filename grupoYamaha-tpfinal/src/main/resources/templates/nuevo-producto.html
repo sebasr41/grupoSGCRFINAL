@@ -28,7 +28,7 @@
 	<!--Formulario de alta -->
 	<div class="row">
 		<div class="col-md-8 d-block m-auto">
-			<form th:action="@{/products-save}" method="POST" th:object="${products}"
+			<form th:action="@{/products-save}" method="POST" th:object="${products}" th:if="${bandera}"
 				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
 								    	<input type="hidden" th:field="*{productCode}" />			    	
 					
@@ -88,7 +88,7 @@
 
 					<div class="form-group col-md-5">
 						<label for="exampleFormControlTextarea1">Descripción <i
-								class="far fa-keyboard text-light ml-2"></i></label>
+								class=""></i></label>
 						<textarea th:field="*{productDescription}" class="form-control" id="exampleFormControlTextarea1"
 							rows="3"></textarea>
 				 	  <div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}"></div>
@@ -98,7 +98,10 @@
 					<button type="submit" class="btn btn-primary">Guardar</button>
 				</div>
 			</form>
-
+         <div class="far fa-keyboard text-light ml-2" th:unless="${bandera}">
+		   	<h3 class="h3">Primero debe registrar una categoria <i class="fas fa-exclamation-triangle text-danger mx-2"></i></h3>
+		   	<a class="btn btn-primary my-2" role="button" href="/productlines">Ir al formulario de categoria </a>	
+		</div>
 
 		</div>
 	</div>
