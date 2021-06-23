@@ -13,7 +13,7 @@
 
 			<div>
 				<ul class="nav nav-tabs">					
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Categoría
@@ -23,7 +23,7 @@
 							<a class="dropdown-item" href="/productLines-list">Lista</a>							
 						</div>
 					</li>
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Autos
@@ -33,7 +33,7 @@
 							<a class="dropdown-item" href="/products-list">Lista</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Ordenes
@@ -43,7 +43,7 @@
 						</div>
 					</li>
 					
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Pagos
@@ -53,7 +53,7 @@
 						</div>						
 					</li>
 			
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Oficina
@@ -64,7 +64,7 @@
 						</div>						
 					</li>
 					
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Empleados
@@ -75,7 +75,7 @@
 						</div>						
 					</li>
 					
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle gam-text-light gam-border-bottom" href="#" id="navbarDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Clientes

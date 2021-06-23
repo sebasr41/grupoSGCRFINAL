@@ -62,7 +62,7 @@ public class ProductLinesController {
 			modelView = new ModelAndView("lista-categoria");
 			if (!file.isEmpty()) {
 				// linux
-				String rutaAbsoluta = "/home/mike47k/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
+				String rutaAbsoluta = "/home/gabriel/gam/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
 
 				/// grupoYamaha-tpfinal/src/main/resources/static/img
 				// Path directorioImagenes = Paths.get("src//main//resources//static/img");
@@ -85,8 +85,7 @@ public class ProductLinesController {
 			return modelView;
 		}
 	}
-	
-	@PreAuthorize("hasRole('ADMIN')")
+		
 	@GetMapping("/productLines-list")
 	public ModelAndView getProductLinesPage() {
 		ModelAndView model = new ModelAndView("lista-categoria");
