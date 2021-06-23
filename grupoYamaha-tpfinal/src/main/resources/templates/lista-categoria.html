@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.15.3/css/all.css}"
+		integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link th:rel="stylesheet" th:href="@{css/styles.css}">
+	<link rel="shortcut icon" href="img/favicon.png" />
+	<title>tpfinal-Programación Visual</title>
+</head>
+
+<body class="body-gam">
+	<!--   HEADER    -->
+	<div th:replace="layouts/header :: header"></div>
+	<!--   NAV WITH TABS    -->
+	<div th:replace="layouts/nav-tabs :: div"></div>
+	<div class="container">
+
+		<div class="container mb-5">
+			<div class="show-case-2">
+				<h1 class="text-center text-light text-uppercase pt-5 font-weight-bold">Categorías</h1>
+			</div>
+		</div>
+
+		<div class="row row-cols-1 row-cols-md-2">
+			<!--Asi se deberia ver-->
+			<div class="col mb-4">
+				<div class="card">
+					<img th:src="@{/img/showcase.jpg}" class="card-img-top" width="300" height="300"
+						alt="Imagen de categoria">
+					<div class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
+						<h5 class="card-title">Card title</h5>
+						<p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+							additional content. This content is a little bit longer.</p>
+						<a href="#" class="btn btn-primary">Ver modelos</a>
+					</div>
+				</div>
+			</div>
+			<!--Bucle-->
+
+			<div class="col mb-4" th:each="cat : ${productslines}">
+				<div class="card">
+					<img th:src="*{'imagPvisual/'+cat.image}" class="card-img-top" width="300" height="300"
+						alt="Imagen de categoria">
+					<div class="card-body card-gam-bg rounded-bottom rounded-lg text-light">
+						<h5 class="card-title" th:text="${cat.productLinesName}"></h5>
+						<p class="card-text" th:text="${cat.textDescription}"></p>
+
+					<!--Formulario de redirección-->
+						<form th:action="@{/products-busqueda}" th:object="${product}" th:method="POST">
+							<div class="row">
+								<!--Oculto-->
+								<input value="" type="hidden" class="form-control" id="nombreCategoria"
+									th:field=*{productName}>
+								<label for="precioProducto"></label> <input value="0" type="hidden" class="form-control"
+									id="precioProducto" th:field=*{buyPrice}>								
+								<select id="producto" th:field="*{productLines.productLinesName}" class="d-none">
+									<option th:value="${cat.productLinesName}" th:selected="false"></option>
+								</select>
+								<!--Oculto-->
+								<button type="submit" class="btn btn-primary mt-4 ml-3">Ver Modelos</button>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	<!--   FOOTER    -->
+	<div th:replace="layouts/footer :: footer"></div>
+
+	<script th:src="@{webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{webjars/popper.js/1.16.1-lts/popper.min.js}"></script>
+	<script th:src="@{webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
