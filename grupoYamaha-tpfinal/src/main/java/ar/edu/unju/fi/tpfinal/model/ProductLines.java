@@ -4,12 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
-
-
 
 @Component
 @Entity
@@ -17,8 +17,9 @@ import org.springframework.stereotype.Component;
 public class ProductLines {
 	
 	@Id
-	@NotNull(message = "La celda no debe quedar vacia, igrese un Nombre de la categoria, inferior a 50 caracteres")
-	@Column(name="prodL_line",length = 50)
+	@Size(max = 1)
+	@NotNull
+	@Column(name="prodL_line")
 	private String productLinesName; 
 	
 	@Size(max = 4000, message = "Ingrese un texto debe inferiro a 4000 caracteres")

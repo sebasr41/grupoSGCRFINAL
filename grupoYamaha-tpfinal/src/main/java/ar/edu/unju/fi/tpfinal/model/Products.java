@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,33 +37,34 @@ public class Products {
             @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
 	private String productCode;//es varchar
 	@Size(max=70, message = "El text debe ser inferior o igual a 70 caracteres")
-	@NotNull(message = "La casilla no debe quedar vacia, Ingrese nombre de producto")
+	@NotBlank(message = "La casilla no debe quedar vacia, Ingrese nombre de producto")
 	@Column(name = "produc_name")
 	private String productName;
 	
 	@Size(max=10, message="El texto debe ser inferior o igual a 10 caracteres")
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese escala de producto")
+	@NotBlank(message = "La casilla no debe quedar vacia, ingrese escala de producto")
 	@Column(name = "produc_scale")
 	private String productScale;
 	
 	@Size(max=50, message="El texto debe ser inferior o igual a 50 caracteres")
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese Empresa proveniente del producto")
+	@NotBlank(message = "La casilla no debe quedar vacia, ingrese Empresa proveniente del producto")
 	@Column(name = "produc_vendedor")
 	private String productVendor;
 	
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese una descripción del producto")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "produc_description")
 	private String productDescription;//text
-	
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese STOCK producto")
+		
+	@Min(value = 1, message = "La casilla no debe quedar vacia, su valor puede ir desde 0 como minimo")
 	@Column(name = "produc_quantityinStock")
 	private int quantityInStock;//smallint
-	
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese PRECIO del producto")
+
+	@Min(value = 1, message = "La casilla no debe quedar vacia, su valor puede ir desde 0 como minimo")
 	@Column(name = "produc_buyprice",scale = 2)
 	private double buyPrice;
 	
-	@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio sugerido por el fabricante (MSRP)")
+	
+	@DecimalMin(value = "0.1",message =  "La casilla no debe quedar vacia, ingrese algun Precio sugerido por el fabricante (MSRP), superior a 1")
 	@Column(name = "produc_msrp", scale = 2)
 	private double MSRP;
 	

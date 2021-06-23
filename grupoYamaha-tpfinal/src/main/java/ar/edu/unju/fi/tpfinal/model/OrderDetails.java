@@ -7,6 +7,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
@@ -24,15 +28,16 @@ public class OrderDetails implements Serializable{
 	@EmbeddedId //Indica que es integrada como clave primaria
 	private OrderDetailsId id;
 	
-	//@NotNull(message = "La casilla no debe quedar vacia, ingrese la cantidad del producto")
+	@Min(value = 1,message = "El stock debe ser igual o mayor a 1")
+	@Max(value = 1000,message = "El stock debe ser igual o menor a 1000 productos")	
 	@Column(name = "orderDet_quantityOrdered")
 	private int quantityOrdered;
 	
-	//@NotNull(message = "La casilla no debe quedar vacia, ingrese Precio del producto")
 	@Column(name = "orderDet_priceEach", scale = 2)
 	private double priceEach;
-	
-	//@NotNull(message = "La casilla no debe quedar vacia")
+
+	@Min(value = 1,message = "El stock debe ser igual o mayor a 1")
+	@Max(value = 18,message = "El stock debe ser igual o menor a 18 productos")
 	@Column(name = "orderDet_orderLineNumber")
 	private int orderLineNumber;//smallint
 	 

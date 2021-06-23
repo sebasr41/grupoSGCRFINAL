@@ -35,7 +35,7 @@
 					<div class="form-group col-md-5">
 						<label for="customerName">Nombre de cliente <i class="fas fa-signature text-light ml-2"></i></label>
 						<input th:field="*{customerName}" type="text" class="form-control" id="customerName">
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></div>
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" ></div>
 					</div>
 					<div class="form-group col-md-5">
 						<label for="contactFirstName">Apellido de contacto <i class="fas fa-signature text-light ml-2"></i></label>
@@ -86,7 +86,7 @@
 				<div class="form-group col-md-5">
 						<label for="postalCode">Código postal</label>
 						<input th:field="*{postalCode}" type="number" class="form-control" id="postalCode">
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
+						
 					</div>
 					
 					<div class="form-group col-md-5">

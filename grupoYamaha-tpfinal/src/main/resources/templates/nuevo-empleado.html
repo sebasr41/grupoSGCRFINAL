@@ -40,10 +40,12 @@
 					<div class="form-group col-md-5">
 						<label for="nombre">Nombre <i class="fas fa-signature text-light ml-2"></i></label>
 						<input th:field="*{firstName}" type="text" class="form-control" id="nombre">
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
 					</div>
 					<div class="form-group col-md-5">
 						<label for="apellido">Apellido <i class="fas fa-signature text-light ml-2"></i></label>
 						<input th:field="*{lastName}" type="text" class="form-control" id="apellido">
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
 					</div>
 				</div>
 				<div class="row d-flex justify-content-center">
@@ -51,10 +53,12 @@
 						<label for="extension">Extensión</label>
 						<input th:field="*{extension}" type="text" class="form-control" id="extension"
 							placeholder="x5800">
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('extension')}" th:errors="*{extension}"></div>
 					</div>
 					<div class="form-group col-md-5">
 						<label for="correo">Correo <i class="fas fa-at text-light ml-2"></i></label>
 						<input th:field="*{email}" type="text" class="form-control" id="correo">
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 					</div>
 				</div>
 				<div class="row d-flex justify-content-center">
@@ -64,14 +68,13 @@
 							<option th:each="off : ${offices}" th:value="${off.officeCode}" th:text="${off.officeCode}"
 								th:selected="false"></option>
 						</select>
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('off.officeCode')}" th:errors="*{off.officeCode}"></div>
 					</div>
 
 					<div class="form-group col-md-5">
-						
-						
 							<label for="extension">Puesto de trabajo</label>
 							<input th:field="*{jobTitle}" type="text" class="form-control" id="extension">
-						
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></div>
 					</div>
 
 				</div>
@@ -82,6 +85,7 @@
 							<option th:each="prod : ${employlist}" th:value="${prod.employeeNumber}"
 								th:text="${prod.firstName}+ ' - '+ ${prod.jobTitle}" th:selected="false"></option>
 						</select>
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('employees.employeeNumber')}" th:errors="*{employees.employeeNumber}"></div>
 					</div>
 
 				</div>

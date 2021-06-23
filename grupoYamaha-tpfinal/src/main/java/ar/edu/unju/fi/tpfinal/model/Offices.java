@@ -6,7 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.Size;
+
 
 import org.springframework.stereotype.Component;
 
@@ -21,32 +26,42 @@ public class Offices {
 	private Long officeCode;//varchar clave principal
 	
 	
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "offic_city")
 	private String city;
 	
-	
+	@Min(value = 1,message = "debe ingresar un valor inferior o igual a 1 carcteres" )
+	@Max(value = 50,message = "debe ingresar un valor inferior o igual a 50 carcteres" )
 	@Column(name = "offic_phone")
 	private int phone;
-	
-	
+    
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "offic_addressLine1")
 	private String addressLine1;
 	
+
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
 	@Column(name = "offic_addressLine2")
 	private String addressLine2;
 	
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
 	@Column(name = "offic_state")
 	private String state;//creo q es string
 	
-	
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "offic_country")
 	private String country;
-	
-	
+
+	@Size(max = 15, message = " ingrese un valor inferior o igual a 15 caracteres")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "offic_postalCode")
 	private String postalCode;
-	
-	
+
+	@Size(max = 10, message = " ingrese un valor inferior o igual a 10 caracteres")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "offic_territory")
 	private String territory;
 	/**

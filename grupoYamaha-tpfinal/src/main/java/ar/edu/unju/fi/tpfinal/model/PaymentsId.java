@@ -24,7 +24,7 @@ public class PaymentsId implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "customer_number")
 	private Customers customerNumber;
-
+	
 	@Column(name="pay_checknumber")//varchar clave principal
 	private String checkNumber;
 	

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,22 +25,28 @@ public class Employees {
 	@Column(name = "empl_employeenumber")//le pongo id empl_id
 	private Long employeeNumber;//int clave principal//int clave principal
 	
+	@NotBlank(message = "La casilla no debe quedar vacia")
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
 	@Column(name = "empl_lastname")
 	private String lastName;
 	
-	
+	@NotBlank(message = "La casilla no debe quedar vacia")
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
 	@Column(name = "empl_firstname")
 	private String firstName;
 	
-	
+	@NotBlank(message = "La casilla no debe quedar vacia")
+	@Size(max = 10, message = " ingrese un valor inferior o igual a 10 caracteres")
 	@Column(name = "empl_extension")
 	private String extension;
 	
-	
+	@Size(max = 100, message = " ingrese un valor inferior o igual a 100 caracteres")
+	@NotBlank(message = "La casilla no debe quedar vacia")
 	@Column(name = "empl_email")
 	private String email;
 	
-	
+	@NotBlank(message = "La casilla no debe quedar vacia")
+	@Size(max = 50, message = " ingrese un valor inferior o igual a 50 caracteres")
 	@Column(name = "empl_jobtitle")
 	private String jobTitle;
 	

@@ -8,7 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,46 +28,56 @@ public class Customers {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cust_numero", nullable = false)//le pongo id
 	private Long customerNumber;//int clave principal
-	
-	//@NotNull
-	@Column(name = "cust_customername",length = 50, nullable = false)
+		
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@NotBlank(message = "La celda no debe quedar vacia, igrese un Nombre de cliente, inferior a 50 caracteres")
+	@Column(name = "cust_customername")
 	private String customerName;
 	
-	//@NotNull
-	@Column(name = "cust_contactlastname",length = 50, nullable = false)
+	@NotBlank(message = "La celda no debe quedar vacia, igrese un Nombre apellido, inferior a 50 caracteres")
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@Column(name = "cust_contactlastname")
 	private String contactLastName;
 	
-	//@NotNull
-	@Column(name = "cust_contactfirstname",length = 50, nullable = false)
+	@NotBlank(message = "La celda no debe quedar vacia, igrese el nombre de contacto, inferior a 50 caracteres")
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@Column(name = "cust_contactfirstname")
 	private String contactFirstName;
 	
-	//@NotNull
-	@Column(name = "cust_phone",length = 50, nullable = false)
+	@NotBlank(message = "La celda no debe quedar vacia, igrese el numero de telefono, inferior a 50 caracteres")
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@Column(name = "cust_phone")
 	private String phone;//es varchar es la variable
 	
-	//@NotNull
-	@Column(name = "cust_addressLine1",length = 50, nullable = false)
+	@Size(max = 50, message = "debe ingresar un valor inferior a 50 carcteres")
+	@NotBlank(message = "La celda no debe quedar vacia, igrese dirección, inferior a 50 caracteres")
+	@Column(name = "cust_addressLine1")
 	private String addressLine1;
 	
-	@Column(name = "cust_addressLine2",length = 50)
+	@Size(max = 50, message = "debe ingresar un valor inferior a 50 carcteres")
+	@Column(name = "cust_addressLine2")
 	private String addressLine2;
 	
-	//@NotNull
-	@Column(name = "cust_city",length = 50, nullable = false)
+	@Size(max = 50, message = "debe ingresar un valor inferior a 50 carcteres")
+	@NotBlank(message = "La celda no debe quedar vacia, igrese un Nombre de a ciudad, inferior a 50 caracteres")
+	@Column(name = "cust_city")
 	private String city;
 	
-	@Column(name = "cust_state",length = 50)
+	@Size(max = 50, message = "debe ingresar un valor inferior a 50 carcteres")
+	@Column(name = "cust_state")
 	private String state;
 	
-	@Column(name = "cust_postalCode",length = 15)
+	@Size(max = 15, message = "debe ingresar un valor inferior a 15 carcteres")
+	@Column(name = "cust_postalCode")
 	private String postalCode;
 	
-	//@NotNull
-	@Column(name = "cust_coutry",length = 50, nullable = false)
+	@Size(max = 50, message = "debe ingresar un valor inferior a 50 carcteres")
+	@NotBlank(message = "La celda no debe quedar vacia, igrese un nombre de pais, inferior a 50 caracteres")
+	@Column(name = "cust_coutry")
 	private String coutry;
 	
-	
-	@Column(name = "cust_creditlimit",scale = 2)
+	@DecimalMin(value = "0.01")
+	@Column(name = "cust_creditlimit")
 	private Double creditLimit;
 
 	@ManyToOne
