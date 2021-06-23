@@ -17,9 +17,11 @@
 	      
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	          <ul class="navbar-nav mr-auto">            
-	            <li class="nav-item">
-	              <a class="nav-link" href="/crearusuario">Creá tu cuenta</a>
-	            </li>    
+	           <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </form>    
 	            <li class="nav-item">
 	              <a class="nav-link" href="/productlines">Acciones</a>
 	            </li>        	         
@@ -39,6 +41,7 @@
 	            <li class="nav-item">
 	              <a class="btn-gam-repo" role="button" href="https://github.com/sebasr41/grupoSGCRFINAL/tree/master" target="_blank">Nuestro repositorio<i class="fab fa-github"></i></a>
 	            </li>
+	             
 	          </ul>         
 	        </div>
 	    </nav>

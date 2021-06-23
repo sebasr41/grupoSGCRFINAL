@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,8 @@ public class ProductsController {
 
 	@Autowired
 	private OrderDetails orderdetails;
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/products")
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);
@@ -62,7 +64,8 @@ public class ProductsController {
 
 		return "nuevo-producto";
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/products-save")
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products") Products products,
 			BindingResult resultadoValidacion, RedirectAttributes attribute) {
@@ -116,7 +119,7 @@ public class ProductsController {
 		return model;
 
 	}
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/products-eliminar-{id}")
 	public ModelAndView getProductsEliminarPage(@PathVariable(value = "id") String id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/products-list");
@@ -134,7 +137,8 @@ public class ProductsController {
 		
 		return modelView;
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/products-editar-{id}")
 	public ModelAndView getProductsEditPage(@PathVariable(value = "id") String id) {
 
@@ -149,7 +153,8 @@ public class ProductsController {
 
 		return modelView;
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/products-busqueda")
 	public String buscarProducts(Model model, @ModelAttribute(name = "product") Products products) {
 

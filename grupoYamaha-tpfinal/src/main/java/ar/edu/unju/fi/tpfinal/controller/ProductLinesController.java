@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,14 +35,16 @@ public class ProductLinesController {
 	private IProductLinesService productolinesService;
 	@Autowired
 	private Products products;
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/productlines")
 	public String getProductLinesPage(Model model) {
 		productlines.setImage("");
 		model.addAttribute("productlines", productlines);
 		return "nueva-categoria";
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/productlines-guardar")
 	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines,
 			@RequestParam("file") MultipartFile file, BindingResult resultadoValidacion) throws IOException {
@@ -80,7 +83,8 @@ public class ProductLinesController {
 			return modelView;
 		}
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/productLines-list")
 	public ModelAndView getProductLinesPage() {
 		ModelAndView model = new ModelAndView("lista-categoria");
@@ -90,7 +94,8 @@ public class ProductLinesController {
 		return model;
 
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/productolines-eliminar-{id}")
 	public ModelAndView getProductolinesEliminarPage(@PathVariable(value = "id") String id) {
 		// redirect recarga la lista de cuentas
@@ -98,7 +103,8 @@ public class ProductLinesController {
 		productolinesService.eliminarProductLines(id);
 		return modelView;
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/productolines-editar-{id}")
 	public ModelAndView getProductolinesEditPage(@PathVariable(value = "id") String id) {
 
