@@ -77,7 +77,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ1.setEmail("cristianmichel33@gmail.com");
 			employ1.setFirstName("Cristian");
 			employ1.setLastName("Michel");
-			employ1.setJobTitle("Boss");
+			employ1.setJobTitle("CEO");
 			employ1.setOffices(oficina);
 			employ1.setExtension("x1000");
 			
@@ -86,7 +86,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ4.setEmail("roxanayvbenicio@gmail.com");
 			employ4.setFirstName("Roxana");
 			employ4.setLastName("Benicio");
-			employ4.setJobTitle("Admin");
+			employ4.setJobTitle("Customer Maanager");
 			employ4.setExtension("x1000");
 			employ4.setEmployees(employ1);
 			employ4.setOffices(oficina);
@@ -104,7 +104,7 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			employ2.setEmail("SebasR432@gmail.com");
 			employ2.setFirstName("Seba");
 			employ2.setLastName("Rojas");
-			employ2.setJobTitle("Deputy Chief");
+			employ2.setJobTitle("Executive Director");
 			employ2.setExtension("x1000");
 			employ2.setEmployees(employ1);
 			employ2.setOffices(oficina);

@@ -62,7 +62,7 @@ public class ProductLinesController {
 			modelView = new ModelAndView("lista-categoria");
 			if (!file.isEmpty()) {
 				// linux
-				String rutaAbsoluta = "/home/gabriel/gam/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
+				String rutaAbsoluta = "/home/mike47k/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
 
 				/// grupoYamaha-tpfinal/src/main/resources/static/img
 				// Path directorioImagenes = Paths.get("src//main//resources//static/img");

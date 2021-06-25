@@ -8,7 +8,7 @@ import ar.edu.unju.fi.tpfinal.model.Customers;
 
 public interface ICustomersService {
 	
-	public void guardarCustomers(Customers customers);
+	public Customers guardarCustomers(Customers customers);
 
 	public void eliminarCustomers(Long id);
 

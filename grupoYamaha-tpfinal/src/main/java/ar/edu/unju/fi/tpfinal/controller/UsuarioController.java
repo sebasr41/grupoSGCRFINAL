@@ -4,22 +4,34 @@ package ar.edu.unju.fi.tpfinal.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.apache.commons.lang3.StringUtils;
 
 import ar.edu.unju.fi.tpfinal.enums.RolNombre;
+import ar.edu.unju.fi.tpfinal.model.Customers;
+import ar.edu.unju.fi.tpfinal.model.Employees;
 import ar.edu.unju.fi.tpfinal.model.Rol;
 import ar.edu.unju.fi.tpfinal.model.Usuario;
+import ar.edu.unju.fi.tpfinal.service.ICustomersService;
+import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.RolService;
 import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+
+import javax.validation.Valid;
 
 @Controller
 public class UsuarioController {
+	
+	@Autowired
+	ICustomersService customerService;
 
     @Autowired
     UsuarioService usuarioService;
@@ -29,38 +41,49 @@ public class UsuarioController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    Usuario usuario;
+    
+    @Autowired
+    IEmployeesService employeService;
 
     @GetMapping("/usuario-registro")
-    public String registro(){
+    public String registro(Model model){
+    	model.addAttribute("usuario", usuario);
         return "registro";
     }
 
     @PostMapping("/usuario-registrar")
-    public ModelAndView registrar(String nombreUsuario, String password){
+    public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario){
         ModelAndView mv = new ModelAndView();
-        if(StringUtils.isBlank(nombreUsuario)){
+        if(StringUtils.isBlank(usuario.getNombreUsuario())){
             mv.setViewName("/usuario-registro");
             mv.addObject("error", "el nombre no puede estar vacío");
             return mv;
         }
-        if(StringUtils.isBlank(password)){
+        if(StringUtils.isBlank(usuario.getPassword())){
             mv.setViewName("/usuario-registro");
             mv.addObject("error", "la contraseña no puede estar vacía");
             return mv;
         }
-        if(usuarioService.existsByNombreusuario(nombreUsuario)){
+        if(usuarioService.existsByNombreusuario(usuario.getNombreUsuario())){
             mv.setViewName("/usuario-registro");
             mv.addObject("error", "ese nombre de usuario ya existe");
             return mv;
         }
-        Usuario usuario = new Usuario();
-        usuario.setNombreUsuario(nombreUsuario);
-        usuario.setPassword(passwordEncoder.encode(password));
+        
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
         Set<Rol> roles = new HashSet<>();
         roles.add(rolUser);
         usuario.setRoles(roles);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa"+usuario);
+        //setemaos  un empleado en customer automaticamente luego guardamos y a la vez seteamos lo guardado en usuario y despues guardamos usuario
+        Customers custom = usuario.getCustomers();
+        Optional<Employees> gerente= employeService.getEmployeesPorId((long) 2);
+        custom.setEmployees(gerente.get());
+        usuario.setCustomers(customerService.guardarCustomers(custom));
+        
         usuarioService.save(usuario);
         mv.setViewName("/login");
         mv.addObject("registroOK", "Cuenta creada, " + usuario.getNombreUsuario() + ", ya puedes iniciar sesión");

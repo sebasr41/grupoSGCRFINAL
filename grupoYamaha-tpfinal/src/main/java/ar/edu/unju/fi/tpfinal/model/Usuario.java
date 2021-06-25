@@ -3,10 +3,15 @@ package ar.edu.unju.fi.tpfinal.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.HashSet;
 import java.util.Set;
-
+@Component
 @Entity
+@Table(name="USUARIOS")
 public class Usuario {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,6 +23,10 @@ public class Usuario {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles = new HashSet<>();
+    
+    @Autowired
+    @OneToOne
+    private Customers customers;
 
     public Usuario() {
     }
@@ -26,8 +35,18 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
     }
+    
+    
 
-    public int getId() {
+    public Customers getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(Customers customers) {
+		this.customers = customers;
+	}
+
+	public int getId() {
         return id;
     }
 

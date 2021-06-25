@@ -16,9 +16,9 @@ public class CustomersServiceImp implements ICustomersService{
 	@Autowired
 	private ICustomersRepository customersRepository;
 	@Override
-	public void guardarCustomers(Customers customers) {
+	public Customers guardarCustomers(Customers customers) {
 		// TODO Auto-generated method stub
-		customersRepository.save(customers);
+		return customersRepository.save(customers);
 	}
 
 	@Override

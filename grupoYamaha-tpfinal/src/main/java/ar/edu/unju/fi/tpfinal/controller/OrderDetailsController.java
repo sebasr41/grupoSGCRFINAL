@@ -110,7 +110,7 @@ public class OrderDetailsController {
 		return uuid;
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@PostMapping("/order-form-{id}")
 	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id,
 			@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
@@ -168,7 +168,7 @@ public class OrderDetailsController {
 
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@GetMapping("/payments-list")
 	public ModelAndView getPaymentsPage() {
 		

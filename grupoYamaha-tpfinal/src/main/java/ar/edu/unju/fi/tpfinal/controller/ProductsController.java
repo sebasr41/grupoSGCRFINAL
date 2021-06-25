@@ -153,7 +153,7 @@ public class ProductsController {
 		return modelView;
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@PostMapping("/products-busqueda")
 	public String buscarProducts(Model model, @ModelAttribute(name = "product") Products products) {
 
