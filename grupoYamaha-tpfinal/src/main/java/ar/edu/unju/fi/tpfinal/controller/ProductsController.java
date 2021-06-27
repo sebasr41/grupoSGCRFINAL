@@ -91,6 +91,7 @@ public class ProductsController {
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-producto");
 			List<ProductLine> productslines = productslinesService.obtenerProductLines();
+			modelView.addObject("bandera", true);
 			modelView.addObject("products", products);
 			modelView.addObject("productslines", productslines);
 			return modelView;

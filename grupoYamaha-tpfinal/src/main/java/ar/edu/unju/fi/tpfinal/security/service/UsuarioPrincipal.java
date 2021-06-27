@@ -16,7 +16,11 @@ import java.util.stream.Collectors;
 
 public class UsuarioPrincipal implements UserDetails {
 
-    private int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
     private String nombreUsuario;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
