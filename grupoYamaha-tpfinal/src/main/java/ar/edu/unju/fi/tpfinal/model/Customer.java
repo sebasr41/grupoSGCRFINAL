@@ -76,7 +76,7 @@ public class Customer {
 	@Column(name = "cust_coutry")
 	private String coutry;
 	
-	@DecimalMin(value = "0.01")
+	@DecimalMin(value = "10000.0")
 	@Column(name = "cust_creditlimit")
 	private Double creditLimit;
 

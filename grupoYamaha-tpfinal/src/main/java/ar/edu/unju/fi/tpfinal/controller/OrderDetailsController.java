@@ -11,6 +11,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,11 +31,13 @@ import ar.edu.unju.fi.tpfinal.model.Order;
 import ar.edu.unju.fi.tpfinal.model.Payment;
 import ar.edu.unju.fi.tpfinal.model.PaymentId;
 import ar.edu.unju.fi.tpfinal.model.Product;
+import ar.edu.unju.fi.tpfinal.model.Usuario;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 import ar.edu.unju.fi.tpfinal.service.IPaymenService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
+import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 /**
  * 
  * 
@@ -61,6 +66,9 @@ public class OrderDetailsController {
 	private IProductsService productsService;
 	@Autowired
 	private Order orders;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
@@ -144,8 +152,10 @@ public class OrderDetailsController {
 	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id,
 			@Valid @ModelAttribute("orderdetails") OrderDetail orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		ModelAndView modelView;
-		System.out.println("aaaaaaaaaaaaa"+ resultadoValidacion.getErrorCount());
 		
+		
+		
+		System.out.println("aaaaaaaaaaaaaaa"+resultadoValidacion.getErrorCount());
 		if (resultadoValidacion.getErrorCount() >1) {
 			ModelAndView model = new ModelAndView("redirect:/products-list");
 			System.out.println("sssssssssssssssssssss"+ orderdetails);
@@ -160,24 +170,54 @@ public class OrderDetailsController {
 			
 		}
 		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Usuario usuario = usuarioService.getByNombreUsuario(userDetails.getUsername()).get();
+		Optional<Product> products = productsService.obtenerProductsPorId(id);
+		
+		//control de credito
+		Product proControl = products.get();
+		if ((proControl.getBuyPrice()*orderdetails.getQuantityOrdered()) > usuario.getCustomers().getCreditLimit()) {
+			ModelAndView model = new ModelAndView("redirect:/products-list");
+
+			
+			attribute.addFlashAttribute("warning", "No tenes limite suficiente");
+			return model;
+		}
+		
 		
 		
 		LocalDate hoy = LocalDate.now();
 		orders.setOrderDate(hoy);
 		// dia random hasta el dia especificado en este caso se uso 10 dias despues//
 		Random aelotorio = new Random();
+		
+		
+		
+		PaymentId payid =new PaymentId() ;
+		if (usuario.getCustomers() == null) {
+			//admin
+			Optional<Customer> custom = customerService.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
+			// auto-generamos un id string para que no tire que es nulo //
+			 payid = new PaymentId(custom.get(), generateString());
 
-		Optional<Customer> custom = customerService
-				.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
-		// auto-generamos un id string para que no tire que es nulo //
-		PaymentId payid = new PaymentId(custom.get(), generateString());
-
-		custom.ifPresent(orders::setCustomers);
+			custom.ifPresent(orders::setCustomers);
+		}else {
+			
+			//Usuario
+			orders.setCustomers(usuario.getCustomers());
+			payid = new PaymentId(usuario.getCustomers(), generateString());
+			
+		}
+		
+		
+		
+		
 		orders.setShippedDate(hoy.plusDays(aelotorio.nextInt(10)));
 		orders.setRequiredDate(orders.getShippedDate().plusDays(10));
 		orders.setStatus("Procesando");
 
-		Optional<Product> products = productsService.obtenerProductsPorId(id);
+		
 		products.ifPresent(oID::setProductCode);
 		orders.setOrderNumber(null);
 		oID.setOrderNumber(orderService.guardarOrders(orders));
@@ -185,6 +225,8 @@ public class OrderDetailsController {
 		modelView = new ModelAndView("redirect:/order-list");
 
 		Product precio = products.get();
+		precio.setQuantityInStock(precio.getQuantityInStock()-orderdetails.getQuantityOrdered());
+		productsService.guardarProducts(precio);
 		orderdetails.setPriceEach(precio.getBuyPrice());
 		Payment pay = new Payment(payid, hoy.plusDays(aelotorio.nextInt(7)),
 				orderdetails.getQuantityOrdered() * orderdetails.getPriceEach());

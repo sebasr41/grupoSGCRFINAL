@@ -5,11 +5,13 @@ package ar.edu.unju.fi.tpfinal.config;
  *
  */
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -84,8 +86,6 @@ public class CreateRoles implements CommandLineRunner {
 			    	usuario3.setPassword(passwordEncoded);
 			    	usuario3.setRoles(roles);
 			    	usuarioService.save(usuario3);
-		    	
-		    	
 		    	
 		    	
 		    	

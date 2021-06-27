@@ -37,7 +37,6 @@ public class OrderDetail implements Serializable{
 	private double priceEach;
 
 	@Min(value = 1,message = "El stock debe ser igual o mayor a 1")
-	@Max(value = 18,message = "El stock debe ser igual o menor a 18 productos")
 	@Column(name = "orderDet_orderLineNumber")
 	private int orderLineNumber;//smallint
 	 /**

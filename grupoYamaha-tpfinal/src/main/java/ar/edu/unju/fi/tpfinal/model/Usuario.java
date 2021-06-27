@@ -5,6 +5,7 @@ package ar.edu.unju.fi.tpfinal.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ public class Usuario {
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles = new HashSet<>();
     
+    @Valid
     @Autowired
     @OneToOne
     private Customer customers;
@@ -116,4 +118,10 @@ public class Usuario {
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
     }
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombreUsuario=" + nombreUsuario + ", password=" + password + ", roles=" + roles
+				+ ", customers=" + customers + "]";
+	}
+    
 }
