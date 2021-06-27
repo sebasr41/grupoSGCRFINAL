@@ -118,7 +118,7 @@
 					<div class="form-group col-md-5">
 						<label for="creditLimit">Límite de crédito <i class="fas fa-sort-numeric-up-alt text-light ml-2"></i></label>
 						<input th:field="*{customers.creditLimit}" type="number" class="form-control" id="creditLimit">
-						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('customers.creditLimit')}" th:errors="*{customers.creditLimit}"></div>
+						<div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('customers.creditLimit')}" th:errors="*{customers.creditLimit}" ></div>
 					</div>
 					
 					<div class="form-group col-md-5">

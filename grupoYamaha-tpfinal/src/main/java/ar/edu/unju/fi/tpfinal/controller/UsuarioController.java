@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,39 +72,48 @@ public class UsuarioController {
      * @return
      */
     @PostMapping("/usuario-registrar")
-    public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario){
+    public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario,final BindingResult resultadoValidacion) throws Exception{
         ModelAndView mv = new ModelAndView();
-        if(StringUtils.isBlank(usuario.getNombreUsuario())){
-            mv.setViewName("/usuario-registro");
-            mv.addObject("error", "el nombre no puede estar vacío");
-            return mv;
-        }
-        if(StringUtils.isBlank(usuario.getPassword())){
-            mv.setViewName("/usuario-registro");
-            mv.addObject("error", "la contraseña no puede estar vacía");
-            return mv;
-        }
-        if(usuarioService.existsByNombreusuario(usuario.getNombreUsuario())){
-            mv.setViewName("/usuario-registro");
-            mv.addObject("error", "ese nombre de usuario ya existe");
-            return mv;
-        }
+        System.out.println("sssssssssssssssss"+resultadoValidacion.getErrorCount());
+        if (resultadoValidacion.hasErrors()) {
+        	System.out.println("aaaaaaaaaaaaaaaaa");
+        	 ModelAndView mov = new ModelAndView("redirect:/usuario-registro");
+        	 mov.addObject("usuario", usuario);
+			return mov;
+		}else {
+			if(StringUtils.isBlank(usuario.getNombreUsuario())){
+	            mv.setViewName("/usuario-registro");
+	            mv.addObject("error", "el nombre no puede estar vacío");
+	            return mv;
+	        }
+	        if(StringUtils.isBlank(usuario.getPassword())){
+	            mv.setViewName("/usuario-registro");
+	            mv.addObject("error", "la contraseña no puede estar vacía");
+	            return mv;
+	        }
+	        if(usuarioService.existsByNombreusuario(usuario.getNombreUsuario())){
+	            mv.setViewName("/usuario-registro");
+	            mv.addObject("error", "ese nombre de usuario ya existe");
+	            return mv;
+	        }
+	        
+	        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+	        Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
+	        Set<Rol> roles = new HashSet<>();
+	        roles.add(rolUser);
+	        usuario.setRoles(roles);
+	        //setemaos  un empleado en customer automaticamente luego guardamos y a la vez seteamos lo guardado en usuario y despues guardamos usuario
+	        Customer custom = usuario.getCustomers();
+	        Optional<Employee> gerente= employeService.getEmployeesPorId((long) 2);
+	        custom.setEmployees(gerente.get());
+	        usuario.setCustomers(customerService.guardarCustomers(custom));
+	        
+	        usuarioService.save(usuario);
+	        mv.setViewName("/login");
+	        mv.addObject("registroOK", "Cuenta creada, " + usuario.getNombreUsuario() + ", ya puedes iniciar sesión");
+	        return mv;
+		}
         
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-        Set<Rol> roles = new HashSet<>();
-        roles.add(rolUser);
-        usuario.setRoles(roles);
-        //setemaos  un empleado en customer automaticamente luego guardamos y a la vez seteamos lo guardado en usuario y despues guardamos usuario
-        Customer custom = usuario.getCustomers();
-        Optional<Employee> gerente= employeService.getEmployeesPorId((long) 2);
-        custom.setEmployees(gerente.get());
-        usuario.setCustomers(customerService.guardarCustomers(custom));
-        
-        usuarioService.save(usuario);
-        mv.setViewName("/login");
-        mv.addObject("registroOK", "Cuenta creada, " + usuario.getNombreUsuario() + ", ya puedes iniciar sesión");
-        return mv;
     }
 
 
