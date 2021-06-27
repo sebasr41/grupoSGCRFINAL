@@ -90,10 +90,10 @@ public class ProductsController {
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-producto");
-			List<ProductLine> productslines = productslinesService.obtenerProductLines();
-			modelView.addObject("bandera", true);
+			List<ProductLine> productslines = productslinesService.obtenerProductLines();	
 			modelView.addObject("products", products);
 			modelView.addObject("productslines", productslines);
+			modelView.addObject("bandera", true);
 			return modelView;
 
 		}
