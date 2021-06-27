@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
-
+/**
+ * author CGRS
+ */
 
 
 import java.util.Optional;
@@ -18,17 +20,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.tpfinal.model.Offices;
+import ar.edu.unju.fi.tpfinal.model.Office;
 
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 
 
-
+/**
+ * 
+ * 
+ *
+ */
 @Controller
 public class OfficesController {
 	@Autowired
-	private Offices offices;
+	private Office offices;
 	@Autowired
 	private IOfficesService officesService;
 	
@@ -36,6 +42,11 @@ public class OfficesController {
 	private IEmployeesService employeesService;
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/offices")
 	public String getOfficesPage(Model model) {
 		model.addAttribute(offices);
@@ -44,8 +55,14 @@ public class OfficesController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param offices
+	 * @param resultadoValidacion
+	 * @return
+	 */
 	@PostMapping("/offices-guardar")
-	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("offices") Offices offices, BindingResult resultadoValidacion){
+	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("offices") Office offices, BindingResult resultadoValidacion){
 		ModelAndView modelView;
 		if(resultadoValidacion.hasErrors()) {
 		modelView= new ModelAndView("nueva-oficina"); 
@@ -61,6 +78,10 @@ public class OfficesController {
 		
 		}
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/offices-list")
 	public ModelAndView getOfficesPage() {
 		ModelAndView model = new ModelAndView("lista-oficina");
@@ -70,6 +91,12 @@ public class OfficesController {
 
 }
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @param attribute
+	 * @return
+	 */
 	@GetMapping("/office-eliminar-{id}")
 	public ModelAndView getOfficezEliminarPage(@PathVariable(value = "id") long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/offices-list");
@@ -88,12 +115,17 @@ public class OfficesController {
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/office-editar-{id}")
 	public ModelAndView getOfficeEditPage(@PathVariable(value = "id") long id) {
 
 		ModelAndView modelView = new ModelAndView("nueva-oficina");
 
-		Optional<Offices> offices = officesService.getOfficesPorId(id);
+		Optional<Office> offices = officesService.getOfficesPorId(id);
 
 		modelView.addObject("offices",offices);
 		

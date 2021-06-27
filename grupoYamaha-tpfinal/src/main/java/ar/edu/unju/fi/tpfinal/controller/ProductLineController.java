@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
-
+/**
+ * author CGRS
+ */
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,32 +23,66 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.tpfinal.model.ProductLines;
-import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.model.ProductLine;
+import ar.edu.unju.fi.tpfinal.model.Product;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
-
+/**
+ * 
+ * @author 2021
+ *
+ */
 @Controller
-public class ProductLinesController {
+public class ProductLineController {
 
 	@Autowired
-	private ProductLines productlines;
+	private ProductLine productlines;
 
 	@Autowired
 	private IProductLinesService productolinesService;
 	@Autowired
-	private Products products;
+	private Product products;
+	
+	
+	
+	
+	
+	
+	
 	
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/productlines")
+	/**
+	 * Metodo
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/productlines")//aqui lo de azul e scomo aparecera en la barra navegacion
 	public String getProductLinesPage(Model model) {
 		productlines.setImage("");
 		model.addAttribute("productlines", productlines);
 		return "nueva-categoria";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param productlines
+	 * @param file
+	 * @param resultadoValidacion
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping("/productlines-guardar")
-	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLines productlines,
+	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLine productlines,
 			@RequestParam("file") MultipartFile file, BindingResult resultadoValidacion) throws IOException {
 		//////// validation
 		ModelAndView modelView;
@@ -63,7 +99,6 @@ public class ProductLinesController {
 			if (!file.isEmpty()) {
 				// linux
 				String rutaAbsoluta = "/home/mike47k/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
-
 				/// grupoYamaha-tpfinal/src/main/resources/static/img
 				// Path directorioImagenes = Paths.get("src//main//resources//static/img");
 				// String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
@@ -85,7 +120,21 @@ public class ProductLinesController {
 			return modelView;
 		}
 	}
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/productLines-list")
 	public ModelAndView getProductLinesPage() {
 		ModelAndView model = new ModelAndView("lista-categoria");
@@ -96,7 +145,18 @@ public class ProductLinesController {
 
 	}
 	
+	
+	
+	
+	
+	
+	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/productolines-eliminar-{id}")
 	public ModelAndView getProductolinesEliminarPage(@PathVariable(value = "id") String id) {
 		// redirect recarga la lista de cuentas
@@ -105,12 +165,25 @@ public class ProductLinesController {
 		return modelView;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/productolines-editar-{id}")
 	public ModelAndView getProductolinesEditPage(@PathVariable(value = "id") String id) {
 
 		ModelAndView modelView = new ModelAndView("product-lines");
-		Optional<ProductLines> productlines = productolinesService.getProductolinesPorId(id);
+		Optional<ProductLine> productlines = productolinesService.getProductolinesPorId(id);
 		modelView.addObject("productlines", productlines);
 		return modelView;
 	}

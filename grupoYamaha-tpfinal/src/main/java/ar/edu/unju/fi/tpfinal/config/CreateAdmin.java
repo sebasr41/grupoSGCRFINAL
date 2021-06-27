@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.tpfinal.config;
-
+/**
+ * 
+ * @author RCGS 
+ *
+ */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +19,7 @@ import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service
+@Service 
 public class CreateAdmin implements CommandLineRunner {
 
     @Autowired

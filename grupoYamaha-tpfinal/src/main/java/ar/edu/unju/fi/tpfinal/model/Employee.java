@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.model;
-
+/**
+ * @author RCGS
+ */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="EMPLOYEES")
-public class Employees {
+public class Employee {
 	
 
 	@Id
@@ -53,20 +55,21 @@ public class Employees {
 	@ManyToOne
 	@Autowired
 	@JoinColumn(name="offic_officeCode")
-	private Offices offices;
+	private Office offices;
 	
 	@Autowired
 	@ManyToOne
 	@JoinColumn(name="reportsTo")
-	private Employees employees;
+	private Employee employees;
 	/**
-	 * 
+	 * Constructor de clase Employe
 	 */
-	public Employees() {
+	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	/**
+	 * Constructor de atributos de clases
 	 * @param employeeNumber
 	 * @param lastName
 	 * @param firstName
@@ -78,9 +81,9 @@ public class Employees {
 	 * @param employees
 	 */
 		
-	public Employees(Long employeeNumber, String lastName, String firstName,
-			String extension,  String email, String jobTitle,  Offices offices,
-			Employees employees) {
+	public Employee(Long employeeNumber, String lastName, String firstName,
+			String extension,  String email, String jobTitle,  Office offices,
+			Employee employees) {
 		super();
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
@@ -93,105 +96,120 @@ public class Employees {
 	}
 	
 	/**
-	 * @return the employeeNumber
+	 * 
+	 * Método "getter",
+	 * @return employeeNumber," muestra un valor" tipo Long
 	 */
 	public Long getEmployeeNumber() {
 		return employeeNumber;
 	}
 	/**
-	 * @param employeeNumber the employeeNumber to set
+	 * Método "setter",
+	 * @param employeeNumber,carga un valor tipo Long
 	 */
 	public void setEmployeeNumber(Long employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
 	/**
-	 * @return the lastName
+	 * Método "getter",
+	 * @return lastName,  muestra un valor tipo String
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 	/**
-	 * @param lastName the lastName to set
+	 * Método "setter",
+	 * @param lastName,carga un valor tipo String
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	/**
-	 * @return the firstName
+	 * Método "getter",
+	 * @return firstName, muestra un valor" tipo String
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 	/**
-	 * @param firstName the firstName to set
+	 * Método "setter",
+	 * @param firstName ,carga un valor tipo String
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	/**
-	 * @return the extension
+	 * Método "getter",
+	 * @return extension, muestra un valor tipo String
 	 */
 	public String getExtension() {
 		return extension;
 	}
 	/**
-	 * @param extension the extension to set
+	 * Método "setter",
+	 * @param extension ,carga un valor tipo String
 	 */
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
 	/**
-	 * @return the email
+	 * 
+	 * Método "getter",
+	 * @return email, muestra un valor tipo String
 	 */
 	public String getEmail() {
 		return email;
 	}
 	/**
-	 * @param email the email to set
+	 * Método "setter",
+	 * @param email,carga un valor tipo String
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	/**
-	 * @return the jobTitle
+	 * Método "getter",
+	 * @return jobTitle muestra un valor tipo String
 	 */
 	public String getJobTitle() {
 		return jobTitle;
 	}
 	/**
-	 * @param jobTitle the jobTitle to set
+	 * Método "setter",
+	 * @param jobTitle, carga un valor tipo String 
 	 */
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
 	/**
-	 * @return the offices
+	 * Método "getter",
+	 * @return offices, muestra un valor tipo String
 	 */
-	public Offices getOffices() {
+	public Office getOffices() {
 		return offices;
 	}
 	/**
-	 * @param offices the offices to set
+	 * Método "setter"
+	 * @param offices, carga un valor tipo String 
 	 */
-	public void setOffices(Offices offices) {
+	public void setOffices(Office offices) {
 		this.offices = offices;
 	}
 	/**
-	 * @return the employees
+	 * Método "getter",
+	 * @return employees, muestra un valor de la clase employee
 	 */
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 	/**
-	 * @param employees the employees to set
+	 * Método "setter",
+	 * @param employees, carga un valor de la clase employee 
 	 */
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 
-	
 
-	
-	
 }

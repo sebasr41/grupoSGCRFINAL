@@ -6,58 +6,69 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.tpfinal.model.Employees;
-import ar.edu.unju.fi.tpfinal.model.Offices;
-import ar.edu.unju.fi.tpfinal.repository.IEmployeesRepository;
+import ar.edu.unju.fi.tpfinal.model.Employee;
+import ar.edu.unju.fi.tpfinal.model.Office;
+import ar.edu.unju.fi.tpfinal.repository.IEmployeeRepository;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
-
+/**
+*
+*/
 @Service
-
 public class EmployeesServiceImp  implements IEmployeesService{
 
 	@Autowired
-	private IEmployeesRepository employeesRepository;
+	private IEmployeeRepository employeesRepository;
 	
 	@Autowired
 	private IOfficesService officeService;
 	
 	
-	
+	/**
+	 *
+	 */
 	@Override
-	public void guardarEmployees(Employees employees) {
+	public void guardarEmployees(Employee employees) {
 		// TODO Auto-generated method stub
 		employeesRepository.save(employees);
 	}
-
+	/**
+	 *
+	 */
 	@Override
 	public void eliminarEmployees(Long id) {
 		employeesRepository.deleteById(id);
 		
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public List<Employees> obtenerEmployees() {
+	public List<Employee> obtenerEmployees() {
 		
-		List<Employees> employees= (List<Employees>) employeesRepository.findAll();
+		List<Employee> employees= (List<Employee>) employeesRepository.findAll();
 		return employees;
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public Optional<Employees> getEmployeesPorId(Long id) {
+	public Optional<Employee> getEmployeesPorId(Long id) {
 		// TODO Auto-generated method stub
-		Optional<Employees> employees = employeesRepository.findById(id);
+		Optional<Employee> employees = employeesRepository.findById(id);
 		return employees;
 	}
-
+	/**
+	 *
+	 */
 	@Override
 	public void generarAdmins() {
 
-			List<Employees> employs = (List<Employees>) employeesRepository.findAll();
+			List<Employee> employs = (List<Employee>) employeesRepository.findAll();
 		
 		if(employs.isEmpty()) {
 			
-			Offices oficina = new Offices();
+			Office oficina = new Office();
 			oficina.setCity("S.S Jujuy");
 			oficina.setAddressLine1("Italo Palanca");
 			oficina.setAddressLine2("SUITE 300");
@@ -68,11 +79,11 @@ public class EmployeesServiceImp  implements IEmployeesService{
 			oficina.setTerritory("LAS");
 			oficina = officeService.guardarOffices(oficina);
 			
-			Employees employ1 = new Employees();
-			Employees employ2 = new Employees();
-			Employees employ3 = new Employees();
-			Employees employ4 = new Employees();
-			Employees employ5 = new Employees();
+			Employee employ1 = new Employee();
+			Employee employ2 = new Employee();
+			Employee employ3 = new Employee();
+			Employee employ4 = new Employee();
+			Employee employ5 = new Employee();
 			
 			employ1.setEmail("cristianmichel33@gmail.com");
 			employ1.setFirstName("Cristian");
@@ -128,16 +139,20 @@ public class EmployeesServiceImp  implements IEmployeesService{
 		
 		
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public List<Employees> obtenerEmployeesPorOfficeCode(Long officeCode) {
-		List<Employees> empleados = employeesRepository.findByOfficesOfficeCode(officeCode);
+	public List<Employee> obtenerEmployeesPorOfficeCode(Long officeCode) {
+		List<Employee> empleados = employeesRepository.findByOfficesOfficeCode(officeCode);
 		return empleados;
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public List<Employees> obtenerEmployeesPorEmployeesNumber(Long employeesNumber) {
-		List<Employees> empleados = employeesRepository.findByEmployeesEmployeeNumber(employeesNumber);
+	public List<Employee> obtenerEmployeesPorEmployeesNumber(Long employeesNumber) {
+		List<Employee> empleados = employeesRepository.findByEmployeesEmployeeNumber(employeesNumber);
 		return empleados;
 	}
 

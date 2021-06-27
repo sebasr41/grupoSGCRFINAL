@@ -1,19 +1,22 @@
 package ar.edu.unju.fi.tpfinal.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.List;
 import java.util.Optional;
 
-import ar.edu.unju.fi.tpfinal.model.ProductLines;
+import ar.edu.unju.fi.tpfinal.model.ProductLine;
 
 
 public interface IProductLinesService {
 	
-	public void guardarProductLines(ProductLines productLine);
+	public void guardarProductLines(ProductLine productLine);
 
 	public void eliminarProductLines(String id);
 
-	public List<ProductLines> obtenerProductLines();
+	public List<ProductLine> obtenerProductLines();
 
-	public Optional<ProductLines> getProductolinesPorId(String id);
+	public Optional<ProductLine> getProductolinesPorId(String id);
 
 }

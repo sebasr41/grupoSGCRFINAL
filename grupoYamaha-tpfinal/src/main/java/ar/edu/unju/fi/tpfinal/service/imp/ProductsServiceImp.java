@@ -1,51 +1,70 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.tpfinal.model.Products;
-import ar.edu.unju.fi.tpfinal.repository.IProductsRepository;
+import ar.edu.unju.fi.tpfinal.model.Product;
+import ar.edu.unju.fi.tpfinal.repository.IProductRepository;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
+/**
+ *
+ */
 @Service
 public class ProductsServiceImp implements IProductsService{
 
     @Autowired
-    private IProductsRepository productsRepository;
-
+    private IProductRepository productsRepository;
+    /**
+     * 
+     */
     @Override
-    public void guardarProducts(Products products) {
+    public void guardarProducts(Product products) {
         
         productsRepository.save(products);
     }
-
+    
+    /**
+     * 
+     */
     @Override
-    public List<Products> obtenerProducts() {
-        List<Products> products = (List<Products>) productsRepository.findAll();
+    public List<Product> obtenerProducts() {
+        List<Product> products = (List<Product>) productsRepository.findAll();
 		return products;
     }
-
+    /**
+     * 
+     */
     @Override
     public void eliminarProducts(String id) {
         
         productsRepository.deleteById(id);
     }
-
+    
+    /**
+     * 
+     */
     @Override
-    public Optional<Products> obtenerProductsPorId(String id) {
-        Optional<Products> products = productsRepository.findById(id);
+    public Optional<Product> obtenerProductsPorId(String id) {
+        Optional<Product> products = productsRepository.findById(id);
 		return products;
     }
-
+    /**
+     * 
+     */
 	@Override
 	public Object buscarProducts(String productsName,String id, double price) {
 	
 				//System.out.println("nombre " + productsName+ "id categoria "+id+ " precio "+ price );
 		
-		 List<Products> products = new ArrayList<Products>();
+		 List<Product> products = new ArrayList<Product>();
 				
 		        if(!productsName.isEmpty() && !id.isEmpty() && price >=0) {
 					products = productsRepository.findByProductNameAndProductLinesProductLinesNameAndBuyPriceGreaterThanEqual(productsName, id, price);

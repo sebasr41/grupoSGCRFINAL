@@ -22,10 +22,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="CUSTOMERS")
-public class Customers {
+public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)// la estrategia par agenerar el Id es detipo Identity osea toma en cuenta lso valors de la base de dato par agenerar el siguente valro del id
 	@Column(name = "cust_numero", nullable = false)//le pongo id
 	private Long customerNumber;//int clave principal
 		
@@ -83,23 +83,38 @@ public class Customers {
 	@ManyToOne
 	@Autowired
 	@JoinColumn(name="empl_employeenumber")
-	private Employees employees;
+	private Employee employees;
 	
 	/**
-	 * 
+	 * Constructor de la Clase Customer
 	 */
-	public Customers() {
+	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	
 	
-	
-	public Customers(@NotNull Long customerNumber, @NotNull String customerName, @NotNull String contactLastName,
+	/**
+	 * Constructor de los atributos:
+	 * @param customerNumber
+	 * @param customerName
+	 * @param contactLastName
+	 * @param contactFirstName
+	 * @param phone
+	 * @param addressLine1
+	 * @param addressLine2
+	 * @param city
+	 * @param state
+	 * @param postalCode
+	 * @param coutry
+	 * @param creditLimit
+	 * @param employees
+	 */
+	public Customer(@NotNull Long customerNumber, @NotNull String customerName, @NotNull String contactLastName,
 			@NotNull String contactFirstName, @NotNull String phone, @NotNull String addressLine1, String addressLine2,
 			@NotNull String city, String state, String postalCode, @NotNull String coutry, Double creditLimit,
-			Employees employees) {
+			Employee employees) {
 		super();
 		this.customerNumber = customerNumber;
 		this.customerName = customerName;
@@ -116,158 +131,180 @@ public class Customers {
 		this.employees = employees;
 	}
 
-
+	//Metodos accesores
 
 
 	/**
-	 * @return the customerNumber
+	 * Método "getter"
+	 * @return customerNumber, retorna valor tipo Long
 	 */
 	public Long getCustomerNumber() {
 		return customerNumber;
 	}
 
 	/**
-	 * @param customerNumber the customerNumber to set
+	 * Método "setter"
+	 * @param customerNumber, carga un valor tipo Long
 	 */
 	public void setCustomerNumber(Long customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
 	/**
-	 * @return the customerName
+	 * Método "getter" 
+	 * @return customerName, retorna valor tipo String
 	 */
 	public String getCustomerName() {
 		return customerName;
 	}
 
 	/**
-	 * @param customerName the customerName to set
+	 * Método "setter" 
+	 * @param customerName, carga valor tipo String
 	 */
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
 
 	/**
-	 * @return the contactLastName
+	 * Método "getter" 
+	 * @return contactLastName, retorna valor tipo Strting
 	 */
 	public String getContactLastName() {
 		return contactLastName;
 	}
 
 	/**
-	 * @param contactLastName the contactLastName to set
+	 * Método "setter"
+	 * @param contactLastName, "cargar un valor" tipo Strting
 	 */
 	public void setContactLastName(String contactLastName) {
 		this.contactLastName = contactLastName;
 	}
 
 	/**
-	 * @return the contactFirstName
+	 * Método "getter"
+	 * @return contactFirstName, retorna tipo String
 	 */
 	public String getContactFirstName() {
 		return contactFirstName;
 	}
 
 	/**
-	 * @param contactFirstName the contactFirstName to set
+	 * Método "setter" 
+	 * @param contactFirstName "carga un valor" tipo String 
 	 */
 	public void setContactFirstName(String contactFirstName) {
 		this.contactFirstName = contactFirstName;
 	}
 
 	/**
-	 * @return the phone
+	 * Método "getter"  
+	 * @return phone, "retornar el valor" tipo String
 	 */
 	public String getPhone() {
 		return phone;
 	}
 
 	/**
-	 * @param phone the phone to set
+	 * Método setter
+	 * @param phone, "cargar un valor" tipo Strting
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 	/**
-	 * @return the addressLine1
+	 * Método "getter" 
+	 * @return the addressLine1, tipo Strting
 	 */
 	public String getAddressLine1() {
 		return addressLine1;
 	}
 
 	/**
-	 * @param addressLine1 the addressLine1 to set
+	 * Método "setter",
+	 * @param addressLine1, "cargar un valor" tipo Strting
 	 */
 	public void setAddressLine1(String addressLine1) {
 		this.addressLine1 = addressLine1;
 	}
 
 	/**
-	 * @return the addressLine2
+	 * Método "setter"
+	 * @return addressLine2, setea un valor tipo String
 	 */
 	public String getAddressLine2() {
 		return addressLine2;
 	}
 
 	/**
-	 * @param addressLine2 the addressLine2 to set
+	 * Método "setter" 
+	 * @param addressLine2, "cargar un valor" tipo Strting
 	 */
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
 	}
 
 	/**
-	 * @return the city
+	 * Método "getter" 
+	 * @return city, retorna valor tipo Strting
 	 */
 	public String getCity() {
 		return city;
 	}
 
 	/**
-	 * @param city the city to set
+	 * Método "setter" 
+	 * @param city "cargar un valor" tipo Strting
 	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
 	/**
-	 * @return the state
+	 * Método "getter"
+	 * @return state, tipo String
 	 */
 	public String getState() {
 		return state;
 	}
 
 	/**
-	 * @param state the state to set
+	 * Método "setter" 
+	 * @param state,sirve para "cargar un valor" tipo String 
 	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 
 	/**
-	 * @return the postalCode
+	 * Método "getter" (usa get =obtener) 
+	 * @return the postalCode, tipo String
 	 */
 	public String getPostalCode() {
 		return postalCode;
 	}
 
 	/**
-	 * @param postalCode the postalCode to set
+	 * Método "setter" 
+	 * @param postalCode,cargar un valor postalCode
 	 */
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
 	/**
-	 * @return the coutry
+	 * Método "getter"
+	 * @return the coutry, tipo String
 	 */
 	public String getCoutry() {
 		return coutry;
 	}
 
 	/**
-	 * @param coutry the coutry to set
+	 * Método "setter"
+	 * @param coutry, carga un valor tipo String
 	 */
 	public void setCoutry(String coutry) {
 		this.coutry = coutry;
@@ -275,36 +312,42 @@ public class Customers {
 
 
 	/**
-	 * @return the creditLimit
+	 * Método "getter"
+	 * @return the creditLimit,  tipo String
 	 */
 	public Double getCreditLimit() {
 		return creditLimit;
 	}
 
 	/**
-	 * @param creditLimit the creditLimit to set
+	 * Método "setter" 
+	 * @param creditLimit "cargar un valor" tipo Double
 	 */
 	public void setCreditLimit(Double creditLimit) {
 		this.creditLimit = creditLimit;
 	}
 
 	/**
-	 * @return the employees
+	 * Método "getter" 
+	 * @return the employees, un valor de clase employees
 	 */
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
 	/**
-	 * @param employees the employees to set
+	 * Método "setter" 
+	 * @param employees carga un valor de la clase Employees
 	 */
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 
 
 
-
+	/**
+	 * @Override es para que pueda sobreescribiendo un método de alguna clase padre
+	 */
 	@Override
 	public String toString() {
 		return "Customers [customerNumber=" + customerNumber + ", customerName=" + customerName + ", contactLastName="

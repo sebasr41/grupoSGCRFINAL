@@ -1,19 +1,22 @@
 package ar.edu.unju.fi.tpfinal.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.List;
 import java.util.Optional;
 
-import ar.edu.unju.fi.tpfinal.model.Offices;
+import ar.edu.unju.fi.tpfinal.model.Office;
 
 public interface IOfficesService {
 
-	public Offices guardarOffices(Offices offices);
+	public Office guardarOffices(Office offices);
 
 	public void eliminarOffices(Long id);
 
-	public List<Offices> obtenerOffices();
+	public List<Office> obtenerOffices();
 
-	public Optional<Offices> getOfficesPorId(Long id);
+	public Optional<Office> getOfficesPorId(Long id);
 	
 
 }

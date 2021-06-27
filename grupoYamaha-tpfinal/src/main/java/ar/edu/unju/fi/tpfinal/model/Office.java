@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.model;
-
+/**
+ * @author RCGS
+ */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name="OFFICES")
-public class Offices {	
+public class Office {	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,16 +67,27 @@ public class Offices {
 	@Column(name = "offic_territory")
 	private String territory;
 	/**
-	 * 
+	 * Constructor de la clase OFFICE
 	 */
-	public Offices() {
+	public Office() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	
-	public Offices(Long officeCode, String city, int phone, String addressLine1,
+	/**
+	 * Constructor de Atirbutos de la clase OFFICE
+	 * @param officeCode
+	 * @param city
+	 * @param phone
+	 * @param addressLine1
+	 * @param addressLine2
+	 * @param state
+	 * @param country
+	 * @param postalCode
+	 * @param territory
+	 */
+	public Office(Long officeCode, String city, int phone, String addressLine1,
 			String addressLine2, String state,  String country, String postalCode,
 			 String territory) {
 		super();
@@ -90,117 +103,139 @@ public class Offices {
 	}
 
 
-	
+	/**
+	 * Método "getter", mostramos OfficeCode
+	 * @return officeCode, de tipo Long
+	 */
 	public Long getOfficeCode() {
 		return officeCode;
 	}
 
 
-
+	/**
+	 * Método Setter: establecemos OfficeCode
+	 * @param officeCode, carga un valor de tipo Long
+	 */
 	public void setOfficeCode(Long officeCode) {
 		this.officeCode = officeCode;
 	}
-
-
-
 	/**
-	 * @return the city
+	 * Método "getter"
+	 * @return city,mostramos un valor tipo String
 	 */
 	public String getCity() {
 		return city;
 	}
 	/**
-	 * @param city the city to set
+	 * Método Setter
+	 * @param city, establecemos un valor tipo String
 	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 	/**
-	 * @return the phone
+	 * Método "getter"
+	 * @return the phone,mostramos un valor tipo int
 	 */
 	public int getPhone() {
 		return phone;
 	}
 	/**
-	 * @param phone the phone to set
+	 * Método Setter
+	 * @param phone, establecemos un valor tipo int
 	 */
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 	/**
-	 * @return the addressLine1
+	 * Método "getter"
+	 * @return the addressLine1, mostramos un valor tipo  String
 	 */
 	public String getAddressLine1() {
 		return addressLine1;
 	}
 	/**
-	 * @param addressLine1 the addressLine1 to set
+	 * Método Setter
+	 * @param addressLine1, establecemos un valor tipo String 
 	 */
 	public void setAddressLine1(String addressLine1) {
 		this.addressLine1 = addressLine1;
 	}
 	/**
-	 * @return the addressLine2
+	 * Método "getter"
+	 * @return addressLine2, mostramos un valor tipo String
 	 */
 	public String getAddressLine2() {
 		return addressLine2;
 	}
 	/**
-	 * @param addressLine2 the addressLine2 to set
+	 * Método Setter
+	 * @param addressLine2,establecemos un valor tipo String
 	 */
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
 	}
 	/**
-	 * @return the state
+	 * Método getter
+	 * @return state,mostramos un valor tipo String 
 	 */
 	public String getState() {
 		return state;
 	}
 	/**
-	 * @param state the state to set
+	 * Método "setter"
+	 * @param state,establecemos un valor tipo String
 	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 	/**
-	 * @return the country
+	 * Método "getter"
+	 * @return country,mostramos un valor tipo String
 	 */
 	public String getCountry() {
 		return country;
 	}
 	/**
-	 * @param country the country to set
+	 * Método "setter"
+	 * @param country, establecemos un valor tipo String
 	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 	/**
-	 * @return the postalCode
+	 * Método "getter"
+	 * @return postalCode,mostramos un valor tipo String
 	 */
 	public String getPostalCode() {
 		return postalCode;
 	}
 	/**
-	 * @param postalCode the postalCode to set
+	 * Método "setter"
+	 * @param postalCode,establecemos un valor tipo String
 	 */
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 	/**
-	 * @return the territory
+	 * Método "getter"
+	 * @return territory, mostramos un valor tipo String
 	 */
 	public String getTerritory() {
 		return territory;
 	}
 	/**
-	 * @param territory the territory to set
+	 * Método "setter"
+	 * @param territory,establecemos un valor tipo String
 	 */
 	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
 
-
+	/**
+	 /**
+	 * es Metodo para que pueda sobreescribiendo un método de alguna clase padre
+	 */
 	@Override
 	public String toString() {
 		return "Offices [officeCode=" + officeCode + ", city=" + city + ", phone=" + phone + ", addressLine1="

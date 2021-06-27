@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
-
+/**
+ * author CGRS
+ */
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -16,13 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.tpfinal.model.Customers;
-import ar.edu.unju.fi.tpfinal.model.Employees;
+import ar.edu.unju.fi.tpfinal.model.Customer;
+import ar.edu.unju.fi.tpfinal.model.Employee;
 
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 
+/**
+ * 
+ * @author 2021
+ *
+ */
 @Controller
 public class CustomersController {
 
@@ -33,7 +40,7 @@ public class CustomersController {
 	private IEmployeesService employeesService;
 
 	@Autowired
-	private Customers customers;
+	private Customer customers;
 
 	@Autowired
 	private IEmployeesService employservice;
@@ -41,6 +48,11 @@ public class CustomersController {
 	private IOrdersService ordersService;
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/crearusuario")
 	public String getCustomersPage(Model model) {
 		model.addAttribute("customers", customers);
@@ -49,8 +61,14 @@ public class CustomersController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param customers
+	 * @param resultadoValidacion
+	 * @return
+	 */
 	@PostMapping("/usuario-guardar")
-	public ModelAndView getGuardarCustomersPage(@Valid @ModelAttribute("customers") Customers customers,
+	public ModelAndView getGuardarCustomersPage(@Valid @ModelAttribute("customers") Customer customers,
 			BindingResult resultadoValidacion) {
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
@@ -65,7 +83,7 @@ public class CustomersController {
 		else {
 			ModelAndView model = new ModelAndView("lista-usuario");
 
-			Optional<Employees> employees = employeesService
+			Optional<Employee> employees = employeesService
 					.getEmployeesPorId(customers.getEmployees().getEmployeeNumber());
 			employees.ifPresent(customers::setEmployees);
 
@@ -77,6 +95,10 @@ public class CustomersController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/customer-list")
 	public ModelAndView getCustomerPage() {
 		ModelAndView model = new ModelAndView("lista-usuario");
@@ -87,16 +109,27 @@ public class CustomersController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/customer-editar-{id}")
 	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
 		ModelAndView modelView = new ModelAndView("nuevo-usuario");
-		Optional<Customers> customers = customersService.getCustomersPorId(id);
+		Optional<Customer> customers = customersService.getCustomersPorId(id);
 		modelView.addObject("customers", customers);
 		
 		return modelView;
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @param attribute
+	 * @return
+	 */
 	@GetMapping("/customer-eliminar-{id}")
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/customer-list");

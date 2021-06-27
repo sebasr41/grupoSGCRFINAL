@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.tpfinal.security;
-
+/**
+ * 
+ * @author RCGS
+ */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http.authorizeRequests()
+    	//Necesario para evitar que la seguridad se aplique a los resources
+        //Como los css, imagenes y javascripts
     	.antMatchers("/include/**","/css/**","icons/**","/img/**","/js/**","/layer/**","/webjars/**","/layouts/**").permitAll()
         .antMatchers("/", "/home", "/error", "/fragments", "/forbidden", "/login")
         .permitAll()  
@@ -55,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .formLogin()
         .loginProcessingUrl("/signin")
         .loginPage("/login").permitAll()
+        //en caso de ser exitoso elingreso de datos en el login redirige a /home
         .defaultSuccessUrl("/home")
         .usernameParameter("nombreUsuario")
         .passwordParameter("password")
@@ -62,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
         .and()
         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        //en caso de ser no ser exitoso el ingreso de datos en el login redirige a "/login?logout"
         .logoutSuccessUrl("/login?logout").permitAll()
         .deleteCookies("JSESSIONID")
         .and()

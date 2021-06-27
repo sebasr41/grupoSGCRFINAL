@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
-
+/**
+ * author CGRS
+ */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.apache.commons.lang3.StringUtils;
 
 import ar.edu.unju.fi.tpfinal.enums.RolNombre;
-import ar.edu.unju.fi.tpfinal.model.Customers;
-import ar.edu.unju.fi.tpfinal.model.Employees;
+import ar.edu.unju.fi.tpfinal.model.Customer;
+import ar.edu.unju.fi.tpfinal.model.Employee;
 import ar.edu.unju.fi.tpfinal.model.Rol;
 import ar.edu.unju.fi.tpfinal.model.Usuario;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
@@ -26,7 +28,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
-
+/**
+ * 
+ * @author 2021
+ *
+ */
 @Controller
 public class UsuarioController {
 	
@@ -47,13 +53,23 @@ public class UsuarioController {
     
     @Autowired
     IEmployeesService employeService;
-
+    
+    /**
+     * 
+     * @param model
+     * @return
+     */
     @GetMapping("/usuario-registro")
     public String registro(Model model){
     	model.addAttribute("usuario", usuario);
         return "registro";
     }
 
+    /**
+     * 
+     * @param usuario
+     * @return
+     */
     @PostMapping("/usuario-registrar")
     public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario){
         ModelAndView mv = new ModelAndView();
@@ -79,8 +95,8 @@ public class UsuarioController {
         roles.add(rolUser);
         usuario.setRoles(roles);
         //setemaos  un empleado en customer automaticamente luego guardamos y a la vez seteamos lo guardado en usuario y despues guardamos usuario
-        Customers custom = usuario.getCustomers();
-        Optional<Employees> gerente= employeService.getEmployeesPorId((long) 2);
+        Customer custom = usuario.getCustomers();
+        Optional<Employee> gerente= employeService.getEmployeesPorId((long) 2);
         custom.setEmployees(gerente.get());
         usuario.setCustomers(customerService.guardarCustomers(custom));
         

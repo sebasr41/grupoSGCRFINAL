@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
-
+/**
+ * author CGRS
+ */
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
@@ -19,19 +21,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.tpfinal.model.Customers;
-import ar.edu.unju.fi.tpfinal.model.OrderDetails;
-import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
-import ar.edu.unju.fi.tpfinal.model.Orders;
-import ar.edu.unju.fi.tpfinal.model.Payments;
-import ar.edu.unju.fi.tpfinal.model.PaymentsId;
-import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.model.Customer;
+import ar.edu.unju.fi.tpfinal.model.OrderDetail;
+import ar.edu.unju.fi.tpfinal.model.OrderDetailId;
+import ar.edu.unju.fi.tpfinal.model.Order;
+import ar.edu.unju.fi.tpfinal.model.Payment;
+import ar.edu.unju.fi.tpfinal.model.PaymentId;
+import ar.edu.unju.fi.tpfinal.model.Product;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
 import ar.edu.unju.fi.tpfinal.service.IPaymenService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
-
+/**
+ * 
+ * 
+ *
+ */
 @Controller
 public class OrderDetailsController {
 
@@ -42,7 +48,7 @@ public class OrderDetailsController {
 	private IOrdersService orderService;
 
 	@Autowired
-	private OrderDetailsId oID;
+	private OrderDetailId oID;
 	
 
 	@Autowired
@@ -54,15 +60,21 @@ public class OrderDetailsController {
 	@Autowired
 	private IProductsService productsService;
 	@Autowired
-	private Orders orders;
+	private Order orders;
 
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/orden-cancelar-{id}")
 	public ModelAndView getOrderCancellPage(@PathVariable(value = "id") Long id, Model model) {
 
 		ModelAndView modelView = new ModelAndView("redirect:/order-list");
 
-		Optional<Orders> order = orderService.obtenerOrdersPorId(id);
+		Optional<Order> order = orderService.obtenerOrdersPorId(id);
 		System.out.println(order);
 		orders = order.get();
 		orders.setStatus("Cancelado");
@@ -75,6 +87,10 @@ public class OrderDetailsController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/order-list")
 	public ModelAndView getOrderPage() {
 		ModelAndView model = new ModelAndView("lista-ordenes");
@@ -86,11 +102,17 @@ public class OrderDetailsController {
 
 	}
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @param orders
+	 * @return
+	 */
 	@PostMapping("/order-add-comments-{id}")
-	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("ordersF") Orders orders) {
+	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("ordersF") Order orders) {
 		ModelAndView modelView = new ModelAndView("redirect:/order-list");
-		Optional<Orders> order = orderService.obtenerOrdersPorId(id);
-		Orders aux = order.get();
+		Optional<Order> order = orderService.obtenerOrdersPorId(id);
+		Order aux = order.get();
 		aux.setComments(orders.getComments());
 		
 		orderService.guardarOrders(aux);
@@ -110,10 +132,17 @@ public class OrderDetailsController {
 		return uuid;
 	}
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @param orderdetails
+	 * @param resultadoValidacion
+	 * @param attribute
+	 * @return
+	 */
 	@PostMapping("/order-form-{id}")
 	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id,
-			@Valid @ModelAttribute("orderdetails") OrderDetails orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
+			@Valid @ModelAttribute("orderdetails") OrderDetail orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		ModelAndView modelView;
 		System.out.println("aaaaaaaaaaaaa"+ resultadoValidacion.getErrorCount());
 		
@@ -138,26 +167,26 @@ public class OrderDetailsController {
 		// dia random hasta el dia especificado en este caso se uso 10 dias despues//
 		Random aelotorio = new Random();
 
-		Optional<Customers> custom = customerService
+		Optional<Customer> custom = customerService
 				.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
 		// auto-generamos un id string para que no tire que es nulo //
-		PaymentsId payid = new PaymentsId(custom.get(), generateString());
+		PaymentId payid = new PaymentId(custom.get(), generateString());
 
 		custom.ifPresent(orders::setCustomers);
 		orders.setShippedDate(hoy.plusDays(aelotorio.nextInt(10)));
 		orders.setRequiredDate(orders.getShippedDate().plusDays(10));
 		orders.setStatus("Procesando");
 
-		Optional<Products> products = productsService.obtenerProductsPorId(id);
+		Optional<Product> products = productsService.obtenerProductsPorId(id);
 		products.ifPresent(oID::setProductCode);
 		orders.setOrderNumber(null);
 		oID.setOrderNumber(orderService.guardarOrders(orders));
 		orderdetails.setId(oID);
 		modelView = new ModelAndView("redirect:/order-list");
 
-		Products precio = products.get();
+		Product precio = products.get();
 		orderdetails.setPriceEach(precio.getBuyPrice());
-		Payments pay = new Payments(payid, hoy.plusDays(aelotorio.nextInt(7)),
+		Payment pay = new Payment(payid, hoy.plusDays(aelotorio.nextInt(7)),
 				orderdetails.getQuantityOrdered() * orderdetails.getPriceEach());
 
 		paymentService.guardarPayment(pay);
@@ -168,7 +197,10 @@ public class OrderDetailsController {
 
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/payments-list")
 	public ModelAndView getPaymentsPage() {
 		

@@ -1,25 +1,28 @@
 package ar.edu.unju.fi.tpfinal.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.List;
 import java.util.Optional;
 
-import ar.edu.unju.fi.tpfinal.model.Employees;
-;
+import ar.edu.unju.fi.tpfinal.model.Employee;
+
 
 public interface IEmployeesService {
-	public void guardarEmployees(Employees employees);
+	public void guardarEmployees(Employee employees);
 
 	
 	public void eliminarEmployees(Long id);
 
-	public List<Employees> obtenerEmployees();
+	public List<Employee> obtenerEmployees();
 
-	public Optional<Employees> getEmployeesPorId(Long id);
+	public Optional<Employee> getEmployeesPorId(Long id);
 	
 	public void generarAdmins();
 	
-	public List<Employees> obtenerEmployeesPorOfficeCode(Long officeCode);
+	public List<Employee> obtenerEmployeesPorOfficeCode(Long officeCode);
 	
-	public List<Employees> obtenerEmployeesPorEmployeesNumber(Long employeesNumber);
+	public List<Employee> obtenerEmployeesPorEmployeesNumber(Long employeesNumber);
 
 }

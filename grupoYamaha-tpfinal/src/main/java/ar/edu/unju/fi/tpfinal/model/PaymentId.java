@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.model;
-
+/**
+ * @author RCGS
+ */
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -17,60 +19,80 @@ import org.springframework.stereotype.Component;
 import ar.edu.unju.fi.tpfinal.generator.StringPrefixedSequenceIdGenerator;
 @Component
 @Embeddable
-public class PaymentsId implements Serializable{
+public class PaymentId implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_number")
-	private Customers customerNumber;
+	private Customer customerNumber;
 	
 	@Column(name="pay_checknumber")//varchar clave principal
 	private String checkNumber;
-	
-	public PaymentsId() {
+	/**
+	 * Constructor PaymentId
+	 */
+	public PaymentId() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
-
-	public PaymentsId(Customers customerNumber, String checkNumber) {
+	/**
+	 * Constructor de los atributos de la clase PymentId
+	 * @param customerNumber
+	 * @param checkNumber
+	 */
+	public PaymentId(Customer customerNumber, String checkNumber) {
 		super();
 		this.customerNumber = customerNumber;
 		this.checkNumber = checkNumber;
 	}
 
 
-
-	public Customers getCustomerNumber() {
+	/**
+	 * Método "getter"
+	 * @return customerNumber, de clase Customer
+	 */
+	public Customer getCustomerNumber() {
 		return customerNumber;
 	}
 
-
-	public void setCustomerNumber(Customers customerNumber) {
+	/**
+	 * Metodo setter
+	 * @param customerNumber, de la clase Customer
+	 */
+	public void setCustomerNumber(Customer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
-
+	/**
+	 * Método "getter"
+	 * @return serialVersionUID un valor tipo long
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-
+	/**
+	 * Método "getter"
+	 * @return checkNumber, retorna un valor tipo string
+	 */
 	public String getCheckNumber() {
 		return checkNumber;
 	}
 
+	/**
+	 * Método "setter"
+	 * @param checkNumber, cargaun valor tipo string
+	 */
 	public void setCheckNumber(String checkNumber) {
 		this.checkNumber = checkNumber;
 	}
-
+	/**
+	 * es Metodo para que pueda sobreescribiendo un método de alguna clase padre
+	 */
 	@Override
 	public String toString() {
 		return "PaymentsId [customerNumber=" + customerNumber + "]";
 	}
 
-	
-	
-	
 }

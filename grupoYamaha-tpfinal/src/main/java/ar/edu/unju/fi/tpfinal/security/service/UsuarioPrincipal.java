@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.tpfinal.security.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

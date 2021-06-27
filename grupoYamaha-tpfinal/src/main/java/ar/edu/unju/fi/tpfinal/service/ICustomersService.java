@@ -1,22 +1,25 @@
 package ar.edu.unju.fi.tpfinal.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.List;
 import java.util.Optional;
 
-import ar.edu.unju.fi.tpfinal.model.Customers;
+import ar.edu.unju.fi.tpfinal.model.Customer;
 
 
 public interface ICustomersService {
 	
-	public Customers guardarCustomers(Customers customers);
+	public Customer guardarCustomers(Customer customers);
 
 	public void eliminarCustomers(Long id);
 
-	public List<Customers> obtenerCustomers();
+	public List<Customer> obtenerCustomers();
 
-	public Optional<Customers> getCustomersPorId(Long id);
+	public Optional<Customer> getCustomersPorId(Long id);
 	
-	public List<Customers> obtenerCustomersPorEmployeeNumber(Long employeeNumber);
+	public List<Customer> obtenerCustomersPorEmployeeNumber(Long employeeNumber);
 
 	
 }

@@ -17,20 +17,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.tpfinal.model.Employees;
-import ar.edu.unju.fi.tpfinal.model.Offices;
+import ar.edu.unju.fi.tpfinal.model.Employee;
+import ar.edu.unju.fi.tpfinal.model.Office;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
-
+/**
+ * 
+ * @author 2021
+ *
+ */
 @Controller
 
 public class EmployeesController {
 
 	@Autowired
-	private Employees employees;
+	private Employee employees;
 	@Autowired
-	private Offices offices;
+	private Office offices;
 	@Autowired
 	private IEmployeesService employeesService;
 	@Autowired
@@ -40,6 +44,11 @@ public class EmployeesController {
 	private ICustomersService customersService;
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/empleados")
 	public String getEmployeesPage(Model model) {
 		employeesService.generarAdmins();
@@ -53,15 +62,21 @@ public class EmployeesController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param employees
+	 * @param resultadoValidacion
+	 * @return
+	 */
 	@PostMapping("/empleado-guardar")
-	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("employees") Employees employees,
+	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("employees") Employee employees,
 			BindingResult resultadoValidacion) {
 
 		//validaciones  si hay error retorna el form
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-empleado");
-			List<Offices> offices = officesService.obtenerOffices();
+			List<Office> offices = officesService.obtenerOffices();
 			modelView.addObject("empleados", employees);
 			modelView.addObject("offices", offices);
 
@@ -72,11 +87,11 @@ public class EmployeesController {
 		else {
 
 			ModelAndView model = new ModelAndView("redirect:/employees-list");
-			Optional<Offices> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
+			Optional<Office> offices = officesService.getOfficesPorId(employees.getOffices().getOfficeCode());
 		
 
 			offices.ifPresent(employees::setOffices);
-			Optional<Employees> boss = employeesService.getEmployeesPorId(employees.getEmployees().getEmployeeNumber());
+			Optional<Employee> boss = employeesService.getEmployeesPorId(employees.getEmployees().getEmployeeNumber());
 			boss.ifPresent(employees::setEmployees);
 
 			employeesService.guardarEmployees(employees);
@@ -89,6 +104,10 @@ public class EmployeesController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/employees-list")
 	public ModelAndView getCustomerPage() {
 		ModelAndView model = new ModelAndView("lista-empleados");
@@ -99,10 +118,15 @@ public class EmployeesController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/employee-editar-{id}")
 	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
 		ModelAndView modelView = new ModelAndView("nuevo-empleado");
-		Optional<Employees> employees = employeesService.getEmployeesPorId(id);
+		Optional<Employee> employees = employeesService.getEmployeesPorId(id);
 		modelView.addObject("employees", employees);
 		modelView.addObject(offices);
 		modelView.addObject("employlist", employeesService.obtenerEmployees());
@@ -113,6 +137,12 @@ public class EmployeesController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @param attribute
+	 * @return
+	 */
 	@GetMapping("/employee-eliminar-{id}")
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/employees-list");

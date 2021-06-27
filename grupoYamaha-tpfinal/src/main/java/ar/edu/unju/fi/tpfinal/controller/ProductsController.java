@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
-
+/**
+ * author CGRS
+ */
 import java.util.List;
 import java.util.Optional;
 
@@ -17,22 +19,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.tpfinal.model.Customers;
-import ar.edu.unju.fi.tpfinal.model.OrderDetails;
-import ar.edu.unju.fi.tpfinal.model.ProductLines;
-import ar.edu.unju.fi.tpfinal.model.Products;
+import ar.edu.unju.fi.tpfinal.model.Customer;
+import ar.edu.unju.fi.tpfinal.model.OrderDetail;
+import ar.edu.unju.fi.tpfinal.model.ProductLine;
+import ar.edu.unju.fi.tpfinal.model.Product;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
-
+/**
+ * 
+ * @author 2021
+ *
+ */
 @Controller
 public class ProductsController {
 	@Autowired
-	private Products products;
+	private Product products;
 
 	@Autowired
-	private Customers custom;
+	private Customer custom;
 	
 	@Autowired
 	private IOrderDetailsService orderdetailsService;
@@ -47,9 +53,14 @@ public class ProductsController {
 	private IProductsService productsService;
 
 	@Autowired
-	private OrderDetails orderdetails;
+	private OrderDetail orderdetails;
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/products")
 	public String getProductsPage(Model model) {
 		model.addAttribute("products", products);
@@ -66,13 +77,20 @@ public class ProductsController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param products
+	 * @param resultadoValidacion
+	 * @param attribute
+	 * @return
+	 */
 	@PostMapping("/products-save")
-	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products") Products products,
+	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products") Product products,
 			BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-producto");
-			List<ProductLines> productslines = productslinesService.obtenerProductLines();
+			List<ProductLine> productslines = productslinesService.obtenerProductLines();
 			modelView.addObject("products", products);
 			modelView.addObject("productslines", productslines);
 			return modelView;
@@ -82,7 +100,7 @@ public class ProductsController {
 		else {
 			ModelAndView model = new ModelAndView("redirect:/products-list");
 
-			Optional<ProductLines> productslines = productslinesService
+			Optional<ProductLine> productslines = productslinesService
 					.getProductolinesPorId(products.getProductLines().getProductLinesName());
 
 			productslines.ifPresent(products::setProductLines);
@@ -98,7 +116,10 @@ public class ProductsController {
 		}
 
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping("/products-list")
 	public ModelAndView getProductsPage() {
 		ModelAndView model = new ModelAndView("lista-productos");
@@ -119,6 +140,12 @@ public class ProductsController {
 
 	}
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @param attribute
+	 * @return
+	 */
 	@GetMapping("/products-eliminar-{id}")
 	public ModelAndView getProductsEliminarPage(@PathVariable(value = "id") String id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/products-list");
@@ -138,14 +165,19 @@ public class ProductsController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/products-editar-{id}")
 	public ModelAndView getProductsEditPage(@PathVariable(value = "id") String id) {
 
 		ModelAndView modelView = new ModelAndView("nuevo-producto");
 
-		Optional<Products> products = productsService.obtenerProductsPorId(id);
+		Optional<Product> products = productsService.obtenerProductsPorId(id);
 
-		List<ProductLines> productslines = productslinesService.obtenerProductLines();
+		List<ProductLine> productslines = productslinesService.obtenerProductLines();
 		modelView.addObject("products", products);
 		modelView.addObject("productslines", productslines);
 		modelView.addObject("bandera", true);
@@ -153,9 +185,14 @@ public class ProductsController {
 		return modelView;
 	}
 	
-	
+	/**
+	 * 
+	 * @param model
+	 * @param products
+	 * @return
+	 */
 	@PostMapping("/products-busqueda")
-	public String buscarProducts(Model model, @ModelAttribute(name = "product") Products products) {
+	public String buscarProducts(Model model, @ModelAttribute(name = "product") Product products) {
 
 		model.addAttribute("product", products);
 		model.addAttribute("products", productsService.buscarProducts(products.getProductName(),

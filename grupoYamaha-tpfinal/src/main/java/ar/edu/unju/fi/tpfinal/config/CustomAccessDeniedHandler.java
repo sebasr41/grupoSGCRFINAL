@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.tpfinal.config;
-
+/**
+ * 
+ * @author RCGS 
+ *
+ */
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 

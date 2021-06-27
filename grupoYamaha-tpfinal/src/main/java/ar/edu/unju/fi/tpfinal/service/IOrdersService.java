@@ -1,19 +1,22 @@
 package ar.edu.unju.fi.tpfinal.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.List;
 import java.util.Optional;
 
-import ar.edu.unju.fi.tpfinal.model.Employees;
-import ar.edu.unju.fi.tpfinal.model.Orders;
+import ar.edu.unju.fi.tpfinal.model.Employee;
+import ar.edu.unju.fi.tpfinal.model.Order;
 
 public interface IOrdersService {
 
-    public Orders guardarOrders(Orders orders);
+    public Order guardarOrders(Order orders);
 
-	public List<Orders> obtenerOrders();
+	public List<Order> obtenerOrders();
 
-    public Optional<Orders> obtenerOrdersPorId(Long id);
+    public Optional<Order> obtenerOrdersPorId(Long id);
 	
 	public void eliminarOrders(Long id);
-	public List<Orders> obtenerOrdersPorcustomerNumber(Long customerNumber);
+	public List<Order> obtenerOrdersPorcustomerNumber(Long customerNumber);
 }

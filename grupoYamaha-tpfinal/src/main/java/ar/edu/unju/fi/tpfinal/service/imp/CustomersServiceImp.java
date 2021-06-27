@@ -1,49 +1,65 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
-
+/**
+ * 
+ * @author RCGS
+ */
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.tpfinal.model.Customers;
-import ar.edu.unju.fi.tpfinal.repository.ICustomersRepository;
+import ar.edu.unju.fi.tpfinal.model.Customer;
+import ar.edu.unju.fi.tpfinal.repository.ICustomerRepository;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
-
+/**
+ *
+ */
 @Service
 public class CustomersServiceImp implements ICustomersService{
-
+	
 	@Autowired
-	private ICustomersRepository customersRepository;
+	private ICustomerRepository customersRepository;
+	/**
+	 *
+	 */
 	@Override
-	public Customers guardarCustomers(Customers customers) {
+	public Customer guardarCustomers(Customer customers) {
 		// TODO Auto-generated method stub
 		return customersRepository.save(customers);
 	}
-
+	/**
+	 *
+	 */
 	@Override
 	public void eliminarCustomers(Long id) {
 		// TODO Auto-generated method stub
 		customersRepository.deleteById(id);
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public List<Customers> obtenerCustomers() {
+	public List<Customer> obtenerCustomers() {
 		// TODO Auto-generated method stub
-		List<Customers> customers= (List<Customers>) customersRepository.findAll();
+		List<Customer> customers= (List<Customer>) customersRepository.findAll();
 		return customers;
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public Optional<Customers> getCustomersPorId(Long id) {
+	public Optional<Customer> getCustomersPorId(Long id) {
 		// TODO Auto-generated method stub
-		Optional<Customers> customers = customersRepository.findById(id);
+		Optional<Customer> customers = customersRepository.findById(id);
 		return customers;
 	}
-
+	/**
+	 *
+	 */
 	@Override
-	public List<Customers> obtenerCustomersPorEmployeeNumber(Long employeeNumber) {
-		List<Customers> customers = customersRepository.findByEmployeesEmployeeNumber(employeeNumber);
+	public List<Customer> obtenerCustomersPorEmployeeNumber(Long employeeNumber) {
+		List<Customer> customers = customersRepository.findByEmployeesEmployeeNumber(employeeNumber);
 		return customers;
 	}
 

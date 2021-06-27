@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.tpfinal.security.service;
-
+/**
+ * 
+ * @author RCGS
+ */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

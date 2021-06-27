@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.model;
-
+/**
+ * @author RCGS
+ */
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -26,54 +28,91 @@ public class Usuario {
     
     @Autowired
     @OneToOne
-    private Customers customers;
-
+    private Customer customers;
+    /**
+     * constructor de la clase usuario
+     */
     public Usuario() {
     }
-
+    /**
+     * Constructor de lso atributos de la clase Usuario
+     * @param nombreUsuario
+     * @param password
+     */
     public Usuario(String nombreUsuario, String password) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
     }
     
     
-
-    public Customers getCustomers() {
+    /**
+     * Método "getter"
+     * @return customers de la clase Customer
+     */
+    public Customer getCustomers() {
 		return customers;
 	}
-
-	public void setCustomers(Customers customers) {
+    /**
+     * Método "setter" 
+     * @param customers, carga un valor de la classe Customer
+     */
+	public void setCustomers(Customer customers) {
 		this.customers = customers;
 	}
-
+	/**
+	 * Método "getter" 
+	 * @return id, retorna un valor tipo int
+	 */
 	public int getId() {
         return id;
     }
-
+	/**
+	 * Método "setter"
+	 * @param id carga un valor tipo int
+	 */
     public void setId(int id) {
         this.id = id;
     }
-
+    /**
+     * Método "getter" 
+	 * 
+     * @return nombreUsuario, retorna un valor tipo String
+     */
     public String getNombreUsuario() {
         return nombreUsuario;
     }
-
+    /**
+     * Método "setter" 
+     * @param nombreUsuario, carga un valor tipo String
+     */
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
-
+    /**
+     * Método "getter" 
+     * @return password, retorna un valor tipo String
+     */
     public String getPassword() {
         return password;
     }
-
+    /**
+     * Método "setter" 
+     * @param password, carga un valor tipo String
+     */
     public void setPassword(String password) {
         this.password = password;
     }
-
+    /**
+     * Método "getter" 
+     * @return roles de la clase Rol
+     */
     public Set<Rol> getRoles() {
         return roles;
     }
-
+    /**
+     * Método "setter" 
+     * @param roles, carga valor de la clase Rol
+     */
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
     }

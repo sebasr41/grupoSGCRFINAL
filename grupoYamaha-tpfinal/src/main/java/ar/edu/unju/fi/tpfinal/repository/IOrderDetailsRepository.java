@@ -4,10 +4,16 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ar.edu.unju.fi.tpfinal.model.OrderDetails;
+import ar.edu.unju.fi.tpfinal.model.OrderDetail;
 
-public interface IOrderDetailsRepository extends CrudRepository<OrderDetails, Long> {
+
+/**
+ *Es una interfaz que se extiende a los metodos de crudrepository utilizandolos 
+ *para la entidad  OrderDetail que tiene una clave primaria valores Long.
+ *y que crea un metodo de busqueda de codigo de producucto(productCode)
+ */  
+public interface IOrderDetailsRepository extends CrudRepository<OrderDetail, Long> {
 	
-	List<OrderDetails> findByIdProductCodeProductCode(String productCode);
+	List<OrderDetail> findByIdProductCodeProductCode(String productCode);
     
 }

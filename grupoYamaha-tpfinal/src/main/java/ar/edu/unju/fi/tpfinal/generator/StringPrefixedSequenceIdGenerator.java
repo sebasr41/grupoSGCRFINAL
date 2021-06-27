@@ -13,7 +13,11 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
-
+/**
+ * 
+ * clase que se extiende a los metodos qeu utiliza SequenceStyleGenerator 
+ *
+ */
 public class StringPrefixedSequenceIdGenerator extends SequenceStyleGenerator {
 
 	public static final String VALUE_PREFIX_PARAMETER = "valuePrefix";
@@ -24,12 +28,17 @@ public class StringPrefixedSequenceIdGenerator extends SequenceStyleGenerator {
     public static final String NUMBER_FORMAT_DEFAULT = "%d";
     private String numberFormat;
  
+    /**
+     * 
+     */
     @Override
     public Serializable generate(SharedSessionContractImplementor session,
             Object object) throws HibernateException {
         return valuePrefix + String.format(numberFormat, super.generate(session, object));
     }
- 
+    /**
+     * 
+     */
     @Override
     public void configure(Type type, Properties params,
             ServiceRegistry serviceRegistry) throws MappingException {
