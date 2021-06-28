@@ -75,7 +75,7 @@ public class EmployeesController {
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-empleado");
 			List<Office> offices = officesService.obtenerOffices();
-			modelView.addObject("empleados", employees);
+			modelView.addObject("employlist", employeesService.obtenerEmployees());
 			modelView.addObject("offices", offices);
 
 			return modelView;
