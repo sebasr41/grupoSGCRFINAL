@@ -69,4 +69,12 @@ public class UsuarioService {
     public boolean existsByNombreusuario(String nombreUsuario){
         return usuarioRepository.existsByNombreUsuario(nombreUsuario);
     }
+    /**
+     * 
+     * @param nombreUsuario
+     * @return
+     */
+    public List<Usuario> getByCustomerCustomerName(Long id){
+        return usuarioRepository.findByCustomersCustomerNumber(id);
+    }
 }

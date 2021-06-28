@@ -25,8 +25,6 @@ public class Usuario {
     @Column(unique = true)
     private String nombreUsuario;
 	@NotBlank(message = "La celda no debe quedar vacia")
-    @Min(value = 8,message = "Debe ingresar un valor igual o mayor a 8 caracteres" )
-	@Max(value = 16,message = "Debe ingresar un valor inferior o igual a 16 carcteres" )
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))

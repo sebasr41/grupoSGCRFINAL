@@ -52,7 +52,7 @@ public class EmployeesController {
 	@GetMapping("/empleados")
 	public String getEmployeesPage(Model model) {
 		employeesService.generarAdmins();
-		model.addAttribute(employees);
+		model.addAttribute("employees",employees);
 		model.addAttribute(offices);
 		model.addAttribute("employlist", employeesService.obtenerEmployees());
 

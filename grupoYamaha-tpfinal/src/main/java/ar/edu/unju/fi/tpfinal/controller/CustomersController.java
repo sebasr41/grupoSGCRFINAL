@@ -24,6 +24,7 @@ import ar.edu.unju.fi.tpfinal.model.Employee;
 import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOrdersService;
+import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 
 /**
  * 
@@ -46,6 +47,9 @@ public class CustomersController {
 	private IEmployeesService employservice;
 	@Autowired
 	private IOrdersService ordersService;
+	
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
@@ -81,7 +85,7 @@ public class CustomersController {
 		}
 
 		else {
-			ModelAndView model = new ModelAndView("lista-usuario");
+			ModelAndView model = new ModelAndView("redirect:/customer-list");
 
 			Optional<Employee> employees = employeesService
 					.getEmployeesPorId(customers.getEmployees().getEmployeeNumber());
@@ -134,9 +138,14 @@ public class CustomersController {
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/customer-list");
 		if (ordersService.obtenerOrdersPorcustomerNumber(id).isEmpty()) {
-			employeesService.eliminarEmployees(id);
-			attribute.addFlashAttribute("warning", "Cliente eliminado con exito");
-				
+			if(usuarioService.getByCustomerCustomerName(id).isEmpty()) {
+				customersService.eliminarCustomers(id);
+				attribute.addFlashAttribute("warning", "Cliente eliminado con exito");
+					
+			}else {
+				attribute.addFlashAttribute("warning", "No se puede eliminar, el cliente tiene un usuario asociado ");
+			}
+			
 		}else {
 			attribute.addFlashAttribute("warning", "No se puede eliminar, el cliente tiene una orden de compra cargada ");
 		}

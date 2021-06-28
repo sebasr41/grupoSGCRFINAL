@@ -49,7 +49,7 @@ public class OfficesController {
 	 */
 	@GetMapping("/offices")
 	public String getOfficesPage(Model model) {
-		model.addAttribute(offices);
+		model.addAttribute("offices",offices);
 		
 		return "nueva-oficina";
 	}
