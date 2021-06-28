@@ -28,11 +28,10 @@ import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 /**
- * 
- * Product Controller 
- * Este Controller es el que responde a la interacción (eventos) que hace
- *  el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
- * 
+ *  * Esta anotacion @Controller indica que tiene pequeaas tareas derivada de la clase controller.
+ * Aqui se responde a la interacción (eventos) que hace el usuario en la interfaz 
+ * y realiza las peticiones necesarias (a la interfaces, clases,etc) para obtener lo que pide la vista.
+ * en este caso de funcienes para buscar-producto, guardar producto, eliminar producto, listar productos 
  */
 @Controller
 public class ProductsController {

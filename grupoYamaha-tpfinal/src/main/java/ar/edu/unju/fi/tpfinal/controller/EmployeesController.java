@@ -23,9 +23,10 @@ import ar.edu.unju.fi.tpfinal.service.ICustomersService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 /**
+ * Esta anotacion @Controller indica que tiene pequeaas tareas derivada de la clase controller.
+ * Aqui se responde a la interacción (eventos) que hace el usuario en la interfaz 
+ * y realiza las peticiones necesarias (a la interfaces, clases,etc) para obtener lo que pide la vista.
  * 
- *Este Controller es el que responde a la interacción (eventos) que hace
-  el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  */
 @Controller
 

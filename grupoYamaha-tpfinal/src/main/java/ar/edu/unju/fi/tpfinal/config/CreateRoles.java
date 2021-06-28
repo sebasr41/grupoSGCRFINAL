@@ -21,7 +21,10 @@ import ar.edu.unju.fi.tpfinal.model.Usuario;
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.RolService;
 import ar.edu.unju.fi.tpfinal.service.UsuarioService;
-
+/**
+ * Clase que implementa CommandLineRunner. Esta clase es usada para crear roles
+ *  desde el inicio de ejecucion del proggrma
+  */
 @Service
 public class CreateRoles implements CommandLineRunner {
 	//Autowired Inyecta la dependencia, o enlaza RolService con CreateRoles
@@ -38,7 +41,9 @@ public class CreateRoles implements CommandLineRunner {
     //Autowired Inyecta la dependencia, o enlaza PasswordEncoder con CreateRoles
     @Autowired
     PasswordEncoder passwordEncoder;
-
+    /**
+     * creación de usuarios 
+     */
     @Override
     public void run(String... args) throws Exception {
     	

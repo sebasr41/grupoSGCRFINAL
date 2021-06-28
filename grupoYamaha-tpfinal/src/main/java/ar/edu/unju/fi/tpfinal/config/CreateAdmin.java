@@ -18,7 +18,11 @@ import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * 
+ * clase que implementa CommandLineRunner, donde se puede crear usuario desde el comienzo
+ *
+ */
 @Service 
 public class CreateAdmin implements CommandLineRunner {
 
