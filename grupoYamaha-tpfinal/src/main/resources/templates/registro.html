@@ -30,11 +30,13 @@
                 <div class="row d-flex justify-content-center">
 	                <div class="form-group col-md-5">
 	                    <label for="nombreUsuario">Nombre de usuario</label>
-	                    <input type="text" th:field="*{nombreUsuario}" class="form-control" id="nombreUsuario" name="nombreUsuario" required="required" autocomplete="off">
+	                    <input type="text" th:field="*{nombreUsuario}" class="form-control" id="nombreUsuario" name="nombreUsuario"  autocomplete="off">
+	                    <div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}" ></div>
 	                </div>
 	                <div class="form-group col-md-5">
 	                    <label for="password">Contraseña</label>
-	                    <input type="password" th:field="*{password}" class="form-control" id="password" name="password" required="required">
+	                    <input type="password" th:field="*{password}" class="form-control" id="password" name="password" >
+	                     <div class="form-text alert-danger col-md-12 rounded-bottom " th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></div>
 	                </div>
                 </div>
                 

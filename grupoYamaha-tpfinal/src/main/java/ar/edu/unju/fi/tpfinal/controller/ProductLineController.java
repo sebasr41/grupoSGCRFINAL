@@ -82,8 +82,8 @@ public class ProductLineController {
 	 * @throws IOException
 	 */
 	@PostMapping("/productlines-guardar")
-	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLine productlines,
-			@RequestParam("file") MultipartFile file, BindingResult resultadoValidacion) throws IOException {
+	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLine productlines, BindingResult resultadoValidacion,
+			@RequestParam("file") MultipartFile file) throws IOException {
 		//////// validation
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {

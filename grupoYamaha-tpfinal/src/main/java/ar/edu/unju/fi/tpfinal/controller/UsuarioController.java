@@ -77,7 +77,7 @@ public class UsuarioController {
         System.out.println("sssssssssssssssss"+resultadoValidacion.getErrorCount());
         if (resultadoValidacion.hasErrors()) {
         	System.out.println("aaaaaaaaaaaaaaaaa");
-        	 ModelAndView mov = new ModelAndView("redirect:/usuario-registro");
+        	 ModelAndView mov = new ModelAndView("registro");
         	 mov.addObject("usuario", usuario);
 			return mov;
 		}else {

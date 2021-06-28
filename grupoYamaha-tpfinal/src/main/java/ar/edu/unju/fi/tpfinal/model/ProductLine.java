@@ -20,11 +20,15 @@ public class ProductLine {
 	
 	@Id
 	@Column(name="prodL_line")
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@NotBlank(message = "La celda no debe quedar vacia, ingrese una Categoria")
 	private String productLinesName; 
-	
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@NotBlank(message = "La celda no debe quedar vacia")
 	@Column(name="prodL_textdescription")
 	private String textDescription;
-	
+	@Size(max = 50,message = "debe ingresar maximo 50 caracteres")
+	@NotBlank(message = "La celda no debe quedar vacia")
 	@Column(name="prodL_htmldescription")
 	private String htmlDescription;
 	

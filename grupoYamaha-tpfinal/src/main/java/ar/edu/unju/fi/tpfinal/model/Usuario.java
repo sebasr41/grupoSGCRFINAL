@@ -6,6 +6,9 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,10 +21,12 @@ import java.util.Set;
 public class Usuario {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
+	@NotBlank(message = "La celda no debe quedar vacia") 
     @Column(unique = true)
     private String nombreUsuario;
-    @NotNull
+	@NotBlank(message = "La celda no debe quedar vacia")
+    @Min(value = 8,message = "Debe ingresar un valor igual o mayor a 8 caracteres" )
+	@Max(value = 16,message = "Debe ingresar un valor inferior o igual a 16 carcteres" )
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
