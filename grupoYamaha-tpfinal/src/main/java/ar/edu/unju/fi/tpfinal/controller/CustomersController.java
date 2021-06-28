@@ -124,6 +124,7 @@ public class CustomersController {
 		ModelAndView modelView = new ModelAndView("nuevo-usuario");
 		Optional<Customer> customers = customersService.getCustomersPorId(id);
 		modelView.addObject("customers", customers);
+		modelView.addObject("employs", employservice.obtenerEmployees());
 		
 		return modelView;
 	}

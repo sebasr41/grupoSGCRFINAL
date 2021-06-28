@@ -171,13 +171,16 @@ public class OrderDetailsController {
 		Usuario usuario = usuarioService.getByNombreUsuario(userDetails.getUsername()).get();
 		// Obtenemos productos mediante el id de la url.
 		Optional<Product> products = productsService.obtenerProductsPorId(id);
-		//Control limite de credito.
+		
 		Product proControl = products.get();
+		//CONTROL DE ADMIN 
+		if (usuario.getCustomers() != null) {
+			//Control limite de credito.
 		if ((proControl.getBuyPrice()*orderdetails.getQuantityOrdered()) > usuario.getCustomers().getCreditLimit()) {
 			ModelAndView model = new ModelAndView("redirect:/products-list");
 			attribute.addFlashAttribute("warning", "No tenes limite suficiente");
 			return model;
-		}
+		}}
 		// Obtenemos el dia actual y lo seteamos en Order.
 		LocalDate hoy = LocalDate.now();
 		orders.setOrderDate(hoy);
