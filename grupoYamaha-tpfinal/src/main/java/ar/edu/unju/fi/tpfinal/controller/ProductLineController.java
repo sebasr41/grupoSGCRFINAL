@@ -28,8 +28,9 @@ import ar.edu.unju.fi.tpfinal.model.Product;
 import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 /**
  * 
- * @author 2021
- *
+ * Product Lines Controller 
+  * Este Controller es el que responde a la interacción (eventos) que hace
+ *  el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  */
 @Controller
 public class ProductLineController {
@@ -51,11 +52,11 @@ public class ProductLineController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * Metodo
+	 * Metodo GetMapping, para cargar de formulario de categoria .
 	 * @param model
-	 * @return
+	 * @return formulario con el modelo de categoria.
 	 */
-	@GetMapping("/productlines")//aqui lo de azul e scomo aparecera en la barra navegacion
+	@GetMapping("/productlines")//aqui lo de azul escomo aparecera en la barra navegacion
 	public String getProductLinesPage(Model model) {
 		productlines.setImage("");
 		model.addAttribute("productlines", productlines);
@@ -65,29 +66,21 @@ public class ProductLineController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo PostMapping, para guardar datos de categoria.
 	 * @param productlines
-	 * @param file
+	 * @param file 
 	 * @param resultadoValidacion
-	 * @return
+	 * @return si hay errores el formulario de carga de datos, sino retorna la lista de categorias.
 	 * @throws IOException
 	 */
 	@PostMapping("/productlines-guardar")
 	public ModelAndView ProductLinesPage(@Valid @ModelAttribute("productlines") ProductLine productlines, BindingResult resultadoValidacion,
 			@RequestParam("file") MultipartFile file) throws IOException {
-		//////// validation
+		/// validation
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
-
 
 			modelView = new ModelAndView("nueva-categoria");
 			modelView.addObject("productlines", productlines);
@@ -96,6 +89,9 @@ public class ProductLineController {
 
 		else {
 			modelView = new ModelAndView("lista-categoria");
+			/**
+			 * Codigo para guardar imagen
+			 */
 			if (!file.isEmpty()) {
 				// linux
 				String rutaAbsoluta = "/home/mike47k/imagPvisual"; // directorioImagenes.toFile().getAbsolutePath();
@@ -124,16 +120,10 @@ public class ProductLineController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	/**
+	 * Metodo GetMapping, para obtener lista de categorias.
+	 * @return una lista con todas las categorias
 	 * 
-	 * @return
 	 */
 	@GetMapping("/productLines-list")
 	public ModelAndView getProductLinesPage() {
@@ -145,46 +135,4 @@ public class ProductLineController {
 
 	}
 	
-	
-	
-	
-	
-	
-	
-	@PreAuthorize("hasRole('ADMIN')")
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@GetMapping("/productolines-eliminar-{id}")
-	public ModelAndView getProductolinesEliminarPage(@PathVariable(value = "id") String id) {
-		// redirect recarga la lista de cuentas
-		ModelAndView modelView = new ModelAndView("redirect:/lista-productlines");
-		productolinesService.eliminarProductLines(id);
-		return modelView;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@PreAuthorize("hasRole('ADMIN')")
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@GetMapping("/productolines-editar-{id}")
-	public ModelAndView getProductolinesEditPage(@PathVariable(value = "id") String id) {
-
-		ModelAndView modelView = new ModelAndView("product-lines");
-		Optional<ProductLine> productlines = productolinesService.getProductolinesPorId(id);
-		modelView.addObject("productlines", productlines);
-		return modelView;
-	}
 }

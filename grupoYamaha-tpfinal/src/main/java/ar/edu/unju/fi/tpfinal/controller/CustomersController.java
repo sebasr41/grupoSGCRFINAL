@@ -28,7 +28,8 @@ import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 
 /**
  * 
- * @author 2021
+ * Este Controller es el que responde a la interacción (eventos) que hace
+ * el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  *
  */
 @Controller
@@ -53,9 +54,9 @@ public class CustomersController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping.
 	 * @param model
-	 * @return
+	 * @return form de customers.
 	 */
 	@GetMapping("/crearusuario")
 	public String getCustomersPage(Model model) {
@@ -66,10 +67,10 @@ public class CustomersController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo PostMapping. Para guardar datos.
 	 * @param customers
 	 * @param resultadoValidacion
-	 * @return
+	 * @return Si hay errores retorna el form, sino la lista de customers.
 	 */
 	@PostMapping("/usuario-guardar")
 	public ModelAndView getGuardarCustomersPage(@Valid @ModelAttribute("customers") Customer customers,
@@ -100,8 +101,8 @@ public class CustomersController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
-	 * @return
+	 * Metodo GetMapping. 
+	 * @return lista de customers.
 	 */
 	@GetMapping("/customer-list")
 	public ModelAndView getCustomerPage() {
@@ -114,9 +115,9 @@ public class CustomersController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping.
 	 * @param id
-	 * @return
+	 * @return form de customer.
 	 */
 	@GetMapping("/customer-editar-{id}")
 	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
@@ -129,10 +130,10 @@ public class CustomersController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping.
 	 * @param id
 	 * @param attribute
-	 * @return
+	 * @return lista de customers.
 	 */
 	@GetMapping("/customer-eliminar-{id}")
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {

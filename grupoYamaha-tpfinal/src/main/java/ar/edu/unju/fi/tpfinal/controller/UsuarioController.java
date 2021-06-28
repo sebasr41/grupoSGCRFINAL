@@ -31,7 +31,8 @@ import java.util.Set;
 import javax.validation.Valid;
 /**
  * 
- * @author 2021
+ * Este Controller es el que responde a la interacción (eventos) que hace
+ * el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  *
  */
 @Controller
@@ -56,9 +57,9 @@ public class UsuarioController {
     IEmployeesService employeService;
     
     /**
-     * 
+     * Metodo GetMapping.
      * @param model
-     * @return
+     * @return form de usuario de registro.
      */
     @GetMapping("/usuario-registro")
     public String registro(Model model){
@@ -67,16 +68,14 @@ public class UsuarioController {
     }
 
     /**
-     * 
+     * Metodo PostMapping. Para guardar datos.
      * @param usuario
-     * @return
+     * @return si hay errores el form de registro, sino crea la cuenta.
      */
     @PostMapping("/usuario-registrar")
     public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario,final BindingResult resultadoValidacion) throws Exception{
         ModelAndView mv = new ModelAndView();
-        System.out.println("sssssssssssssssss"+resultadoValidacion.getErrorCount());
         if (resultadoValidacion.hasErrors()) {
-        	System.out.println("aaaaaaaaaaaaaaaaa");
         	 ModelAndView mov = new ModelAndView("registro");
         	 mov.addObject("usuario", usuario);
 			return mov;
@@ -96,13 +95,13 @@ public class UsuarioController {
 	            mv.addObject("error", "ese nombre de usuario ya existe");
 	            return mv;
 	        }
-	        
+	        // una vez seteada la password , se codifica.
 	        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 	        Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
 	        Set<Rol> roles = new HashSet<>();
 	        roles.add(rolUser);
 	        usuario.setRoles(roles);
-	        //setemaos  un empleado en customer automaticamente luego guardamos y a la vez seteamos lo guardado en usuario y despues guardamos usuario
+	        //seteamos  un empleado en customer automaticamente luego guardamos y a la vez seteamos lo guardado en usuario y despues guardamos usuario
 	        Customer custom = usuario.getCustomers();
 	        Optional<Employee> gerente= employeService.getEmployeesPorId((long) 2);
 	        custom.setEmployees(gerente.get());

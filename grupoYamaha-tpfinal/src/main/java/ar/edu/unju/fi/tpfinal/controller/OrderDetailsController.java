@@ -39,9 +39,9 @@ import ar.edu.unju.fi.tpfinal.service.IPaymenService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 import ar.edu.unju.fi.tpfinal.service.UsuarioService;
 /**
- * 
- * 
- *
+ * Order Details Controller.
+ * Este Controller es el que responde a la interacción (eventos) que hace
+ * el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  */
 @Controller
 public class OrderDetailsController {
@@ -72,10 +72,10 @@ public class OrderDetailsController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping. Para cancelar la orden de compra.
 	 * @param id
 	 * @param model
-	 * @return
+	 * @return redirect de order-list con el status "cancelado".
 	 */
 	@GetMapping("/orden-cancelar-{id}")
 	public ModelAndView getOrderCancellPage(@PathVariable(value = "id") Long id, Model model) {
@@ -96,8 +96,9 @@ public class OrderDetailsController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
-	 * @return
+	 * Metodo GetMapping. Para obtener una lista de ordenes.
+	 * @param model
+	 * @return lista-ordenes.
 	 */
 	@GetMapping("/order-list")
 	public ModelAndView getOrderPage() {
@@ -111,10 +112,10 @@ public class OrderDetailsController {
 	}
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo PostMapping. Para agregar comentario a la order.
 	 * @param id
 	 * @param orders
-	 * @return
+	 * @return redirect de order-list con el comentario.
 	 */
 	@PostMapping("/order-add-comments-{id}")
 	public ModelAndView getOrderAddCommentPage(@PathVariable(value="id")Long id, @Valid @ModelAttribute("ordersF") Order orders) {
@@ -134,100 +135,92 @@ public class OrderDetailsController {
 
 	 
 
-
+   /**
+    * Metodo publico para generar un string aleatorio.
+    * @return String aleatorio.
+    */
 	public static String generateString() {
 		String uuid = UUID.randomUUID().toString();
 		return uuid;
 	}
 	
 	/**
-	 * 
+	 * Metodo PostMapping. Para guardar los datos obtenidos del form ProductsList.
 	 * @param id
 	 * @param orderdetails
 	 * @param resultadoValidacion
 	 * @param attribute
-	 * @return
+	 * @return  Si hay errores un redirect a product list, sino guardar los datos en la order-list.
 	 */
 	@PostMapping("/order-form-{id}")
-	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id,
-			@Valid @ModelAttribute("orderdetails") OrderDetail orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
+	public ModelAndView OrderDetailsPage(@PathVariable(value = "id") String id, @Valid @ModelAttribute("orderdetails") OrderDetail orderdetails, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		ModelAndView modelView;
 		
-		
-		
-		System.out.println("aaaaaaaaaaaaaaa"+resultadoValidacion.getErrorCount());
-		if (resultadoValidacion.getErrorCount() >1) {
+	     if (resultadoValidacion.getErrorCount() >1) {
 			ModelAndView model = new ModelAndView("redirect:/products-list");
-			System.out.println("sssssssssssssssssssss"+ orderdetails);
 			
 			attribute.addFlashAttribute("warning", "No lleno los datos");
 			return model;
 
 		}
-
-		else {
-			
-			
-		}
-		
+        /*
+         * Obtiene los datos del usuario logueado.
+         */
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Usuario usuario = usuarioService.getByNombreUsuario(userDetails.getUsername()).get();
+		// Obtenemos productos mediante el id de la url.
 		Optional<Product> products = productsService.obtenerProductsPorId(id);
-		
-		//control de credito
+		//Control limite de credito.
 		Product proControl = products.get();
 		if ((proControl.getBuyPrice()*orderdetails.getQuantityOrdered()) > usuario.getCustomers().getCreditLimit()) {
 			ModelAndView model = new ModelAndView("redirect:/products-list");
-
-			
 			attribute.addFlashAttribute("warning", "No tenes limite suficiente");
 			return model;
 		}
-		
-		
-		
+		// Obtenemos el dia actual y lo seteamos en Order.
 		LocalDate hoy = LocalDate.now();
 		orders.setOrderDate(hoy);
-		// dia random hasta el dia especificado en este caso se uso 10 dias despues//
 		Random aelotorio = new Random();
-		
-		
-		
+		/*
+		* Payments : Se crea un payment id.
+		*/
 		PaymentId payid =new PaymentId() ;
+		//Control de seteo de costomers segun el rol.
 		if (usuario.getCustomers() == null) {
 			//admin
 			Optional<Customer> custom = customerService.getCustomersPorId(orderdetails.getId().getOrderNumber().getCustomers().getCustomerNumber());
-			// auto-generamos un id string para que no tire que es nulo //
+			// auto-generamos un id string para payment id para que no tire que es nulo.
 			 payid = new PaymentId(custom.get(), generateString());
-
+            // Seteamos customers en orders.
 			custom.ifPresent(orders::setCustomers);
 		}else {
 			
 			//Usuario
 			orders.setCustomers(usuario.getCustomers());
+			//Creamos un payment id con el customer de usuario
 			payid = new PaymentId(usuario.getCustomers(), generateString());
 			
 		}
-		
-		
-		
-		
+		//Seteo de datos de orders.	
 		orders.setShippedDate(hoy.plusDays(aelotorio.nextInt(10)));
 		orders.setRequiredDate(orders.getShippedDate().plusDays(10));
 		orders.setStatus("Procesando");
 
-		
+		//Seteamos un Product en oID.
 		products.ifPresent(oID::setProductCode);
+		// Seteamos orderNumber(null) para evitar que los datos se sobre escriban.
 		orders.setOrderNumber(null);
+		//Seteamos orders en oID, luego seteamos oID en orderdetails.
 		oID.setOrderNumber(orderService.guardarOrders(orders));
 		orderdetails.setId(oID);
 		modelView = new ModelAndView("redirect:/order-list");
-
+        //Codigo para actualizar el stock y setear el precio en orderdetails.
 		Product precio = products.get();
 		precio.setQuantityInStock(precio.getQuantityInStock()-orderdetails.getQuantityOrdered());
 		productsService.guardarProducts(precio);
 		orderdetails.setPriceEach(precio.getBuyPrice());
+		//Seteamos payment y guardamos los datos.
 		Payment pay = new Payment(payid, hoy.plusDays(aelotorio.nextInt(7)),
 				orderdetails.getQuantityOrdered() * orderdetails.getPriceEach());
 
@@ -240,8 +233,9 @@ public class OrderDetailsController {
 	}
 	
 	/**
+	 *  Metodo GetMapping. Obtenemos una lista de pagos.
 	 * 
-	 * @return
+	 * @return lista-pagos.
 	 */
 	@GetMapping("/payments-list")
 	public ModelAndView getPaymentsPage() {

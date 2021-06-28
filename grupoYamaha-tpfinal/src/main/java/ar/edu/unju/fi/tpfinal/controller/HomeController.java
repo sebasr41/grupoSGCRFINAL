@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 	/**
-	 * 
-	 * @return
+	 * Metodo GetMapping.
+	 * @return login 
 	 */
     @GetMapping("/login")
     public String login(){
         return "login";
     }
     /**
-     * 
-     * @return
+     * Metodo GetMapping.
+     * @return forbidden
      */
     @GetMapping("/forbidden")
     public String forbidden(){

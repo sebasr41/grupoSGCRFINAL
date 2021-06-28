@@ -24,8 +24,8 @@ import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
 /**
  * 
- * @author 2021
- *
+ *Este Controller es el que responde a la interacción (eventos) que hace
+  el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  */
 @Controller
 
@@ -45,9 +45,9 @@ public class EmployeesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping.
 	 * @param model
-	 * @return
+	 * @return form empleado
 	 */
 	@GetMapping("/empleados")
 	public String getEmployeesPage(Model model) {
@@ -63,16 +63,14 @@ public class EmployeesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo PostMapping. Guarda datos obtenidos
 	 * @param employees
 	 * @param resultadoValidacion
-	 * @return
+	 * @return Si hay errores retorna el form, sino la lista de empleados.
 	 */
 	@PostMapping("/empleado-guardar")
 	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("employees") Employee employees,
 			BindingResult resultadoValidacion) {
-
-		//validaciones  si hay error retorna el form
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-empleado");
@@ -105,8 +103,8 @@ public class EmployeesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
-	 * @return
+	 * Metodo GetMapping. 
+	 * @return lista de empleados.
 	 */
 	@GetMapping("/employees-list")
 	public ModelAndView getCustomerPage() {
@@ -119,9 +117,9 @@ public class EmployeesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping.
 	 * @param id
-	 * @return
+	 * @return form de empleado.
 	 */
 	@GetMapping("/employee-editar-{id}")
 	public ModelAndView getCustomerEditPage(@PathVariable(value= "id")Long id) {
@@ -138,10 +136,10 @@ public class EmployeesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping.
 	 * @param id
 	 * @param attribute
-	 * @return
+	 * @return Si el empleado no tiene empleados a cargo se elimina, sino retorna la misma pagina.
 	 */
 	@GetMapping("/employee-eliminar-{id}")
 	public ModelAndView getCustomersEliminarPage(@PathVariable(value = "id") Long id, RedirectAttributes attribute) {

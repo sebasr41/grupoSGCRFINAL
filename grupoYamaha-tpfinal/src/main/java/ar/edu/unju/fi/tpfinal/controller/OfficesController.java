@@ -2,8 +2,6 @@ package ar.edu.unju.fi.tpfinal.controller;
 /**
  * author CGRS
  */
-
-
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -24,12 +22,9 @@ import ar.edu.unju.fi.tpfinal.model.Office;
 
 import ar.edu.unju.fi.tpfinal.service.IEmployeesService;
 import ar.edu.unju.fi.tpfinal.service.IOfficesService;
-
-
 /**
- * 
- * 
- *
+ * Este Controller es el que responde a la interacción (eventos) que hace
+ * el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
  */
 @Controller
 public class OfficesController {
@@ -43,9 +38,9 @@ public class OfficesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GeMapping. Para form de offices.
 	 * @param model
-	 * @return
+	 * @return formulario de oficinas.
 	 */
 	@GetMapping("/offices")
 	public String getOfficesPage(Model model) {
@@ -56,10 +51,10 @@ public class OfficesController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo PostMapping. Guardar los datos obtenidos
 	 * @param offices
 	 * @param resultadoValidacion
-	 * @return
+	 * @return Si hay errores retorna el form, sino la lista de oficinas.
 	 */
 	@PostMapping("/offices-guardar")
 	public ModelAndView guardarOfficesPage(@Valid @ModelAttribute("offices") Office offices, BindingResult resultadoValidacion){
@@ -79,8 +74,8 @@ public class OfficesController {
 		}
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
-	 * @return
+	 * @Metodo GetMapping. Muestra lista de oficinas
+	 * @return lista de oficinas
 	 */
 	@GetMapping("/offices-list")
 	public ModelAndView getOfficesPage() {
@@ -92,13 +87,13 @@ public class OfficesController {
 }
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping. Para eliminar oficinas.
 	 * @param id
 	 * @param attribute
-	 * @return
+	 * @return Si la oficina no tiene empleados se elimina, sino retorna la misma pagina.
 	 */
 	@GetMapping("/office-eliminar-{id}")
-	public ModelAndView getOfficezEliminarPage(@PathVariable(value = "id") long id, RedirectAttributes attribute) {
+	public ModelAndView getOfficesEliminarPage(@PathVariable(value = "id") long id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/offices-list");
 		
 			
@@ -116,9 +111,9 @@ public class OfficesController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping. Retorna el form para editar.
 	 * @param id
-	 * @return
+	 * @return formulario
 	 */
 	@GetMapping("/office-editar-{id}")
 	public ModelAndView getOfficeEditPage(@PathVariable(value = "id") long id) {

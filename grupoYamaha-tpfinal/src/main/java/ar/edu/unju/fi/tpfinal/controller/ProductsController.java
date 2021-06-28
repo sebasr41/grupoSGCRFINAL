@@ -29,8 +29,10 @@ import ar.edu.unju.fi.tpfinal.service.IProductLinesService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 /**
  * 
- * @author 2021
- *
+ * Product Controller 
+ * Este Controller es el que responde a la interacción (eventos) que hace
+ *  el usuario en la interfaz y realiza las peticiones al modelo para pasar estos a la vista.
+ * 
  */
 @Controller
 public class ProductsController {
@@ -57,9 +59,9 @@ public class ProductsController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping para cargar formulario.
 	 * @param model
-	 * @return
+	 * @return formulario nuevo-producto.
 	 */
 	@GetMapping("/products")
 	public String getProductsPage(Model model) {
@@ -78,11 +80,11 @@ public class ProductsController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo PostMapping , para guardar datos.
 	 * @param products
 	 * @param resultadoValidacion
 	 * @param attribute
-	 * @return
+	 * @return  formulario nuevo-producto si hay errores, sino un redirect a la lista de products.
 	 */
 	@PostMapping("/products-save")
 	public ModelAndView getGuardarProductsPage(@Valid @ModelAttribute("products") Product products,
@@ -100,7 +102,9 @@ public class ProductsController {
 
 		else {
 			ModelAndView model = new ModelAndView("redirect:/products-list");
-
+           /*
+            * Obtenemos productlines mediante el id utilizando un optional y lo seteamos en product.
+            */
 			Optional<ProductLine> productslines = productslinesService
 					.getProductolinesPorId(products.getProductLines().getProductLinesName());
 
@@ -118,8 +122,9 @@ public class ProductsController {
 
 	}
 	/**
+	 * Metodo GetMapping. Lista de productos  donde se muestra los productos con el modelo de orderdetails
 	 * 
-	 * @return
+	 * @return lista de productos con funciones de editar, eliminar, buscar y comprar.
 	 */
 	@GetMapping("/products-list")
 	public ModelAndView getProductsPage() {
@@ -127,10 +132,16 @@ public class ProductsController {
 		model.addObject("product", products);
 		model.addObject("products", productsService.obtenerProducts());
 		model.addObject("productslines", productslinesService.obtenerProductLines());
-		// New
+		// 
 		model.addObject("orderdetails", orderdetails);
+		/*
+		 * Si se ingresa como usuario, se usara el mismo customer.
+		 * Si se ingresa como admin, se mostrara una lista de costumers al realizar una compra.
+		 * En estos casos se utiliza validaciones (if, else)
+		 */
 		model.addObject("customers", customerService.obtenerCustomers());
 		model.addObject("custom", custom);
+	
 		if (customerService.obtenerCustomers().isEmpty()) {
 			model.addObject("bandera", false);
 		}else {
@@ -142,15 +153,17 @@ public class ProductsController {
 	}
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping. Para eliminar products.
 	 * @param id
 	 * @param attribute
-	 * @return
+	 * @return lista de pruductos.
 	 */
 	@GetMapping("/products-eliminar-{id}")
 	public ModelAndView getProductsEliminarPage(@PathVariable(value = "id") String id, RedirectAttributes attribute) {
 		ModelAndView modelView = new ModelAndView("redirect:/products-list");
-		
+		/*
+		 * Controlamos que products no tenga asociado una orden,si tiene, no eliminamos.
+		 */
 		if (orderdetailsService.obtenerOrderDetailsporProductCode(id).isEmpty()) {
 			productsService.eliminarProducts(id);
 			attribute.addFlashAttribute("warning", "Vehículo eliminado con exito");
@@ -167,9 +180,9 @@ public class ProductsController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	/**
-	 * 
+	 * Metodo GetMapping. Para editar products.
 	 * @param id
-	 * @return
+	 * @return form nuevo-producto.
 	 */
 	@GetMapping("/products-editar-{id}")
 	public ModelAndView getProductsEditPage(@PathVariable(value = "id") String id) {
@@ -177,7 +190,7 @@ public class ProductsController {
 		ModelAndView modelView = new ModelAndView("nuevo-producto");
 
 		Optional<Product> products = productsService.obtenerProductsPorId(id);
-
+     
 		List<ProductLine> productslines = productslinesService.obtenerProductLines();
 		modelView.addObject("products", products);
 		modelView.addObject("productslines", productslines);
@@ -187,10 +200,10 @@ public class ProductsController {
 	}
 	
 	/**
-	 * 
-	 * @param model
-	 * @param products
-	 * @return
+	 * Metodo PostMaping. Para buscar products mediante 3 parametros.
+	 * @param model.
+	 * @param products : Nombre de Product, Precio de Product y Categoria.
+	 * @return lista-productos. 
 	 */
 	@PostMapping("/products-busqueda")
 	public String buscarProducts(Model model, @ModelAttribute(name = "product") Product products) {
