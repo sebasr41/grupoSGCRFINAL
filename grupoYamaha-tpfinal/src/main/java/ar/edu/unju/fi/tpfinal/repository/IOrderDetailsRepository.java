@@ -15,5 +15,6 @@ import ar.edu.unju.fi.tpfinal.model.OrderDetail;
 public interface IOrderDetailsRepository extends CrudRepository<OrderDetail, Long> {
 	
 	List<OrderDetail> findByIdProductCodeProductCode(String productCode);
+	List<OrderDetail> findByIdOrderNumberCustomersCustomerNumber(Long customerNumber);
     
 }

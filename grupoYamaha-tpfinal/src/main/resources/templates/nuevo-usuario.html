@@ -31,7 +31,7 @@
 		<div class="col-md-8 d-block m-auto">
 			<form th:action="@{/usuario-guardar}" method="POST" th:object="${customers}"
 				class="text-light mb-4 px-4 py-4 bg-pv--form rounded gam-overflow">
-
+				<input type="hidden" th:field="*{customerNumber}" />
 				<div class="row d-flex justify-content-center">
 					<div class="form-group col-md-5">
 						<label for="customerName">Nombre de cliente <i class="fas fa-signature text-light ml-2"></i></label>

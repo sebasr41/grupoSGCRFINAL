@@ -66,5 +66,10 @@ public class OrderDetailsServiceImp implements IOrderDetailsService {
 		
 		return orderdetails;
 	}
+	@Override
+	public List<OrderDetail> obtenerOrderDetailsporCustomerNumber(Long customerNumber) {
+		List<OrderDetail> orderdetailsPorCustomer = orderDetailsRepository.findByIdOrderNumberCustomersCustomerNumber(customerNumber);
+		return orderdetailsPorCustomer;
+	}
     
 }

@@ -42,6 +42,12 @@ public interface IOrderDetailsService {
 	 * @return
 	 */
 	public List<OrderDetail> obtenerOrderDetailsporProductCode(String productCode);
+	/**
+	 * Método Listar por customer number
+	 * @param customerNumber
+	 * @return
+	 */
+	public List<OrderDetail> obtenerOrderDetailsporCustomerNumber(Long customerNumber);
 
     
 }

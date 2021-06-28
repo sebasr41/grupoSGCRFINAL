@@ -70,7 +70,7 @@ public class OrderDetailsController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	/**
 	 * Metodo GetMapping. Para cancelar la orden de compra.
 	 * @param id
@@ -94,7 +94,7 @@ public class OrderDetailsController {
 		return modelView;
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	/**
 	 * Metodo GetMapping. Para obtener una lista de ordenes.
 	 * @param model
@@ -103,14 +103,26 @@ public class OrderDetailsController {
 	@GetMapping("/order-list")
 	public ModelAndView getOrderPage() {
 		ModelAndView model = new ModelAndView("lista-ordenes");
-		model.addObject("ordersF",orders);
-		model.addObject("orders", orderService.obtenerOrders());
-		model.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
-
-		return model;
-
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		
+		Usuario usuario = usuarioService.getByNombreUsuario(userDetails.getUsername()).get();
+		
+		if(usuario.getCustomers()!= null) {
+			model.addObject("ordersF",orders);
+			//model.addObject("orders", orderService.obtenerOrdersPorcustomerNumber(usuario.getCustomers().getCustomerNumber()));
+			model.addObject("orderDetails", orderdetailsService.obtenerOrderDetailsporCustomerNumber(usuario.getCustomers().getCustomerNumber()));
+			return model;
+		}else {
+			
+			model.addObject("ordersF",orders);
+			model.addObject("orders", orderService.obtenerOrders());
+			model.addObject("orderDetails", orderdetailsService.obtenerOrderDetails());
+			return model;
+		}		
+		
 	}
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	/**
 	 * Metodo PostMapping. Para agregar comentario a la order.
 	 * @param id
